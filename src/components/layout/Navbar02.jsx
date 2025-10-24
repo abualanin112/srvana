@@ -155,7 +155,7 @@ export const Navbar02 = React.forwardRef(
       <header
         ref={combinedRef}
         className={cn(
-          "sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:px-6 [&_*]:no-underline",
+          "sticky top-0 z-30 w-full border-b bg-white/30 backdrop-blur-lg supports-[backdrop-filter]:bg-white/30 px-4 md:px-6 [&_*]:no-underline",
           className
         )}
         {...props}
@@ -187,7 +187,7 @@ export const Navbar02 = React.forwardRef(
                         <NavigationMenuItem key={index} className="w-full">
                           {link.submenu ? (
                             <>
-                              <div className="text-muted-foreground px-2 py-1.5 text-xs font-medium">
+                              <div className="text-muted-foreground px-2 py-1.5 text-xs font-bold">
                                 {link.label}
                               </div>
                               <ul>
@@ -195,7 +195,7 @@ export const Navbar02 = React.forwardRef(
                                   <li key={itemIndex}>
                                     <NavLink
                                       to={item.to || "#"}
-                                      className="flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline"
+                                      className="flex w-full items-center rounded-md px-3 py-2 text-md font-bold transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline"
                                     >
                                       {item.label}
                                     </NavLink>
@@ -206,7 +206,7 @@ export const Navbar02 = React.forwardRef(
                           ) : (
                             <NavLink
                               to={link.to || "#"}
-                              className="flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline"
+                              className="flex w-full items-center rounded-md px-3 py-2 text-md font-bold transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline"
                             >
                               {link.label}
                             </NavLink>
@@ -236,7 +236,7 @@ export const Navbar02 = React.forwardRef(
             )}
 
             {/* Main nav */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 font-bold">
               <Link
                 to={logoHref}
                 className="flex items-center gap-2 text-primary hover:text-primary/90 transition-colors"
@@ -274,7 +274,7 @@ export const Navbar02 = React.forwardRef(
                                         to="/"
                                         className="flex h-full w-full select-none flex-col justify-center items-center text-center rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md cursor-pointer"
                                       >
-                                        <div className="mb-3 text-xl font-medium">
+                                        <div className="mb-3 text-xl font-bold">
                                           shadcn.io
                                         </div>
                                         <p className="text-sm leading-tight text-muted-foreground">
@@ -366,7 +366,7 @@ export const Navbar02 = React.forwardRef(
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+                className="text-sm font-bold hover:bg-accent hover:text-accent-foreground"
                 onClick={(e) => {
                   e.preventDefault();
                   if (onSignInClick) onSignInClick();
@@ -379,7 +379,7 @@ export const Navbar02 = React.forwardRef(
             <NavLink to={ctaHref} className="no-underline">
               <Button
                 size="sm"
-                className="text-sm font-medium px-4 h-9 rounded-md shadow-sm"
+                className="text-sm font-bold px-4 h-9 rounded-md shadow-sm"
                 onClick={(e) => {
                   e.preventDefault();
                   if (onCtaClick) onCtaClick();

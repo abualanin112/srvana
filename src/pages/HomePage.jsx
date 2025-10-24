@@ -11,6 +11,9 @@ import BlogSection from "@/components/layout/BlogSection";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
+import BubbleBackground from "@/components/ui/BubbleBackground";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
+
 import {
   FaUsers,
   FaHardHat,
@@ -97,50 +100,59 @@ export default function HomePage() {
   const [selectedService, setSelectedService] = useState(featuredServices[0]);
   return (
     <>
-      <section className="relative w-full py-20 md:py-32 lg:py-48 bg-background flex items-center justify-center text-center">
-        <div className="container max-w-4xl px-4 md:px-6">
-          {/* العنوان الرئيسي */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-tight mb-6">
-            كل خدماتك في مكان واحد
-          </h1>
+      <section className="relative w-full h-screen overflow-hidden bg-transparent -mt-16">
+        {/* الخلفية المتحركة */}
+        <BubbleBackground interactive className="absolute inset-0 z-0 ">
+          {/* المحتوى فوق الخلفية */}
+          <div className="relative  z-20 container max-w-4xl px-4 md:px-6 flex flex-col items-center justify-center h-full text-center mx-auto">
+            {/* العنوان الرئيسي */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-primary leading-tight my-6">
+              كل خدماتك في مكان واحد
+            </h1>
 
-          {/* الوصف */}
-          <p className="text-lg md:text-xl text-muted-foreground mb-15 max-w-2xl mx-auto">
-            من صيانة الأجهزة المنزلية إلى مشاريعك الكبيرة، نحن نوفر كل شيء
-            بسهولة واحترافية.
-          </p>
+            {/* الوصف */}
+            <p className="text-lg md:text-xl text-primary-foreground mb-15 max-w-2xl mx-auto">
+              من صيانة الأجهزة المنزلية إلى مشاريعك الكبيرة، نحن نوفر كل شيء
+              بسهولة واحترافية.
+            </p>
 
-          {/* الأزرار */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Link to="/services/book">
-              <Button size="lg" className="px-8 py-3 text-lg font-semibold">
-                <FaWrench className="h-5 w-5 ml-2" />{" "}
-                {/* أيقونة مفتاح للخدمات */}
-                احجز خدمة
-              </Button>
-            </Link>
-            <Link to="/projects-services">
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-8 py-3 text-lg font-semibold"
-              >
-                <FaBox className="h-5 w-5 ml-2" /> {/* أيقونة حزمة للمشاريع */}
-                خدمة المشاريع
-              </Button>
+            {/* الأزرار */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+              <Link to="/services/book">
+                <PrimaryButton
+                  size="lg"
+                  className="px-8 py-7 text-lg font-semibold"
+                  onClick={() => alert("تم الضغط!")}
+                >
+                  احجز خدمة
+                </PrimaryButton>
+              </Link>
+              <Link to="/projects-services">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="px-8 py-3 text-lg font-semibold"
+                >
+                  <FaBox className="h-5 w-5 ml-2" />{" "}
+                  {/* أيقونة حزمة للمشاريع */}
+                  خدمة المشاريع
+                </Button>
+              </Link>
+            </div>
+
+            {/* دعوة للعمل (CTA) للفنيين */}
+            <Link
+              to="/join-as-technician"
+              className="inline-flex items-center text-primary hover:text-primary-foreground transition-colors group"
+            >
+              <span className="text-lg font-medium">
+                هل أنت فني؟ انضم إلينا
+              </span>
+              <FaArrowLeft className="h-5 w-5 mr-2 transition-transform group-hover:translate-x-1" />{" "}
+              {/* سهم متجه لليسار ليتناسب مع RTL */}
             </Link>
           </div>
-
-          {/* دعوة للعمل (CTA) للفنيين */}
-          <Link
-            to="/join-as-technician"
-            className="inline-flex items-center text-primary hover:text-primary-foreground transition-colors group"
-          >
-            <span className="text-lg font-medium">هل أنت فني؟ انضم إلينا</span>
-            <FaArrowLeft className="h-5 w-5 mr-2 transition-transform group-hover:translate-x-1" />{" "}
-            {/* سهم متجه لليسار ليتناسب مع RTL */}
-          </Link>
-        </div>
+        </BubbleBackground>
       </section>
       {/* القسم الثاني: خدمات شائعة */}
       <section className="w-full py-16 md:py-24 bg-background">

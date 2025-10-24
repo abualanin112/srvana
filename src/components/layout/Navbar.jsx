@@ -165,7 +165,7 @@ export function Navbar({ darkMode, setDarkMode }) {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-20 w-full border-b bg-background/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-center">
         {/* الجزء الأيمن: الشعار واسم المشروع */}
         <div className="mr-4 flex items-center space-x-2 space-x-reverse">
