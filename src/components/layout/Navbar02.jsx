@@ -20,6 +20,8 @@ import { cn } from "@/lib/utils";
 
 import SrvanaLogo from "@/assets/logos/srvana-logo.svg";
 
+import CircleThemeToggle from "@/components/ui/CircleThemeToggle";
+
 // === Hamburger icon (SVG) ===
 const HamburgerIcon = ({ className, ...props }) => (
   <svg
@@ -117,6 +119,8 @@ export const Navbar02 = React.forwardRef(
       ctaHref = "/get-started",
       onSignInClick,
       onCtaClick,
+      darkMode,
+      setDarkMode,
       ...props
     },
     ref
@@ -149,7 +153,6 @@ export const Navbar02 = React.forwardRef(
 
     return (
       <header
-        dir="rtl"
         ref={combinedRef}
         className={cn(
           "sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:px-6 [&_*]:no-underline",
@@ -173,7 +176,9 @@ export const Navbar02 = React.forwardRef(
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent
-                  align="start"
+                  align="end"
+                  sideOffset={4}
+                  side="right"
                   className="w-64 p-1 bg-transparent shadow-none border-none"
                 >
                   <NavigationMenu className="max-w-none">
@@ -250,8 +255,8 @@ export const Navbar02 = React.forwardRef(
 
               {/* Desktop navigation */}
               {!isMobile && (
-                <NavigationMenu className="flex">
-                  <NavigationMenuList className="flex-row-reverse gap-1">
+                <NavigationMenu className="flex bg-transparent">
+                  <NavigationMenuList className="gap-1 bg-transparent">
                     {navigationLinks.map((link, index) => (
                       <NavigationMenuItem key={index}>
                         {link.submenu ? (
@@ -383,6 +388,9 @@ export const Navbar02 = React.forwardRef(
                 {ctaText}
               </Button>
             </NavLink>
+
+            {/* Dark mode toggle على اليمين من زر تسجيل الدخول */}
+            <CircleThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
           </div>
         </div>
       </header>

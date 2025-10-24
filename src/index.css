@@ -234,3 +234,10 @@ body {
     flex-basis: 100%;
   }
 }
+
+/* globals.css */
+*,
+*::before,
+*::after {
+  @apply box-border;
+}
