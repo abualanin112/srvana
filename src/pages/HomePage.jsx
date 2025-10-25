@@ -1,16 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import CountUp from "react-countup";
 import TopTechnicians from "@/components/layout/TopTechnicians";
 import AppHeroSection from "@/components/layout/AppHeroSection";
 import FaqSection from "@/components/layout/FaqSection";
 import BlogSection from "@/components/layout/BlogSection";
+import FeaturedQuickServices from "@/components/layout/FeaturedQuickServices";
 
 // Shadcn UI Components
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-
 import BubbleBackground from "@/components/ui/BubbleBackground";
 
 import {
@@ -20,52 +18,12 @@ import {
   FaMapMarkerAlt,
   FaWrench,
   FaBox,
-  FaArrowLeft,
-  FaLightbulb,
-  FaFaucet,
-  FaFan,
-  FaHammer,
+  // FaArrowLeft,
+  // FaLightbulb,
+  // FaFaucet,
+  // FaFan,
+  // FaHammer,
 } from "react-icons/fa";
-
-// بيانات الخدمات الشائعة (للقسم الثاني)
-const featuredServices = [
-  {
-    id: "ac-repair",
-    title: "صيانة أجهزة التكييف",
-    description:
-      "نقدم صيانة شاملة وتركيب لجميع أنواع أجهزة التكييف للحفاظ على أدائها الأمثل.",
-    image: "/assets/images/ac-repair.jpg", // صورة توضيحية لخدمة التكييف
-    icon: FaFan,
-    ctaLink: "/services/ac-repair",
-  },
-  {
-    id: "electrical",
-    title: "صيانة كهرباء",
-    description:
-      "إصلاح جميع الأعطال الكهربائية وتمديداتها، وتركيب الإضاءة وأنظمة الأمان.",
-    image: "/assets/images/electrical-repair.jpg", // صورة توضيحية لخدمة الكهرباء
-    icon: FaLightbulb,
-    ctaLink: "/services/electrical",
-  },
-  {
-    id: "plumbing",
-    title: "صيانة سباكة",
-    description:
-      "حلول متكاملة لمشاكل السباكة، من إصلاح التسربات إلى تركيب الأدوات الصحية الحديثة.",
-    image: "/assets/images/plumbing-repair.jpg", // صورة توضيحية لخدمة السباكة
-    icon: FaFaucet,
-    ctaLink: "/services/plumbing",
-  },
-  {
-    id: "general-maintenance",
-    title: "صيانة عامة للمنازل",
-    description:
-      "خدمات صيانة متنوعة للمنازل والمنشآت، تشمل النجارة والدهانات والتركيبات.",
-    image: "/assets/images/general-maintenance.jpg", // صورة توضيحية لخدمة عامة
-    icon: FaHammer,
-    ctaLink: "/services/general-maintenance",
-  },
-];
 
 // <<< 2. بيانات قسم الأرقام
 const statsData = [
@@ -96,7 +54,6 @@ const statsData = [
 ];
 
 export default function HomePage() {
-  const [selectedService, setSelectedService] = useState(featuredServices[0]);
   return (
     <>
       <section className="relative w-full h-screen overflow-hidden bg-transparent -mt-16">
@@ -150,80 +107,11 @@ export default function HomePage() {
           </div>
         </BubbleBackground>
       </section>
+
       {/* القسم الثاني: خدمات شائعة */}
-      <section className="w-full py-16 md:py-24 bg-background">
-        <div className="container max-w-7xl mx-auto px-4">
-          <div className="mb-10 text-right">
-            {" "}
-            {/* عنوان القسم في اليمين */}
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-              خدمات شائعة
-            </h2>
-            <Separator className="mt-4 w-24 bg-primary h-1 mr-auto ml-0" />{" "}
-            {/* خط سميك تحت العنوان */}
-          </div>
+      <FeaturedQuickServices />
 
-          {/* 1. الحاوية الرئيسية أصبحت هي البطاقة الموحدة */}
-          <div className="bg-card rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-3 overflow-hidden">
-            {/* الجزء الأيمن: قائمة الخدمات (مع فاصل على اليسار للشاشات الكبيرة) */}
-            <div className="md:col-span-1 p-4 md:p-6 md:border-l border-border">
-              <h3 className="text-xl font-semibold mb-4 text-foreground">
-                استكشف خدماتنا
-              </h3>
-              <nav className="space-y-4">
-                {featuredServices.map((service) => (
-                  <button
-                    key={service.id}
-                    onClick={() => setSelectedService(service)} //  للضغط على الموبايل
-                    onMouseEnter={() => setSelectedService(service)} // <<< هذا هو السطر الجديد للتفاعل عند المرور
-                    className={`flex items-center gap-4 w-full p-4 rounded-md transition-colors duration-200 ease-in-out
-        ${
-          selectedService.id === service.id
-            ? "bg-primary text-primary-foreground shadow-md"
-            : "bg-background hover:bg-muted text-foreground"
-        }`}
-                  >
-                    <service.icon className="h-6 w-6 shrink-0" />
-                    <span className="text-lg font-medium">{service.title}</span>
-                  </button>
-                ))}
-              </nav>
-            </div>
-
-            {/* الجزء الأيسر: تفاصيل الخدمة المختارة */}
-            {/* 4. تمت إزالة bg-card و shadow و rounded من هنا أيضًا */}
-            <div className="md:col-span-2 p-4 md:p-8 flex flex-col items-center text-center md:items-start md:text-right">
-              {selectedService && (
-                <>
-                  <img
-                    src={selectedService.image}
-                    alt={selectedService.title}
-                    width={800}
-                    height={450}
-                    className="w-full max-h-[450px] object-cover rounded-lg mb-6 shadow-md"
-                  />
-                  <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                    {selectedService.title}
-                  </h3>
-                  <p className="text-lg text-muted-foreground mb-8">
-                    {selectedService.description}
-                  </p>
-                  <Link to={selectedService.ctaLink}>
-                    <Button
-                      size="lg"
-                      className="px-8 py-3 text-lg font-semibold"
-                    >
-                      اطلب هذه الخدمة
-                      <FaArrowLeft className="h-5 w-5 mr-2" />
-                    </Button>
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* --- القسم الثالث الجديد: شريط الأرقام --- */}
+      {/* --- القسم الثالث : شريط الأرقام --- */}
       <section className="w-full py-16 md:py-24 bg-muted/50">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
