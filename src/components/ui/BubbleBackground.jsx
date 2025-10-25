@@ -10,12 +10,10 @@ const BubbleBackground = ({
   interactive = false,
   transition = { stiffness: 100, damping: 20 },
   colors = {
-    first: "18,113,255",
-    second: "221,74,255",
-    third: "0,220,255",
-    fourth: "200,50,50",
-    fifth: "180,180,50",
-    sixth: "140,100,255",
+    first: "36.55,32.9,280.18",
+    second: "27,55,121",
+    third: "251,197,16",
+    fourth: "15,65,145",
   },
   ...props
 }) => {
@@ -57,7 +55,7 @@ const BubbleBackground = ({
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      <div className="absolute inset-0 w-full h-full z-5 bg-gradient-to-br from-violet-900 to-blue-900 opacity-60" />
+      <div className="absolute inset-0 w-full h-full z-5 bg-gradient-to-br from-[#fbc510] to-[#0f2a71] opacity-40" />
 
       <style>
         {`
@@ -66,8 +64,7 @@ const BubbleBackground = ({
             --second-color: ${colors.second};
             --third-color: ${colors.third};
             --fourth-color: ${colors.fourth};
-            --fifth-color: ${colors.fifth};
-            --sixth-color: ${colors.sixth};
+
           }
         `}
       </style>
@@ -93,7 +90,7 @@ const BubbleBackground = ({
 
       <div
         className="absolute inset-0 z-10"
-        style={{ filter: "url(#goo) blur(40px)", opacity: 0.6 }}
+        style={{ filter: "url(#goo) blur(40px)", opacity: 0.4 }}
       >
         <motion.div
           className="absolute rounded-full w-[80%] h-[80%] top-[10%] left-[10%]  bg-[radial-gradient(circle_at_center,rgba(var(--first-color),0.8)_0%,rgba(var(--first-color),0)_50%)]"
@@ -117,23 +114,9 @@ const BubbleBackground = ({
           <div className="absolute rounded-full w-[80%] h-[80%] top-[calc(50%+200px)] left-[calc(50%-500px)] bg-[radial-gradient(circle_at_center,rgba(var(--third-color),0.8)_0%,rgba(var(--third-color),0)_50%)]" />
         </motion.div>
 
-        <motion.div
-          className="absolute rounded-full w-[80%] h-[80%] top-[10%] left-[10%]  bg-[radial-gradient(circle_at_center,rgba(var(--fourth-color),0.8)_0%,rgba(var(--fourth-color),0)_50%)] opacity-70"
-          animate={{ x: [-50, 50, -50] }}
-          transition={{ duration: 40, ease: "easeInOut", repeat: Infinity }}
-        />
-
-        <motion.div
-          className="absolute inset-0 flex justify-center items-center origin-[calc(50%_-_800px)_calc(50%_+_200px)]"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-        >
-          <div className="absolute rounded-full w-[160%] h-[160%] bg-[radial-gradient(circle_at_center,rgba(var(--fifth-color),0.8)_0%,rgba(var(--fifth-color),0)_50%)] top-[calc(50%-80%)] left-[calc(50%-80%)]" />
-        </motion.div>
-
         {interactive && (
           <motion.div
-            className="absolute rounded-full w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--sixth-color),0.8)_0%,rgba(var(--sixth-color),0)_50%)] opacity-70"
+            className="absolute rounded-full w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--fourth-color),0.8)_0%,rgba(var(--third-color),0)_50%)] opacity-70"
             style={{ x: springX, y: springY }}
           />
         )}

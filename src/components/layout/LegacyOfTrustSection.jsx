@@ -118,10 +118,10 @@ const AboutStatsSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <h4 className="text-primary font-semibold mb-2 text-xl">
+            <h4 className="text-primary font-semibold mb-2 text-lg">
               عن الشركة
             </h4>
-            <h2 className="text-4xl lg:text-5xl font-extrabold mb-4 text-foreground leading-tight">
+            <h2 className="text-3xl lg:text-4xl font-extrabold mb-4 text-foreground leading-tight">
               بناء إرث من الثقة
             </h2>
             <p className="text-lg text-muted-foreground max-w-md ml-auto">

@@ -103,12 +103,15 @@ const FeaturedQuickServices = () => {
         {" "}
         <div className="mb-12 text-center">
           {" "}
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground">
-            خدمات سريعة شائعة
+          <h4 className="text-primary font-semibold mb-2 text-lg">
+            خدمات سريعة{" "}
+          </h4>
+          <h2 className="text-3xl lg:text-4xl font-extrabold mb-4 text-foreground leading-tight">
+            ما الخدمة التي تبحث عنها؟
           </h2>
-          <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-lg mx-auto">
             {" "}
-            الحل الأمثل للأعمال البسيطة والفنية اليومية السريعة والواضحة
+            الحل الأمثل للأعمال اليومية والفنية السريعة والواضحة
           </p>
         </div>
         {/* --- البطاقة الرئيسية التي تحتوي على كل المحتوى --- */}
