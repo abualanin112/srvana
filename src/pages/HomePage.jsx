@@ -6,6 +6,7 @@ import AppHeroSection from "@/components/layout/AppHeroSection";
 import FaqSection from "@/components/layout/FaqSection";
 import BlogSection from "@/components/layout/BlogSection";
 import FeaturedQuickServices from "@/components/layout/FeaturedQuickServices";
+import LegacyOfTrustSection from "@/components/layout/LegacyOfTrustSection";
 
 // Shadcn UI Components
 import { Button } from "@/components/ui/button";
@@ -18,40 +19,7 @@ import {
   FaMapMarkerAlt,
   FaWrench,
   FaBox,
-  // FaArrowLeft,
-  // FaLightbulb,
-  // FaFaucet,
-  // FaFan,
-  // FaHammer,
 } from "react-icons/fa";
-
-// <<< 2. بيانات قسم الأرقام
-const statsData = [
-  {
-    icon: FaUsers,
-    endValue: 5000,
-    label: "عميل سعيد",
-    suffix: "+",
-  },
-  {
-    icon: FaHardHat,
-    endValue: 1000,
-    label: "فني محترف",
-    suffix: "+",
-  },
-  {
-    icon: FaClipboardCheck,
-    endValue: 20000,
-    label: "خدمة مكتملة",
-    suffix: "+",
-  },
-  {
-    icon: FaMapMarkerAlt,
-    endValue: 25,
-    label: "مدينة مغطاة",
-    suffix: "+",
-  },
-];
 
 export default function HomePage() {
   return (
@@ -112,42 +80,8 @@ export default function HomePage() {
       <FeaturedQuickServices />
 
       {/* --- القسم الثالث : شريط الأرقام --- */}
-      <section className="w-full py-16 md:py-24 bg-muted/50">
-        <div className="container max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-              إنجازاتنا بالأرقام
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              نفخر بما حققناه من ثقة ونجاح مع عملائنا وشركائنا.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            {statsData.map((stat, index) => (
-              <div
-                key={index}
-                className="bg-card p-6 rounded-xl shadow-lg flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-primary/20"
-              >
-                <stat.icon className="h-10 w-10 mb-4 text-primary" />
-                <h3 className="text-4xl lg:text-5xl font-extrabold text-primary">
-                  {/* <<< 3. استخدام CountUp هنا */}
-                  <CountUp
-                    end={stat.endValue}
-                    duration={3} // مدة العد بالثواني
-                    separator="," // فاصل الآلاف
-                    suffix={stat.suffix}
-                    enableScrollSpy
-                    scrollSpyOnce
-                  />
-                </h3>
-                <p className="text-md md:text-lg text-muted-foreground mt-2">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <LegacyOfTrustSection />
+
       {/* <<< الفنيين الاوائل*/}
       <TopTechnicians />
       {/* <<< قسم التطبيق الجديد */}
