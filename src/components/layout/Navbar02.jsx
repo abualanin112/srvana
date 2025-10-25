@@ -155,7 +155,7 @@ export const Navbar02 = React.forwardRef(
       <header
         ref={combinedRef}
         className={cn(
-          "sticky top-0 z-30 w-full border-b bg-white/30 backdrop-blur-lg supports-[backdrop-filter]:bg-white/30 px-4 md:px-6 [&_*]:no-underline",
+          "sticky top-0 z-30 w-full bg-white/30 backdrop-blur-lg supports-[backdrop-filter]:bg-white/30 px-4 md:px-6 [&_*]:no-underline",
           className
         )}
         {...props}
@@ -179,7 +179,7 @@ export const Navbar02 = React.forwardRef(
                   align="end"
                   sideOffset={4}
                   side="right"
-                  className="w-64 p-1 bg-transparent shadow-none border-none"
+                  className="w-64 p-1 shadow-none border-none"
                 >
                   <NavigationMenu className="max-w-none">
                     <NavigationMenuList className="flex-col items-start gap-0">
@@ -187,7 +187,7 @@ export const Navbar02 = React.forwardRef(
                         <NavigationMenuItem key={index} className="w-full">
                           {link.submenu ? (
                             <>
-                              <div className="text-muted-foreground px-2 py-1.5 text-xs font-bold">
+                              <div className="text-muted-foreground px-2 py-1.5 text-xs !font-bold">
                                 {link.label}
                               </div>
                               <ul>
@@ -195,7 +195,7 @@ export const Navbar02 = React.forwardRef(
                                   <li key={itemIndex}>
                                     <NavLink
                                       to={item.to || "#"}
-                                      className="flex w-full items-center rounded-md px-3 py-2 text-md font-bold transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline"
+                                      className="flex w-full items-center rounded-md px-3 py-2 text-md !font-bold transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline"
                                     >
                                       {item.label}
                                     </NavLink>
@@ -206,7 +206,7 @@ export const Navbar02 = React.forwardRef(
                           ) : (
                             <NavLink
                               to={link.to || "#"}
-                              className="flex w-full items-center rounded-md px-3 py-2 text-md font-bold transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline"
+                              className="flex w-full items-center rounded-md px-3 py-2 text-md !font-bold transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer no-underline"
                             >
                               {link.label}
                             </NavLink>

@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 import BubbleBackground from "@/components/ui/BubbleBackground";
-import { PrimaryButton } from "@/components/ui/PrimaryButton";
 
 import {
   FaUsers,
@@ -104,53 +103,50 @@ export default function HomePage() {
         {/* الخلفية المتحركة */}
         <BubbleBackground interactive className="absolute inset-0 z-0 ">
           {/* المحتوى فوق الخلفية */}
-          <div className="relative  z-20 container max-w-4xl px-4 md:px-6 flex flex-col items-center justify-center h-full text-center mx-auto">
+          <div className="relative z-20 container max-w-6xl px-4 md:px-6 flex flex-col items-center justify-center h-full text-center mx-auto">
             {/* العنوان الرئيسي */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-primary leading-tight my-6">
-              كل خدماتك في مكان واحد
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-primary leading-tight my-6">
+              كل <span className="text-secondary"> خدماتك </span>في مكان واحد
             </h1>
 
             {/* الوصف */}
-            <p className="text-lg md:text-xl text-primary-foreground mb-15 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-primary-foreground mb-18 max-w-2xl mx-auto">
               من صيانة الأجهزة المنزلية إلى مشاريعك الكبيرة، نحن نوفر كل شيء
-              بسهولة واحترافية.
+              بسهولة واحترافية
             </p>
 
             {/* الأزرار */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-              <Link to="/services/book">
-                <PrimaryButton
-                  size="lg"
-                  className="px-8 py-7 text-lg font-semibold"
-                  onClick={() => alert("تم الضغط!")}
-                >
-                  احجز خدمة
-                </PrimaryButton>
-              </Link>
-              <Link to="/projects-services">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="px-8 py-3 text-lg font-semibold"
-                >
-                  <FaBox className="h-5 w-5 ml-2" />{" "}
-                  {/* أيقونة حزمة للمشاريع */}
-                  خدمة المشاريع
-                </Button>
-              </Link>
+            <div className="flex flex-col sm:grid sm:grid-cols-2 items-center justify-center gap-4 mb-12">
+              <Button size="lg" className="w-full py-6" asChild>
+                <Link to="/services/book">
+                  <FaWrench className="h-5 w-5" />
+                  احجز خدمة سريعة
+                </Link>
+              </Button>
+
+              <Button
+                variant="secondary"
+                size="lg"
+                className="w-full py-6"
+                asChild
+              >
+                <Link to="/projects-services">
+                  <FaBox className="h-5 w-5" />
+                  اطلب خدمة مخصصة
+                </Link>
+              </Button>
             </div>
 
             {/* دعوة للعمل (CTA) للفنيين */}
-            <Link
-              to="/join-as-technician"
-              className="inline-flex items-center text-primary hover:text-primary-foreground transition-colors group"
-            >
-              <span className="text-lg font-medium">
-                هل أنت فني؟ انضم إلينا
-              </span>
-              <FaArrowLeft className="h-5 w-5 mr-2 transition-transform group-hover:translate-x-1" />{" "}
-              {/* سهم متجه لليسار ليتناسب مع RTL */}
-            </Link>
+            <p className="text-lg font-medium text-primary ">
+              هل أنت فني؟{" "}
+              <Link
+                to="/join-as-technician"
+                className="text-primary-foreground underline underline-offset-4 hover:no-underline"
+              >
+                انضم إلينا
+              </Link>
+            </p>
           </div>
         </BubbleBackground>
       </section>
@@ -170,8 +166,6 @@ export default function HomePage() {
           {/* 1. الحاوية الرئيسية أصبحت هي البطاقة الموحدة */}
           <div className="bg-card rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-3 overflow-hidden">
             {/* الجزء الأيمن: قائمة الخدمات (مع فاصل على اليسار للشاشات الكبيرة) */}
-            {/* 2. تمت إزالة bg-card و shadow و rounded من هنا */}
-            {/* 3. تمت إضافة md:border-l لإنشاء الفاصل */}
             <div className="md:col-span-1 p-4 md:p-6 md:border-l border-border">
               <h3 className="text-xl font-semibold mb-4 text-foreground">
                 استكشف خدماتنا
@@ -180,7 +174,7 @@ export default function HomePage() {
                 {featuredServices.map((service) => (
                   <button
                     key={service.id}
-                    onClick={() => setSelectedService(service)} // ستبقى للضغط على الموبايل
+                    onClick={() => setSelectedService(service)} //  للضغط على الموبايل
                     onMouseEnter={() => setSelectedService(service)} // <<< هذا هو السطر الجديد للتفاعل عند المرور
                     className={`flex items-center gap-4 w-full p-4 rounded-md transition-colors duration-200 ease-in-out
         ${
