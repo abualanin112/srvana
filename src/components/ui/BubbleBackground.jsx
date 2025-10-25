@@ -55,7 +55,7 @@ const BubbleBackground = ({
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      <div className="absolute inset-0 w-full h-full z-5 bg-gradient-to-br from-[#fbc510] to-[#0f2a71] opacity-40" />
+      <div className="absolute inset-0 w-full h-full z-5 bg-gradient-to-br from-[#0f2a71] to-[#fcd34d] opacity-70" />
 
       <style>
         {`
@@ -90,7 +90,7 @@ const BubbleBackground = ({
 
       <div
         className="absolute inset-0 z-10"
-        style={{ filter: "url(#goo) blur(40px)", opacity: 0.4 }}
+        style={{ filter: "url(#goo) blur(40px)", opacity: 0.5 }}
       >
         <motion.div
           className="absolute rounded-full w-[80%] h-[80%] top-[10%] left-[10%]  bg-[radial-gradient(circle_at_center,rgba(var(--first-color),0.8)_0%,rgba(var(--first-color),0)_50%)]"

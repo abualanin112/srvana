@@ -30,12 +30,12 @@ export default function HomePage() {
           {/* المحتوى فوق الخلفية */}
           <div className="relative z-20 container max-w-6xl px-4 md:px-6 flex flex-col items-center justify-center h-full text-center mx-auto">
             {/* العنوان الرئيسي */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-primary leading-tight my-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-primary leading-tight my-6">
               كل <span className="text-secondary"> خدماتك </span>في مكان واحد
             </h1>
 
             {/* الوصف */}
-            <p className="text-xl md:text-2xl text-primary-foreground mb-18 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-primary-foreground mb-15 max-w-2xl mx-auto">
               من صيانة الأجهزة المنزلية إلى مشاريعك الكبيرة، نحن نوفر كل شيء
               بسهولة واحترافية
             </p>
@@ -63,7 +63,7 @@ export default function HomePage() {
             </div>
 
             {/* دعوة للعمل (CTA) للفنيين */}
-            <p className="text-lg font-medium text-primary ">
+            <p className="text-lg font-medium text-primary text-shadow-2xs ">
               هل أنت فني؟{" "}
               <Link
                 to="/join-as-technician"
