@@ -1,4 +1,5 @@
 // src/components/TopTechnicians.jsx
+
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -11,203 +12,226 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-// React Icons
-import { FaStar, FaArrowLeft } from "react-icons/fa";
+// Lucide React Icons
+import { Star, ArrowLeft } from "lucide-react";
 
-// بيانات وهمية لـ 10 فنيين
+// --- بيانات الفنيين ---
 const topTechniciansData = [
   {
     id: 1,
-    rank: 1,
     name: "علي محمد",
     specialty: "خبير تكييف وتبريد",
-    quote: "الدقة في العمل هي سر النجاح.",
     rating: 5,
-    image: "https://i.pravatar.cc/150?img=1",
+    reviewCount: 312,
+    image: "https://i.pravatar.cc/300?img=1",
   },
   {
     id: 2,
-    rank: 2,
     name: "فاطمة الزهراء",
     specialty: "مهندسة كهرباء",
-    quote: "الأمان أولاً في كل توصيلة.",
     rating: 5,
-    image: "https://i.pravatar.cc/150?img=2",
+    reviewCount: 289,
+    image: "https://i.pravatar.cc/300?img=2",
   },
   {
     id: 3,
-    rank: 3,
     name: "خالد عبد الله",
     specialty: "فني سباكة معتمد",
-    quote: "حلول مبتكرة لكل مشاكل المياه.",
     rating: 4.9,
-    image: "https://i.pravatar.cc/150?img=3",
+    reviewCount: 255,
+    image: "https://i.pravatar.cc/300?img=3",
   },
   {
     id: 4,
-    rank: 4,
     name: "سارة إبراهيم",
     specialty: "تصميم وتنفيذ إضاءة",
-    quote: "أضيف لمسة من النور لحياتك.",
     rating: 4.9,
-    image: "https://i.pravatar.cc/150?img=4",
+    reviewCount: 241,
+    image: "https://i.pravatar.cc/300?img=4",
   },
   {
     id: 5,
-    rank: 5,
     name: "يوسف أحمد",
     specialty: "صيانة عامة وتركيبات",
-    quote: "لا توجد مشكلة صغيرة أو كبيرة.",
     rating: 4.8,
-    image: "https://i.pravatar.cc/150?img=5",
+    reviewCount: 217,
+    image: "https://i.pravatar.cc/300?img=5",
   },
   {
     id: 6,
-    rank: 6,
     name: "نور حسين",
     specialty: "فني نجارة",
-    quote: "أحوّل الخشب إلى تحفة فنية.",
     rating: 4.8,
-    image: "https://i.pravatar.cc/150?img=6",
+    reviewCount: 198,
+    image: "https://i.pravatar.cc/300?img=6",
   },
   {
     id: 7,
-    rank: 7,
     name: "محمد مصطفى",
     specialty: "تركيب أنظمة أمان",
-    quote: "راحتك وأمانك مسؤوليتي.",
     rating: 4.7,
-    image: "https://i.pravatar.cc/150?img=7",
+    reviewCount: 185,
+    image: "https://i.pravatar.cc/300?img=7",
   },
   {
     id: 8,
-    rank: 8,
     name: "هند رضا",
     specialty: "دهانات وديكور",
-    quote: "الألوان هي لغة الروح.",
     rating: 4.7,
-    image: "https://i.pravatar.cc/150?img=8",
+    reviewCount: 172,
+    image: "https://i.pravatar.cc/300?img=8",
   },
   {
     id: 9,
-    rank: 9,
     name: "أحمد حسن",
     specialty: "تركيب أطباق الدش",
-    quote: "إشارة قوية في كل مكان.",
     rating: 4.6,
-    image: "https://i.pravatar.cc/150?img=9",
+    reviewCount: 154,
+    image: "https://i.pravatar.cc/300?img=9",
   },
   {
     id: 10,
-    rank: 10,
     name: "مريم محمود",
     specialty: "تنظيف وصيانة مسابح",
-    quote: "مياه نقية ومنعشة دائمًا.",
     rating: 4.6,
-    image: "https://i.pravatar.cc/150?img=10",
+    reviewCount: 140,
+    image: "https://i.pravatar.cc/300?img=10",
   },
 ];
-// مكون لعرض نجوم التقييم
-const RatingStars = ({ rating }) => {
-  const fullStars = Math.floor(rating);
-  return (
-    <div className="flex gap-1 text-yellow-400">
-      {[...Array(fullStars)].map((_, i) => (
-        <FaStar key={i} />
-      ))}
-    </div>
-  );
-};
 
+// --- بيانات الشريط السفلي ---
+const partnersData = [
+  { name: "Sara Dane", image: "https://i.pravatar.cc/150?img=11" },
+  { name: "John Doe", image: "https://i.pravatar.cc/150?img=12" },
+  { name: "Lana Rhoades", image: "https://i.pravatar.cc/150?img=13" },
+  { name: "Emily Carter", image: "https://i.pravatar.cc/150?img=17" },
+  { name: "Mike Shinoda", image: "https://i.pravatar.cc/150?img=14" },
+];
+
+// --- مكون فرعي لعرض النجوم ---
+const RatingStars = ({ rating }) => (
+  <div className="flex items-center gap-1 text-accent">
+    {Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className="w-4 h-4"
+        fill={rating > i ? "currentColor" : "none"}
+        stroke={rating > i ? "currentColor" : "oklch(0.7 0.02 270)"}
+      />
+    ))}
+  </div>
+);
+
+// --- مكون فرعي لبطاقة الفني ---
+const TechnicianCard = ({ technician }) => (
+  <Card
+    className="relative bg-card border pt-0 rounded overflow-hidden group 
+    transition-all duration-500 select-none"
+  >
+    {/* الصورة (3/4 ) */}
+    <div className="h-[75%] overflow-hidden">
+      <img
+        src={technician.image}
+        alt={technician.name}
+        className="w-full h-65 object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    </div>
+
+    {/* المحتوى) */}
+    <CardContent className="h-[25%] p-2 pt-0 text-right flex flex-col justify-center">
+      <h3 className="text-lg font-bold text-card-foreground mb-1 truncate">
+        {technician.name}
+      </h3>
+
+      <p className="text-sm text-primary font-medium truncate">
+        {technician.specialty}
+      </p>
+
+      <div className="flex items-center justify-start gap-2 mt-3">
+        <RatingStars rating={technician.rating} />
+        <p className="text-xs text-muted-foreground">
+          ({technician.reviewCount} تقييمًا)
+        </p>
+      </div>
+    </CardContent>
+    <div className="absolute inset-0" />
+  </Card>
+);
+
+// --- مكون فرعي للشريط السفلي) ---
+const SectionFooter = () => (
+  <div className="mt-6 bg-card border rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div className="flex items-center gap-4">
+      <div className="flex -space-x-2 rtl:space-x-reverse pr-1">
+        {partnersData.map((partner) => (
+          <Avatar key={partner.name} className="ring-2 ring-card">
+            <AvatarImage src={partner.image} alt={partner.name} />
+            <AvatarFallback>
+              {partner.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
+            </AvatarFallback>
+          </Avatar>
+        ))}
+      </div>
+
+      <p className="text-sm font-medium text-muted-foreground">
+        كن جزء من مجتمع الفنيين المحترفين في سرفانا — وابدء استقبال المهام
+      </p>
+    </div>
+    <div>
+      <Link to="/join-as-technician">
+        <Button size="lg" variant="secondary">
+          انضم الآن
+          <ArrowLeft className="h-5 w-5 mr-2" />
+        </Button>
+      </Link>
+    </div>
+  </div>
+);
+
+// --- المكون الرئيسي ---
 export default function TopTechnicians() {
   return (
-    <section className="w-full py-16 md:py-24 bg-background">
-      <div className="container max-w-7xl mx-auto px-4">
-        {/* عنوان القسم */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-            أفضل الفنيين لهذا الشهر
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            الفنيون الأكثر تميّزًا وفق تقييمات عملائنا
-          </p>
-        </div>
-
-        {/* Carousel للفنيين */}
+    <section className="w-full py-16 md:py-24 bg-background text-foreground overflow-hidden">
+      <div className="container max-w-screen-xl mx-auto px-4">
         <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full max-w-5xl mx-auto"
+          opts={{ align: "start", loop: true, direction: "rtl" }}
+          className="w-full"
         >
-          <CarouselContent className="-ml-4">
+          <div className="flex justify-between items-end mb-10">
+            <div className="text-right">
+              <h4 className="text-lg text-primary font-semibold mb-2">
+                الفنيين
+              </h4>
+              <h2 className="text-3xl lg:text-4xl font-extrabold mb-4 text-foreground leading-tight">
+                أفضل الفنيين لهذا الشهر
+              </h2>
+              <p className="mb-2 text-lg text-muted-foreground">
+                الفنيين الأكثر تميزًا وفق تقييمات عملائنا.
+              </p>
+            </div>
+            <div className="hidden md:flex items-center gap-3">
+              <CarouselNext className="relative translate-y-0 left-0 right-0 top-0 bg-muted/50 hover:bg-muted/70 text-foreground size-10 rounded-lg border-border" />
+              <CarouselPrevious className="relative translate-y-0 left-0 right-0 top-0 bg-muted/50 hover:bg-muted/70 text-foreground size-10 rounded-lg border-border" />
+            </div>
+          </div>
+          <CarouselContent className="-mr-2">
             {topTechniciansData.map((tech) => (
               <CarouselItem
                 key={tech.id}
-                className="pl-4 md:basis-1/2 lg:basis-1/3"
+                className="pr-2 md:basis-1/2 lg:basis-1/4"
               >
-                <div className="p-1">
-                  <Card className="overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <CardContent className="relative flex flex-col items-center justify-center p-6 text-center">
-                      <Badge className="absolute top-4 right-4 text-lg font-bold bg-primary text-primary-foreground">
-                        #{tech.rank}
-                      </Badge>
-                      <img
-                        src={tech.image}
-                        alt={tech.name}
-                        className="w-28 h-28 rounded-full mb-4 border-4 border-muted group-hover:border-primary transition-colors"
-                      />
-                      <h3 className="text-2xl font-bold text-foreground mb-1">
-                        {tech.name}
-                      </h3>
-                      <p className="text-md text-primary font-semibold mb-3">
-                        {tech.specialty}
-                      </p>
-                      <RatingStars rating={tech.rating} />
-                      <p className="text-muted-foreground mt-4 italic">
-                        "{tech.quote}"
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
+                <TechnicianCard technician={tech} />
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
         </Carousel>
-
-        {/* === قسم دعوة الانضمام كفني (CTA) المعدل === */}
-        <div className="mt-8 bg-card p-8 rounded-lg shadow-lg max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
-            {/* الجزء الأيمن: النص */}
-            <div className="flex-1">
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-                هل تريد أن تصبح أحد أفضل الفنيين؟
-              </h3>
-              <p className="mt-2 text-lg text-muted-foreground">
-                انضم إلى شبكتنا من المحترفين وابدأ في استقبال الطلبات اليوم.
-              </p>
-            </div>
-
-            {/* الجزء الأيسر: الزر */}
-            <div className="flex-shrink-0">
-              <Link to="/join-as-technician">
-                <Button
-                  size="lg"
-                  className="px-8 py-3 text-lg font-semibold transform transition hover:scale-105"
-                >
-                  انضم إلينا الآن!
-                  <FaArrowLeft className="h-5 w-5 mr-2" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
+        <SectionFooter />
       </div>
     </section>
   );

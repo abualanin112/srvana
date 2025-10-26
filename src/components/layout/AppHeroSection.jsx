@@ -13,7 +13,7 @@ const appFeatures = [
 
 export default function AppHeroSection() {
   return (
-    <section className="relative w-full bg-background overflow-hidden py-16 md:py-24">
+    <section className="relative w-full bg-secondary overflow-hidden py-16 md:py-24">
       {/* خلفية مع Overlay */}
       <div className="absolute inset-0 bg-[url('/assets/images/app-bg.svg')] bg-cover bg-center opacity-5"></div>
       <div className="absolute inset-0 bg-gradientq-to-t from-card via-card/90 to-card/70"></div>

@@ -88,8 +88,8 @@ export default function HomePage() {
       <AppHeroSection />
       {/* <<< قسم الأسئلة الشائعة*/}
       <FaqSection />
-      {/* <<< قسم المدونة هنا */}
-      <BlogSection />
+      {/* <<< قسم المدونة  */}
+      {/* <BlogSection /> */}
     </>
   );
 }
