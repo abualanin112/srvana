@@ -25,7 +25,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
-        {/* <Navbar darkMode={darkMode} setDarkMode={setDarkMode} /> */}
         <Navbar02 darkMode={darkMode} setDarkMode={setDarkMode} />
         <main dir="rtl" className="flex-grow w-full bg-background">
           <Routes>

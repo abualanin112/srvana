@@ -18,6 +18,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // Lucide React Icons
 import { Star, ArrowLeft } from "lucide-react";
 
+import { Icon } from "@/components/ui/BageIcons";
+
 // --- بيانات الفنيين ---
 const topTechniciansData = [
   {
@@ -125,6 +127,14 @@ const RatingStars = ({ rating }) => (
   </div>
 );
 
+const rankColors = {
+  1: "oklch(0.75 0.15 80)",
+  2: "oklch(0.75 0.05 260)",
+  3: "oklch(0.7 0.15 40)",
+};
+
+const defaultRankColor = "oklch(0.65 0.02 240)";
+
 // --- مكون فرعي لبطاقة الفني ---
 const TechnicianCard = ({ technician }) => (
   <Card
@@ -141,10 +151,22 @@ const TechnicianCard = ({ technician }) => (
     </div>
 
     {/* المحتوى) */}
-    <CardContent className="h-[25%] p-2 pt-0 text-right flex flex-col justify-center">
-      <h3 className="text-lg font-bold text-card-foreground mb-1 truncate">
-        {technician.name}
-      </h3>
+    <CardContent className="h-[25%] p-2 pt-0 text-right flex flex-col justify-center relative">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-bold text-card-foreground mb-1 truncate">
+          {technician.name}
+        </h3>
+
+        {technician.id <= 10 && (
+          <div className="absolute top-1 left-6 z-10">
+            <Icon
+              color={rankColors[technician.id] || defaultRankColor}
+              size={45}
+              rank={technician.id}
+            />
+          </div>
+        )}
+      </div>
 
       <p className="text-sm text-primary font-medium truncate">
         {technician.specialty}
