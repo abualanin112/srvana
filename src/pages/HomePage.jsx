@@ -7,6 +7,7 @@ import BlogSection from "@/components/layout/BlogSection";
 import FeaturedQuickServices from "@/components/layout/FeaturedQuickServices";
 import LegacyOfTrustSection from "@/components/layout/LegacyOfTrustSection";
 import ComplexServicesSection from "@/components/layout/ComplexServicesSection";
+import TestimonialsSection from "@/components/layout/TestimonialsSection";
 
 // Shadcn UI Components
 import { Button } from "@/components/ui/button";
@@ -90,6 +91,9 @@ export default function HomePage() {
 
       {/* <<< الفنيين الاوائل*/}
       <TopTechnicians />
+
+      {/* سكشن اراء العملاء*/}
+      <TestimonialsSection />
 
       {/* <<< قسم الأسئلة الشائعة*/}
       <FaqSection />
