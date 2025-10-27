@@ -1,1 +1,4 @@
-www.srvana.tech
+Type: CNAME
+Name: www
+Value: srvana.tech
+TTL: Auto
