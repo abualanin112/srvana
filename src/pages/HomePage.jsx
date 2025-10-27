@@ -86,6 +86,8 @@ export default function HomePage() {
       <TopTechnicians />
 
       {/* <<< قسم التطبيق  */}
+
+      {/* <<< قسم التطبيق  */}
       <AppHeroSection />
 
       {/* <<< قسم المشاريع  */}
