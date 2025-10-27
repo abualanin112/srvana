@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import CountUp from "react-countup";
 import TopTechnicians from "@/components/layout/TopTechnicians";
 import AppHeroSection from "@/components/layout/AppHeroSection";
 import FaqSection from "@/components/layout/FaqSection";
 import BlogSection from "@/components/layout/BlogSection";
 import FeaturedQuickServices from "@/components/layout/FeaturedQuickServices";
 import LegacyOfTrustSection from "@/components/layout/LegacyOfTrustSection";
+import ComplexServicesSection from "@/components/layout/ComplexServicesSection";
 
 // Shadcn UI Components
 import { Button } from "@/components/ui/button";
@@ -84,10 +84,16 @@ export default function HomePage() {
 
       {/* <<< الفنيين الاوائل*/}
       <TopTechnicians />
-      {/* <<< قسم التطبيق الجديد */}
+
+      {/* <<< قسم التطبيق  */}
       <AppHeroSection />
+
+      {/* <<< قسم المشاريع  */}
+      <ComplexServicesSection />
+
       {/* <<< قسم الأسئلة الشائعة*/}
       <FaqSection />
+
       {/* <<< قسم المدونة  */}
       {/* <BlogSection /> */}
     </>

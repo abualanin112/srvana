@@ -42,11 +42,11 @@ const timelineSteps = [
     title: "اختيار الفني",
     description: "قارن بين العروض والتقييمات لاختيار الفني الأنسب.",
   },
-  {
-    icon: CreditCard,
-    title: "الدفع الآمن",
-    description: "ادفع دفعة مقدمة بشكل آمن عبر المنصة لبدء العمل.",
-  },
+  // {
+  //   icon: CreditCard,
+  //   title: "الدفع الآمن",
+  //   description: "ادفع دفعة مقدمة بشكل آمن عبر المنصة لبدء العمل.",
+  // },
   {
     icon: CheckCircle,
     title: "إنجاز المشروع",
@@ -59,37 +59,32 @@ export default function ComplexServicesSection() {
   return (
     <section className="w-full bg-background text-foreground py-16 md:py-24 overflow-hidden">
       <div className="container max-w-screen-xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* --- العمود الأيمن: المحتوى والخطوات --- */}
-          <div className="space-y-8 text-right" dir="rtl">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-stretch">
+          {/* --- العمود الأيمن: المحتوى والخطوات (3/5) --- */}
+          <div className="w-full lg:w-3/5 space-y-8 text-right" dir="rtl">
             <div>
-              <h4 className="text-sm font-semibold text-secondary-foreground tracking-wider uppercase mb-3">
+              <h4 className="text-lg text-primary font-semibold mb-2 tracking-wider">
                 الخدمات المخصصة
               </h4>
-              <h2 className="text-3xl lg:text-4xl font-extrabold text-foreground leading-tight">
-                هل لديك مشروع معقد يحتاج لأكثر من زيارة؟
+              <h2 className="text-3xl lg:text-4xl font-extrabold  mb-4 text-foreground leading-tight">
+                هل لديك مشروع معقد أو مهمة مخصصة؟
               </h2>
               <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
-                بعض المشاريع لا تُنجز في ساعة. هنا يمكنك وصف مشروعك بالتفصيل،
-                رفع الصور، وتلقي عروض دقيقة من فنيين مختصين لاختيار الأنسب لك.
+                هنا يمكنك وصف مشروعك بالتفصيل، رفع الصور، وتلقي عروض دقيقة من
+                فنيين مختصين لاختيار الأنسب لك.
               </p>
             </div>
 
-            {/* --- الخطوات (Timeline) --- */}
             <div className="relative">
-              {/* الخط الرأسي الذي يربط الأيقونات */}
-              <div className="absolute top-0 bottom-0 right-6 w-0.5 bg-border -translate-x-1/2" />
-
+              <div className="absolute top-0 bottom-2 right-6 w-0.5 bg-border -translate-x-1/2" />
               <ul className="space-y-10">
                 {timelineSteps.map((step, index) => (
-                  <li key={index} className="flex items-start gap-6">
-                    {/* الأيقونة الدائرية */}
+                  <li key={index} className="flex items-start gap-6 pr-0.5">
                     <div className="relative z-10 flex-shrink-0 w-12 h-12 bg-card border border-border rounded-full flex items-center justify-center">
                       <step.icon className="w-6 h-6 text-primary" />
                     </div>
-                    {/* عنوان ووصف الخطوة */}
                     <div className="pt-2">
-                      <h3 className="font-bold text-card-foreground text-md">
+                      <h3 className="font-bold text-primary text-md">
                         {step.title}
                       </h3>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -102,10 +97,13 @@ export default function ComplexServicesSection() {
             </div>
           </div>
 
-          {/* --- العمود الأيسر: الكارد ونموذج الطلب --- */}
-          <div className="flex items-center justify-center">
-            <Card className="w-full max-w-md shadow-lg" dir="rtl">
-              <CardHeader className="text-center">
+          {/* --- العمود الأيسر: الكارد ونموذج الطلب (2/5) --- */}
+          <div className="w-full lg:w-2/5">
+            <Card
+              className="w-full h-full shadow-lg flex flex-col mt-6"
+              dir="rtl"
+            >
+              <CardHeader className="text-center pt-6">
                 <CardTitle className="text-xl font-bold">
                   أرسل تفاصيل مشروعك
                 </CardTitle>
@@ -113,22 +111,29 @@ export default function ComplexServicesSection() {
                   لنصلك بأفضل العروض من الفنيين المحترفين
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <form className="space-y-4">
+
+              <CardContent className="flex-grow flex flex-col p-6 pt-4">
+                <form className="space-y-4 flex flex-col flex-grow">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">الاسم الكامل</Label>
+                      <Label htmlFor="name" className="lg:mb-3">
+                        الاسم الكامل
+                      </Label>
                       <Input id="name" placeholder="مثال: علي محمد" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone">رقم الجوال</Label>
-                      <Input id="phone" placeholder="9665xxxxxxx" />
+                      <Label htmlFor="phone" className="lg:mb-3">
+                        رقم الهاتف
+                      </Label>
+                      <Input id="phone" placeholder="01xxxxxxxxx" />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="project-type">نوع المشروع</Label>
-                    <Select>
-                      <SelectTrigger id="project-type">
+                    <Label htmlFor="project-type" className="lg:mb-3">
+                      نوع المشروع
+                    </Label>
+                    <Select dir="rtl" className="trxt-right">
+                      <SelectTrigger id="project-type" className="w-full">
                         <SelectValue placeholder="اختر نوع الخدمة" />
                       </SelectTrigger>
                       <SelectContent>
@@ -140,20 +145,25 @@ export default function ComplexServicesSection() {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="description">وصف مختصر للمشروع</Label>
+                  <div className="space-y-3 flex flex-col flex-grow">
+                    <Label htmlFor="description" className="lg:mb-3">
+                      وصف مختصر للمشروع
+                    </Label>
                     <Textarea
                       id="description"
                       placeholder="مثال: أحتاج لتجديد دورة مياه بالكامل..."
-                      rows={3}
+                      className="resize-none flex-grow"
                     />
                   </div>
-                  <Button type="submit" size="lg" className="w-full mt-4">
-                    أرسل الطلب الآن
-                  </Button>
-                  <p className="text-xs text-muted-foreground text-center pt-2">
-                    سيتم نقلك إلى نموذج تفصيلي لإكمال بيانات المشروع ورفع الصور.
-                  </p>
+                  <div className="mt-auto pt-2">
+                    <Button type="submit" size="lg" className="w-full">
+                      أرسل الطلب الآن
+                    </Button>
+                    <p className="text-xs text-muted-foreground text-center pt-3">
+                      سيتم نقلك إلى نموذج تفصيلي لإكمال بيانات المشروع ورفع
+                      الصور.
+                    </p>
+                  </div>
                 </form>
               </CardContent>
             </Card>
