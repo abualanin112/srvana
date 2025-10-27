@@ -82,16 +82,14 @@ export default function HomePage() {
       {/* --- القسم الثالث : شريط الأرقام --- */}
       <LegacyOfTrustSection />
 
-      {/* <<< الفنيين الاوائل*/}
-      <TopTechnicians />
-
-      {/* <<< قسم التطبيق  */}
+      {/* <<< قسم المشاريع  */}
+      <ComplexServicesSection />
 
       {/* <<< قسم التطبيق  */}
       <AppHeroSection />
 
-      {/* <<< قسم المشاريع  */}
-      <ComplexServicesSection />
+      {/* <<< الفنيين الاوائل*/}
+      <TopTechnicians />
 
       {/* <<< قسم الأسئلة الشائعة*/}
       <FaqSection />
