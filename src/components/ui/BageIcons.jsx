@@ -34,7 +34,7 @@ export const Icon = ({ color = "#000", size = 24, rank }) => (
         x="155" // التوسيط الأفقي
         y="155" // التوسيط الرأسي (يمكنك تعديل هذه القيمة)
         fill={color} // لون الرقم (الأفضل أن يكون أبيض أو أسود)
-        fontSize="140" // حجم الخط (يمكنك تعديله)
+        fontSize="140" // حجم الخط
         fontWeight="bold"
         textAnchor="middle" // لتوسيط النص أفقيًا
         dominantBaseline="central" // لتوسيط النص رأسيًا

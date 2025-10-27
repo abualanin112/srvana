@@ -121,19 +121,19 @@ const RatingStars = ({ rating }) => (
         key={i}
         className="w-4 h-4"
         fill={rating > i ? "currentColor" : "none"}
-        stroke={rating > i ? "currentColor" : "oklch(0.7 0.02 270)"}
+        stroke={rating > i ? "currentColor" : "oklch(0.8478 0.1712 88.281)"}
       />
     ))}
   </div>
 );
 
 const rankColors = {
-  1: "oklch(0.75 0.15 80)",
-  2: "oklch(0.75 0.05 260)",
-  3: "oklch(0.7 0.15 40)",
+  1: "oklch(0.8478 0.1712 88.281)",
+  2: "oklch(31.617% 0.12709 264.335)",
+  3: "oklch(0.55 0.17 30)",
 };
 
-const defaultRankColor = "oklch(0.65 0.02 240)";
+const defaultRankColor = "oklch(0.87 0.01 270)";
 
 // --- مكون فرعي لبطاقة الفني ---
 const TechnicianCard = ({ technician }) => (
@@ -158,7 +158,7 @@ const TechnicianCard = ({ technician }) => (
         </h3>
 
         {technician.id <= 10 && (
-          <div className="absolute top-1 left-6 z-10">
+          <div className="absolute top-0.5 left-6 z-10">
             <Icon
               color={rankColors[technician.id] || defaultRankColor}
               size={45}
