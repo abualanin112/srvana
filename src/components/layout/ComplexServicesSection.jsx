@@ -100,7 +100,7 @@ export default function ComplexServicesSection() {
           {/* --- العمود الأيسر: الكارد ونموذج الطلب (2/5) --- */}
           <div className="w-full lg:w-2/5">
             <Card
-              className="w-full h-full shadow-lg flex flex-col mt-6"
+              className="w-full h-full shadow-xs flex flex-col mt-6"
               dir="rtl"
             >
               <CardHeader className="text-center pt-6">

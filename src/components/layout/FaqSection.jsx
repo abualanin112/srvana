@@ -1,79 +1,107 @@
-// src/components/FaqSection.jsx
-import React from "react";
+"use client";
 
-// Shadcn UI Components
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { DynamicIcon } from "lucide-react/dynamic";
+import { Link } from "react-router-dom";
 
-// بيانات الأسئلة الشائعة
-const faqData = [
+const faqItems = [
   {
     id: "item-1",
-    question: "ما هي خدمات سرفانا المتوفرة؟",
+    icon: "clock",
+    question: "ما هي أوقات عمل سيرفانا؟",
     answer:
-      "نقدم مجموعة متنوعة من الخدمات مثل السباكة، الكهرباء، الصيانة المنزلية، وتوصيل الخدمات التقنية والفنية حسب احتياجاتك.",
+      "يعمل فريق دعم سيرفانا طوال أيام الأسبوع من الساعة 9:00 صباحًا حتى 8:00 مساءً، ما عدا يوم الجمعة. وفي حال وجود عطلات رسمية، يتم الإعلان عن المواعيد الجديدة على موقعنا الإلكتروني.",
   },
   {
     id: "item-2",
-    question: "كيف يمكنني الانضمام كفني؟",
+    icon: "credit-card",
+    question: "كيف تعمل اشتراكات سيرفانا والدفع التلقائي؟",
     answer:
-      "يمكنك التسجيل بسهولة عبر التطبيق، وتحميل ملفك الشخصي وإضافة مهاراتك وخبراتك، ثم انتظار الموافقة لتبدأ استقبال الطلبات.",
+      "يتم خصم رسوم الاشتراك تلقائيًا من وسيلة الدفع الافتراضية في حسابك في نفس اليوم من كل شهر أو سنة، حسب نوع الخطة التي اخترتها. يمكنك تعديل معلومات الدفع أو مراجعة الفواتير من لوحة التحكم في حسابك.",
   },
   {
     id: "item-3",
-    question: "كيف أطلب خدمة من تطبيق سرفانا؟",
+    icon: "truck",
+    question: "هل يمكن تسريع تنفيذ مشروعي؟",
     answer:
-      "بعد التسجيل في التطبيق، اختر الخدمة المطلوبة، حدد موقعك، واضغط على 'طلب الخدمة' ليصلك فني موثوق في أقرب وقت.",
+      "نعم، يمكنك اختيار أولوية التنفيذ مقابل رسوم إضافية. تتيح لك هذه الخدمة تسليم المشروع خلال فترة أقصر من الزمن المتفق عليه مسبقًا، بشرط توفر الموارد التقنية المناسبة.",
   },
   {
     id: "item-4",
-    question: "هل سرفانا متاحة في كل المدن؟",
+    icon: "globe",
+    question: "هل تقدم سيرفانا دعمًا بلغات متعددة؟",
     answer:
-      "حاليا نغطي حوالي 10 – 25 مدينة، ونعمل على توسيع نطاق الخدمة لتشمل المزيد من المناطق قريباً.",
+      "نعم، يوفر فريق سيرفانا دعمًا فنيًا باللغتين العربية والإنجليزية حاليًا، وذلك عبر البريد الإلكتروني أو المحادثة المباشرة داخل الموقع. نحن نعمل على إضافة لغات أخرى قريبًا لخدمة عملائنا حول العالم.",
   },
   {
     id: "item-5",
-    question: "هل يمكنني تقييم الفني بعد الخدمة؟",
+    icon: "package",
+    question: "كيف يمكنني متابعة حالة طلبي أو مشروعي؟",
     answer:
-      "نعم، بعد انتهاء كل خدمة يمكنك ترك تقييم للفني والتعليق على جودة الخدمة لمساعدة المستخدمين الآخرين واختيار الأفضل.",
+      "بمجرد بدء تنفيذ طلبك، ستتلقى إشعارات عبر البريد الإلكتروني ولوحة التحكم داخل حسابك حول حالة التقدم في المشروع. يمكنك أيضًا التواصل مباشرة مع فريق الدعم من خلال صفحة 'طلباتي'.",
   },
 ];
 
 export default function FaqSection() {
   return (
-    <section className="w-full bg-muted/50 py-16 md:py-24">
-      <div className="container max-w-4xl mx-auto px-4">
-        {/* عنوان القسم */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-            الأسئلة الشائعة
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            كل ما تحتاج معرفته عن سرفانا في مكان واحد.
-          </p>
+    <section className="bg-background dark:bg-background py-16 md:py-24 w-full  text-foreground  overflow-hidden">
+      <div className="mx-auto max-w-screen-xl px-4 md:px-6 container">
+        <div className="flex flex-col gap-10 md:flex-row md:gap-16">
+          <div className="md:w-1/3">
+            <div>
+              <h4 className="text-lg text-primary font-semibold mb-2 tracking-wider">
+                الأسئلة الشائعة
+              </h4>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-card-foreground">
+                ما الأسئلة التي تدور في ذهنك؟
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                لم تجد ما تبحث عنه؟ تواصل مع&nbsp;
+                <Link
+                  to="#"
+                  className="text-primary font-medium hover:underline"
+                >
+                  فريق دعم سيرفانا
+                </Link>
+              </p>
+            </div>
+          </div>
+          <div className="md:w-2/3">
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {faqItems.map((item) => (
+                <AccordionItem
+                  key={item.id}
+                  value={item.id}
+                  className="bg-card shadow-xs rounded-lg border px-4 last:border-b"
+                >
+                  <AccordionTrigger className="cursor-pointer items-center py-5 hover:no-underline">
+                    <div className="flex items-center gap-3">
+                      <div className="flex size-6">
+                        <DynamicIcon
+                          name={item.icon}
+                          className="m-auto size-4"
+                        />
+                      </div>
+                      <h3 className="font-medium text-card-foreground">
+                        {item.question}
+                      </h3>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-5">
+                    <div className="px-9">
+                      <p className="text-muted-foreground">{item.answer}</p>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </div>
-
-        {/* Accordion للأسئلة */}
-        <Accordion type="single" collapsible className="w-full">
-          {faqData.map((faqItem) => (
-            <AccordionItem
-              key={faqItem.id}
-              value={faqItem.id}
-              className="bg-card mb-4 rounded-lg shadow-sm border px-4"
-            >
-              <AccordionTrigger className="text-right text-lg font-semibold hover:no-underline py-4">
-                {faqItem.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-right text-base text-muted-foreground pb-4 leading-relaxed">
-                {faqItem.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
       </div>
     </section>
   );

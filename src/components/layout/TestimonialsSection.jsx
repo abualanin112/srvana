@@ -146,7 +146,7 @@ export default function TestimonialsSection() {
               {chunk.map(({ name, role, quote, image, rating }, index) => (
                 <Card
                   key={index}
-                  className=" border !bg-background text-foreground shadow lg:p-1"
+                  className=" border !bg-background text-foreground shadow-xs lg:p-1"
                 >
                   <CardContent className="lg:p-8 flex flex-col h-full">
                     <div className="flex-grow flex gap-4 text-right">

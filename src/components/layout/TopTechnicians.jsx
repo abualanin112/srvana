@@ -139,19 +139,19 @@ const defaultRankColor = "oklch(0.87 0.01 270)";
 const TechnicianCard = ({ technician }) => (
   <Card
     className="relative bg-card border pt-0 rounded overflow-hidden group 
-    transition-all duration-500 select-none"
+    transition-all duration-500 select-none shadow-xs"
   >
     {/* الصورة (3/4 ) */}
-    <div className="h-[75%] overflow-hidden">
+    <div className=" overflow-hidden">
       <img
         src={technician.image}
         alt={technician.name}
-        className="w-full h-65 object-cover transition-transform duration-500 group-hover:scale-105"
+        className="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-105"
       />
     </div>
 
     {/* المحتوى) */}
-    <CardContent className="h-[25%] p-2 pt-0 text-right flex flex-col justify-center relative">
+    <CardContent className="p-2 pt-0 text-right flex flex-col justify-center relative">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-bold text-card-foreground mb-1 truncate">
           {technician.name}
@@ -185,7 +185,7 @@ const TechnicianCard = ({ technician }) => (
 
 // --- مكون فرعي للشريط السفلي) ---
 const SectionFooter = () => (
-  <div className="mt-6 bg-card border rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-6">
+  <div className="mt-4 bg-card border rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-6">
     <div className="flex items-center gap-4">
       <div className="flex -space-x-2 rtl:space-x-reverse pr-1">
         {partnersData.map((partner) => (
@@ -225,7 +225,7 @@ export default function TopTechnicians() {
           opts={{ align: "start", loop: true, direction: "rtl" }}
           className="w-full"
         >
-          <div className="flex justify-between items-end mb-10">
+          <div className="flex justify-between items-end mb-6">
             <div className="text-right">
               <h4 className="text-lg text-primary font-semibold mb-2">
                 الفنيين
@@ -242,11 +242,11 @@ export default function TopTechnicians() {
               <CarouselPrevious className="relative translate-y-0 left-0 right-0 top-0 bg-muted/50 hover:bg-muted/70 text-foreground size-10 rounded-lg border-border" />
             </div>
           </div>
-          <CarouselContent className="-mr-2">
+          <CarouselContent className="-mr-0 ">
             {topTechniciansData.map((tech) => (
               <CarouselItem
                 key={tech.id}
-                className="pr-2 md:basis-1/2 lg:basis-1/4"
+                className="p-0 md:basis-1/2 !md:pr-4 lg:basis-1/4  "
               >
                 <TechnicianCard technician={tech} />
               </CarouselItem>
