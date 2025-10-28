@@ -24,9 +24,9 @@ const CircleThemeToggle = ({ darkMode, setDarkMode }) => {
       className="transition-colors duration-500 p-1"
     >
       {darkMode ? (
-        <Moon size={24} className="text-foreground" />
+        <Sun size={24} className="text-foreground" />
       ) : (
-        <Sun size={24} className="text-secondary" />
+        <Moon size={24} className="text-secondary" />
       )}
     </button>
   );

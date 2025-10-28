@@ -70,7 +70,7 @@ const StatCard = ({
   return (
     <motion.div
       className={cn(
-        "rounded-2xl p-6 flex flex-col justify-start h-full relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 hover:shadow-xl",
+        "rounded-xl shadow-xs p-6 flex flex-col justify-start h-full relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 ",
         className
       )}
       initial={{ opacity: 0, y: 40 }}
@@ -94,11 +94,10 @@ const StatCard = ({
           {isImage ? "80%" : endValue + suffix}
         </h3>
 
-        {/* النص تحت الرقم */}
         <p className="text-2xl mt-1">{label}</p>
       </div>
 
-      {/* --- overlay لتعتيم الخلفية فقط --- */}
+      {/* --- overlay --- */}
       {isImage && <div className="absolute inset-0 bg-black/40"></div>}
     </motion.div>
   );
@@ -109,8 +108,7 @@ const AboutStatsSection = () => {
   return (
     <section className="w-full py-16 md:py-24 bg-card overflow-hidden">
       <div className="container max-w-screen-xl mx-auto px-4">
-        <div className="grid grid-cols-10 grid-rows-6 gap-6 min-h-[650px] relative">
-          {/* --- النص داخل الجريد --- */}
+        <div className="grid grid-cols-10 grid-rows-6 gap-4 min-h-[650px] relative">
           <motion.div
             className="col-start-1 col-end-5 row-start-1 row-end-5 flex flex-col justify-start text-right"
             initial={{ opacity: 0, x: 40 }}

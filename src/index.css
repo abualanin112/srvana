@@ -29,7 +29,7 @@ body {
   --card-foreground: oklch(0.26 0.004 264);
   --popover: oklch(0.985 0.002 270);
   --popover-foreground: oklch(0.26 0.004 264);
-  --primary: oklch(31.617% 0.12709 264.335);
+  --primary: #0f2a71;
   --primary-foreground: oklch(0.9729 0.0029 264.542);
   --secondary: oklch(0.8478 0.1712 88.281);
   --secondary-foreground: oklch(0.2202 0.083 258.399);

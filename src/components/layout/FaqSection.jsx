@@ -45,6 +45,13 @@ const faqItems = [
     answer:
       "بمجرد بدء تنفيذ طلبك، ستتلقى إشعارات عبر البريد الإلكتروني ولوحة التحكم داخل حسابك حول حالة التقدم في المشروع. يمكنك أيضًا التواصل مباشرة مع فريق الدعم من خلال صفحة 'طلباتي'.",
   },
+  {
+    id: "item-6",
+    icon: "shield-check",
+    question: "هل بياناتي ومشاريعي آمنة على المنصة؟",
+    answer:
+      "نعم، نولي أهمية كبيرة لحماية خصوصيتك. يتم تخزين جميع البيانات باستخدام بروتوكولات أمان حديثة، ولا يتم مشاركتها مع أي طرف ثالث دون موافقتك الصريحة.",
+  },
 ];
 
 export default function FaqSection() {
@@ -72,7 +79,12 @@ export default function FaqSection() {
             </div>
           </div>
           <div className="md:w-2/3">
-            <Accordion type="single" collapsible className="w-full space-y-4">
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full space-y-4"
+              defaultValue={faqItems[0].id}
+            >
               {faqItems.map((item) => (
                 <AccordionItem
                   key={item.id}

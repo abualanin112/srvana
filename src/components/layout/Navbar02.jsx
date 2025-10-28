@@ -18,7 +18,10 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-import SrvanaLogo from "@/assets/logos/srvana-logo.svg";
+// import SrvanaLogo from "@/assets/logos/srvana-logo.svg";
+
+// logo
+import CustomLogo from "@/components/ui/CustomLogo";
 
 import CircleThemeToggle from "@/components/ui/CircleThemeToggle";
 
@@ -244,12 +247,7 @@ export const Navbar02 = React.forwardRef(
                 {logo ? (
                   <div className="select-none">{logo}</div>
                 ) : (
-                  <img
-                    src={SrvanaLogo}
-                    alt="Company Logo"
-                    className="w-28 h-auto select-none"
-                    draggable="false"
-                  />
+                  <CustomLogo className="w-30 h-auto select-none text-[#0f2a71] dark:text-[#f5f6f8]" />
                 )}
               </Link>
 
@@ -297,7 +295,7 @@ export const Navbar02 = React.forwardRef(
                                   ))}
                                 </div>
                               ) : link.type === "simple" ? (
-                                <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                                <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                                   {link.items?.map((item, itemIndex) => (
                                     <ListItem
                                       key={itemIndex}
@@ -310,7 +308,7 @@ export const Navbar02 = React.forwardRef(
                                   ))}
                                 </div>
                               ) : link.type === "icon" ? (
-                                <div className="grid w-[400px] gap-3 p-4">
+                                <div className="grid w-[400px] gap-3 p-4 ">
                                   {link.items?.map((item, itemIndex) => (
                                     <ListItem
                                       key={itemIndex}
@@ -345,7 +343,7 @@ export const Navbar02 = React.forwardRef(
                               to={link.to || "#"}
                               className={cn(
                                 navigationMenuTriggerStyle(),
-                                "cursor-pointer"
+                                " font-bold cursor-pointer"
                               )}
                             >
                               {link.label}
@@ -424,7 +422,7 @@ const ListItem = React.forwardRef(
           to={to}
           onClick={() => {}}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer ",
             className
           )}
           {...props}
@@ -435,11 +433,11 @@ const ListItem = React.forwardRef(
                 {renderIconComponent(icon)}
               </div>
               <div className="space-y-1 text-right">
-                <div className="text-base font-medium leading-tight">
+                <div className="text-base font-medium leading-tight ">
                   {title}
                 </div>
                 {children && (
-                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground ">
                     {children}
                   </p>
                 )}

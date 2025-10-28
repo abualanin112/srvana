@@ -80,7 +80,7 @@ export default function ComplexServicesSection() {
 
             <div className="relative">
               <div className="absolute top-0 bottom-23 right-6 w-0.5 bg-border -translate-x-1/2" />
-              <ul className="space-y-9 mb-10">
+              <ul className="space-y-9 mb-8">
                 {timelineSteps.map((step, index) => (
                   <li key={index} className="flex items-start gap-4 pr-0.5">
                     <div className="relative z-10 flex-shrink-0 w-12 h-12 bg-card border border-border rounded-full flex items-center justify-center">

@@ -13,14 +13,7 @@ import TestimonialsSection from "@/components/layout/TestimonialsSection";
 import { Button } from "@/components/ui/button";
 import BubbleBackground from "@/components/ui/BubbleBackground";
 
-import {
-  FaUsers,
-  FaHardHat,
-  FaClipboardCheck,
-  FaMapMarkerAlt,
-  FaWrench,
-  FaBox,
-} from "react-icons/fa";
+import { Wrench, Package } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -36,35 +29,35 @@ export default function HomePage() {
             </h1>
 
             {/* الوصف */}
-            <p className="text-lg md:text-xl text-primary-foreground mb-15 max-w-2xl mx-auto">
-              من صيانة الأجهزة المنزلية إلى مشاريعك الكبيرة، نحن نوفر كل شيء
-              بسهولة واحترافية
+            <p className="text-lg  md:text-2xl leading-10 text-primary-foreground mb-14 max-w-2xl mx-auto">
+              من صيانة الأجهزة المنزلية إلى مشاريعك الكبيرة، نحن نوفر كل شيء في
+              سرفانا — المكان الذي يجمع بين الراحة والثقة.
             </p>
 
             {/* الأزرار */}
-            <div className="flex flex-col sm:grid sm:grid-cols-2 items-center justify-center gap-4 mb-12">
-              <Button size="lg" className="w-full py-6" asChild>
+            <div className="flex flex-col sm:grid sm:grid-cols-2 items-center justify-center gap-4 mb-8">
+              <Button size="md" className="!p-3 !text-sm !font-medium" asChild>
                 <Link to="/services/book">
-                  <FaWrench className="h-5 w-5" />
-                  احجز خدمة سريعة
+                  <Wrench />
+                  خدمة سريعة
                 </Link>
               </Button>
 
               <Button
                 variant="secondary"
-                size="lg"
-                className="w-full py-6"
+                size="md"
+                className="!p-3 !text-sm !font-medium"
                 asChild
               >
                 <Link to="/projects-services">
-                  <FaBox className="h-5 w-5" />
-                  اطلب خدمة مخصصة
+                  <Package />
+                  خدمة مخصصة
                 </Link>
               </Button>
             </div>
 
             {/* دعوة للعمل (CTA) للفنيين */}
-            <p className="text-lg font-medium text-primary text-shadow-2xs ">
+            <p className="text-sm font-medium text-primary text-shadow-2xl ">
               هل أنت فني؟{" "}
               <Link
                 to="/join-as-technician"

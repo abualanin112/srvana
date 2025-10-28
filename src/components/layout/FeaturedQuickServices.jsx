@@ -21,7 +21,7 @@ import {
   Plus,
 } from "lucide-react";
 
-// استيراد الصور من مجلد (assets)
+//  الصور
 import acCleaningImg from "@/assets/FeaturedQuickServices-img/ac-cleaning.png";
 import heaterImg from "@/assets/FeaturedQuickServices-img/heater-installation.png";
 import plumbingImg from "@/assets/FeaturedQuickServices-img/plumbing-leaks.png";
@@ -435,9 +435,10 @@ const FeaturedQuickServices = () => {
                       <Badge
                         variant="outline"
                         className={cn(
-                          "cursor-pointer rounded-md border-primary/50 text-primary/80 transition-colors duration-200",
+                          "cursor-pointer rounded-md bg-primary/5 text-primary border-primary/50 transition-colors duration-200",
 
-                          "hover:bg-primary/10 hover:text-primary hover:border-primary/70"
+                          "hover:bg-primary/10  hover:border-primary",
+                          "dark:bg-primary/20 dark:text-primary-foreground"
                         )}
                       >
                         {feature.name}

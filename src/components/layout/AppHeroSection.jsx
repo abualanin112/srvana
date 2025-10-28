@@ -15,7 +15,7 @@ const appFeatures = [
 
 export default function AppHeroSection() {
   return (
-    <section className="relative w-full bg-secondary py-10 md:py-5 text-foreground overflow-hidden">
+    <section className="relative w-full bg-secondary py-8 md:py-5 text-foreground overflow-hidden">
       <div className="container relative z-10 max-w-screen-xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-12 lg:justify-between">
         {/* الجانب الأيمن: النص والأزرار */}
         <div className="flex flex-col items-center text-center lg:items-start lg:text-right lg:order-1">
@@ -38,13 +38,11 @@ export default function AppHeroSection() {
             {/* زر App Store */}
             <Link to="/download/apple">
               <Button
-                size="lg"
+                size="md"
                 className="
                   w-50 h-16 !px-3 flex items-center justify-center gap-3
                   rounded-radius
                   bg-primary text-primary-foreground
-                  shadow-md transition-colors duration-300
-                  hover:brightness-110
                 "
               >
                 <FaApple className="!h-9 !w-9" />
@@ -60,13 +58,14 @@ export default function AppHeroSection() {
             {/* زر Google Play */}
             <Link to="/download/google">
               <Button
-                size="lg"
+                size="md"
                 className="
                   w-50 h-16 !px-3 flex items-center justify-center gap-3
                   rounded-radius
                   !bg-primary-foreground !text-primary
-                  transition-colors duration-300
-                  hover:brightness-110
+                  !shadow-md !transition-colors !duration-300
+                  hover:!bg-primary-foreground/90
+                  
                 "
               >
                 <FaGooglePlay className="!h-7 !w-7" />
@@ -81,11 +80,11 @@ export default function AppHeroSection() {
           </div>
 
           {/* الميزات الصغيرة */}
-          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 lg:justify-start">
+          <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 lg:justify-start">
             {appFeatures.map((feature, index) => (
               <div key={index} className="flex items-center gap-2">
-                <feature.icon className="h-3 w-3 text-primary" />
-                <span className="font-semibold text-muted-foreground">
+                <feature.icon className="h-3 w-3 text-primary/90" />
+                <span className="font-semibold text-muted-foreground text-sm">
                   {feature.text}
                 </span>
               </div>
@@ -93,12 +92,12 @@ export default function AppHeroSection() {
           </div>
         </div>
 
-        {/* الجانب الأيسر: صورة الموبايل (هنا التعديل) */}
+        {/* الجانب الأيسر: صورة الموبايل */}
         <div className="flex items-center justify-center lg:order-2">
           <motion.img
             src={Iphone15Pro}
             alt="Srvana App Mockup"
-            className="w-full max-w-lg transform translate-y-20 drop-shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
+            className="w-full max-w-md transform translate-y-17 drop-shadow-[0_25px_35px_rgba(0,0,0,0.25)]"
             initial={{ opacity: 0, y: 80 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}

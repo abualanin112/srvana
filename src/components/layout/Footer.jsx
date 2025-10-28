@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
+// logo
+import CustomLogo from "@/components/ui/CustomLogo";
+
 // React Icons
 import {
   FaApple,
@@ -16,23 +19,25 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 
-// بيانات الروابط المحدثة (قائمتان فقط)
+// بيانات الروابط
 const footerLinks1 = [
-  { href: "/help", text: "Help Centre" },
-  { href: "/contact", text: "Contact Us" },
-  { href: "/about", text: "About Us" },
-  { href: "/blog", text: "Our Blog" },
-  { href: "/careers", text: "Careers" },
-  { href: "/vouchers", text: "Buy a Voucher" },
+  { href: "/help", text: "مركز المساعدة" },
+  { href: "/contact", text: "تواصل معنا" },
+  { href: "/about", text: "من نحن" },
+  { href: "/blog", text: "مدونتنا" },
+  { href: "/careers", text: "انضم إلى فريقنا" },
+  { href: "/vouchers", text: "شراء قسيمة" },
+  { href: "/faq", text: "الأسئلة الشائعة" },
 ];
 
 const footerLinks2 = [
-  { href: "/refer", text: "Refer a Friend" },
-  { href: "/join-as-technician", text: "Apply as a Worker" },
-  { href: "/services", text: "Our Services" },
-  { href: "/locations", text: "Our Locations" },
-  { href: "/privacy", text: "Privacy Policy" },
-  { href: "/terms", text: "Terms & Conditions" },
+  { href: "/refer", text: "ادعُ صديقك" },
+  { href: "/join-as-technician", text: "سجّل كفني" },
+  { href: "/services", text: "خدماتنا" },
+  { href: "/locations", text: "مواقعنا" },
+  { href: "/privacy", text: "سياسة الخصوصية" },
+  { href: "/terms", text: "الشروط والأحكام" },
+  { href: "/partners", text: "شركاؤنا" },
 ];
 
 const socialLinks = [
@@ -44,28 +49,22 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    // 1. تغيير الخلفية إلى bg-primary والنص إلى text-primary-foreground
-    <footer className="w-full bg-primary text-primary-foreground">
+    <footer className="w-full bg-primary text-primary-foreground" dir="rtl">
       <div className="container max-w-7xl mx-auto px-4 pt-16 pb-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-5">
           {/* القسم الأول: الشعار والوصف */}
           <div className="md:col-span-3 lg:col-span-2">
-            <Link to="/" className="inline-block mb-4">
-              {/* قد تحتاج لشعار نسخة فاتحة إذا كان الأصلي داكنًا */}
-              <img
-                src="/assets/images/logo-light.svg"
-                alt="Srvana Logo"
-                className="h-10"
-              />
+            <Link to="/" className="inline-block mb-2 ">
+              <CustomLogo className="w-75 drop-shadow-xl text-primary-foreground" />
             </Link>
-            <p className="max-w-xs text-primary-foreground/80">
-              {" "}
-              {/* استخدام شفافية طفيفة للوصف */}
-              سرفانا – منصتك الموثوقة للخدمات والفنيين في مدينتك.
+            <p className="max-w-xs text-primary-foreground/80 text-justify">
+              سرفانا – منصتك الموثوقة للخدمات والفنيين في مدينتك. نوفر لك تجربة
+              سلسة وآمنة للعثور على أفضل الفنيين المعتمدين في مختلف المجالات.مع
+              متابعة دقيقة لكل خطوة من طلبك حتى إنجاز.
             </p>
           </div>
 
-          {/* القسم الثاني: القوائم (قائمتان فقط) */}
+          {/* القسم الثاني: القوائم */}
           <div className="md:col-span-2 lg:col-span-2">
             <div className="grid grid-cols-2 gap-8">
               <div>
@@ -94,52 +93,64 @@ export default function Footer() {
           </div>
 
           {/* القسم الثالث: تحميل التطبيق */}
-          <div className="md:col-span-1 lg:col-span-1">
+          {/* أزرار التحميل */}
+          <div>
             <h3 className="font-bold text-primary-foreground mb-4">
               حمّل تطبيق سرفانا
             </h3>
             <p className="text-sm text-primary-foreground/80 mb-4">
-              وابدأ الوصول للخدمات والفنيين بسهولة.
+              وابدأ في الوصول إلى الخدمات والفنيين بسهولة.
             </p>
-            <div className="flex flex-col gap-4">
-              {" "}
-              {/* زيادة الفجوة بين الأزرار قليلاً إلى gap-4 */}
-              {/* زر App Store - الأكثر بروزًا */}
-              <Button
-                variant="secondary" // خلفية فاتحة (عادة أبيض أو رمادي فاتح جدًا)
-                className="w-full py-8 transform transition hover:scale-105 justify-start text-primary"
-              >
-                <FaApple className="ml-4 h-8 w-8" />{" "}
-                {/* زيادة حجم الأيقونة قليلاً */}
-                <div className="text-right">
-                  <p className="text-xs opacity-80">Download on the</p>
-                  <p className="text-xl font-bold leading-none mt-0.5">
-                    App Store
-                  </p>{" "}
-                  {/* زيادة حجم الخط وجعله bold */}
-                </div>
-              </Button>
-              {/* زر Google Play - مميز بإطار (Outline) */}
-              <Button
-                variant="outline" // خلفية شفافة مع إطار
-                className="w-full py-8 transform transition hover:scale-105 hover:bg-primary-foreground/10 justify-start border-primary-foreground/30 text-primary"
-              >
-                <FaGooglePlay className="ml-4 h-7 w-7" />{" "}
-                {/* Google Play أيقونته تبدو أكبر بصريًا، لذا نصغرها قليلاً للموازنة */}
-                <div className="text-right">
-                  <p className="text-xs opacity-80">GET IT ON</p>
-                  <p className="text-xl font-bold leading-none mt-0.5">
-                    Google Play
-                  </p>
-                </div>
-              </Button>
+            <div className="flex flex-col items-right gap-4" dir="rtl">
+              {/* زر App Store */}
+              <Link to="/download/apple">
+                <Button
+                  size="md"
+                  variant="secondary"
+                  className="
+                            w-50 h-16 !px-3 flex items-center justify-center gap-3
+                            rounded-radius
+                            !text-primary
+                            !transition-colors !duration-300
+                            hover:!brightness-110
+                          "
+                >
+                  <FaApple className="!h-9 !w-9" />
+                  <div className="text-right leading-tight">
+                    <p className="text-xs opacity-80">حمّله من</p>
+                    <p className="text-lg font-semibold tracking-wide">
+                      App Store
+                    </p>
+                  </div>
+                </Button>
+              </Link>
+
+              {/* زر Google Play */}
+              <Link to="/download/google">
+                <Button
+                  size="md"
+                  className="
+                            w-50 h-16 !px-3 flex items-center justify-center gap-3
+                            rounded-radius
+                            !bg-primary-foreground !text-primary
+                            hover:!bg-primary-foreground/90
+                          "
+                >
+                  <FaGooglePlay className="!h-7 !w-7" />
+                  <div className="text-right leading-tight">
+                    <p className="text-xs opacity-80">احصل عليه من</p>
+                    <p className="text-lg font-semibold tracking-wide">
+                      Google Play
+                    </p>
+                  </div>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
-        {/* 2. إضافة خط فاصل */}
-        <Separator className="my-8 bg-primary-foreground/20" />{" "}
-        {/* لون فاتح للخط */}
-        {/* القسم الأخير: السطر السفلي */}
+
+        <Separator className="my-8 bg-primary-foreground/20" />
+
         <div className="flex flex-col-reverse items-center gap-4 md:flex-row md:justify-between">
           <p className="text-sm text-primary-foreground/80">
             © 2025 سرفانا. جميع الحقوق محفوظة.
