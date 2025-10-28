@@ -58,10 +58,13 @@ const timelineSteps = [
 export default function ComplexServicesSection() {
   return (
     <section className="w-full bg-background text-foreground py-16 md:py-24 overflow-hidden">
-      <div className="container max-w-screen-xl mx-auto px-4">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-stretch">
+      <div className="container max-w-screen-xl mx-auto px-4 h-full lg:h-auto flex">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-stretch min-h-full">
           {/* --- العمود الأيمن: المحتوى والخطوات (3/5) --- */}
-          <div className="w-full lg:w-3/5 space-y-8 text-right" dir="rtl">
+          <div
+            className="w-full lg:w-7/12 space-y-8 text-right flex flex-col flex-grow"
+            dir="rtl"
+          >
             <div>
               <h4 className="text-lg text-primary font-semibold mb-2 tracking-wider">
                 الخدمات المخصصة
@@ -76,10 +79,10 @@ export default function ComplexServicesSection() {
             </div>
 
             <div className="relative">
-              <div className="absolute top-0 bottom-2 right-6 w-0.5 bg-border -translate-x-1/2" />
-              <ul className="space-y-10">
+              <div className="absolute top-0 bottom-23 right-6 w-0.5 bg-border -translate-x-1/2" />
+              <ul className="space-y-9 mb-10">
                 {timelineSteps.map((step, index) => (
-                  <li key={index} className="flex items-start gap-6 pr-0.5">
+                  <li key={index} className="flex items-start gap-4 pr-0.5">
                     <div className="relative z-10 flex-shrink-0 w-12 h-12 bg-card border border-border rounded-full flex items-center justify-center">
                       <step.icon className="w-6 h-6 text-primary" />
                     </div>
@@ -98,12 +101,12 @@ export default function ComplexServicesSection() {
           </div>
 
           {/* --- العمود الأيسر: الكارد ونموذج الطلب (2/5) --- */}
-          <div className="w-full lg:w-2/5">
+          <div className="w-full lg:w-5/12 flex flex-col">
             <Card
-              className="w-full h-full shadow-xs flex flex-col mt-6"
+              className="w-full flex-1 shadow-xs flex flex-col p-6 "
               dir="rtl"
             >
-              <CardHeader className="text-center pt-6">
+              <CardHeader className="text-center pt-4">
                 <CardTitle className="text-xl font-bold">
                   أرسل تفاصيل مشروعك
                 </CardTitle>
@@ -112,7 +115,7 @@ export default function ComplexServicesSection() {
                 </CardDescription>
               </CardHeader>
 
-              <CardContent className="flex-grow flex flex-col p-6 pt-4">
+              <CardContent className="flex-grow flex flex-col !p-0 py-4">
                 <form className="space-y-4 flex flex-col flex-grow">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
@@ -155,7 +158,7 @@ export default function ComplexServicesSection() {
                       className="resize-none flex-grow"
                     />
                   </div>
-                  <div className="mt-auto pt-2">
+                  <div className="mt-auto pt-2 pb-3">
                     <Button type="submit" size="lg" className="w-full">
                       أرسل الطلب الآن
                     </Button>
