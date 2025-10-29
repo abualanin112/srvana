@@ -117,7 +117,7 @@ export const Navbar02 = React.forwardRef(
       logoHref = "/",
       navigationLinks = defaultNavigationLinks,
       signInText = "سجل دخولك / أنشئ حسابك ",
-      signInHref = "/signin",
+      signInHref = "/login",
       ctaText = "انضم كفني",
       ctaHref = "/get-started",
       onSignInClick,
@@ -365,10 +365,6 @@ export const Navbar02 = React.forwardRef(
                 variant="ghost"
                 size="sm"
                 className="text-sm font-bold hover:bg-accent hover:text-accent-foreground"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (onSignInClick) onSignInClick();
-                }}
               >
                 {signInText}
               </Button>

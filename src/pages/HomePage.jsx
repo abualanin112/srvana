@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TopTechnicians from "@/components/layout/TopTechnicians";
 import AppHeroSection from "@/components/layout/AppHeroSection";
 import FaqSection from "@/components/layout/FaqSection";
-import BlogSection from "@/components/layout/BlogSection";
+// import BlogSection from "@/components/layout/BlogSection";
 import FeaturedQuickServices from "@/components/layout/FeaturedQuickServices";
 import LegacyOfTrustSection from "@/components/layout/LegacyOfTrustSection";
 import ComplexServicesSection from "@/components/layout/ComplexServicesSection";

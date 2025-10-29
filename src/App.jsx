@@ -1,11 +1,12 @@
+// src/App.jsx
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-// import { Navbar } from "@/components/layout/navbar";
-import Footer from "./components/layout/Footer";
-import { Navbar02 } from "./components/layout/Navbar02";
+import LoginPage from "./pages/Login";
+import MainLayout from "@/components/layout/MainLayout";
+import AuthLayout from "@/components/layout/AuthLayout";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(
@@ -24,17 +25,25 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
-        <Navbar02 darkMode={darkMode} setDarkMode={setDarkMode} />
-        <main dir="rtl" className="flex-grow w-full bg-background">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <Routes>
+        {/*MainLayout*/}
+        <Route
+          element={<MainLayout darkMode={darkMode} setDarkMode={setDarkMode} />}
+        >
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
+
+        {/* AuthLayout */}
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+          {/* register أو /reset-password */}
+        </Route>
+
+        {/* اختياري: 404 route */}
+        {/* <Route path="*" element={<NotFoundPage />} /> */}
+      </Routes>
     </BrowserRouter>
   );
 }
