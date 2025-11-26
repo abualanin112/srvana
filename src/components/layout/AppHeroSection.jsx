@@ -10,7 +10,7 @@ import {
   MobileIcon,
   CheckCircledIcon,
 } from "@radix-ui/react-icons";
-import appMockup from "@/assets/logos/mockup.png";
+import appMockup from "@/assets/logos/mockup.webp";
 
 const AppHeroSection = () => {
   return (

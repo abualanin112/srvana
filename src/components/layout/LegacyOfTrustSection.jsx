@@ -53,7 +53,7 @@ const statsData = [
     label: "ثقة تُبنى بالعمل",
     gridPosition: "col-start-9 col-end-11 row-start-1 row-end-7",
     className:
-      "relative overflow-hidden bg-[url('@/assets/LegacyOfTrustSection-img/Workers.jpg')] bg-cover bg-center text-primary-foreground",
+      "relative overflow-hidden bg-[url('@/assets/LegacyOfTrustSection-img/Workers.webp')] bg-cover bg-center text-primary-foreground",
     isImage: true,
   },
 ];

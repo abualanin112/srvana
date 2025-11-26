@@ -19,10 +19,10 @@ import {
 } from "@radix-ui/react-icons";
 
 //  الصور
-import acCleaningImg from "@/assets/FeaturedQuickServices-img/ac-cleaning.png";
-import plumbingImg from "@/assets/FeaturedQuickServices-img/plumbing-leaks.png";
-import electricalImg from "@/assets/FeaturedQuickServices-img/electrical-fixing.png";
-import paintingImg from "@/assets/FeaturedQuickServices-img/painting.png";
+import acCleaningImg from "@/assets/FeaturedQuickServices-img/ac-cleaning.webp";
+import plumbingImg from "@/assets/FeaturedQuickServices-img/plumbing-leaks.webp";
+import electricalImg from "@/assets/FeaturedQuickServices-img/electrical-fixing.webp";
+import paintingImg from "@/assets/FeaturedQuickServices-img/painting.webp";
 
 // --- بيانات الخدمات ---
 const quickServicesData = [
