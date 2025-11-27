@@ -1,1 +1,0 @@
-import{j as t}from"./index-7uvFpFZZ.js";function s(){return t.jsxs("section",{className:"p-8 text-center",children:[t.jsx("h1",{className:"text-3xl font-bold mb-4",children:"من نحن"}),t.jsx("p",{className:"text-lg text-muted-foreground",children:"سرفانا هو مشروع يهتم بتقديم تجربة رقمية راقية تجمع بين البساطة والجمال."})]})}export{s as default};
