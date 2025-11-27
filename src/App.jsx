@@ -44,6 +44,12 @@ const ProjectReviewPage = lazy(() => import("./pages/ProjectReviewPage"));
 const ProjectSummaryPage = lazy(() => import("./pages/ProjectSummaryPage"));
 const ProjectOffersPage = lazy(() => import("./pages/ProjectOffersPage"));
 const ProjectChatPage = lazy(() => import("./pages/ProjectChatPage"));
+const ProjectProcessingPage = lazy(() =>
+  import("./pages/ProjectProcessingPage")
+);
+const TechnicianPortfolio = lazy(() =>
+  import("./pages/technician/TechnicianPortfolio")
+);
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(
@@ -86,6 +92,10 @@ export default function App() {
             <Route path="/project/summary" element={<ProjectSummaryPage />} />
             <Route path="/project/offers" element={<ProjectOffersPage />} />
             <Route path="/project/chat" element={<ProjectChatPage />} />
+            <Route
+              path="/project/processing"
+              element={<ProjectProcessingPage />}
+            />
             <Route path="/service/request" element={<FastServiceStep1 />} />
             <Route
               path="/service/select-technician"
@@ -100,6 +110,10 @@ export default function App() {
               element={<ServiceCompletionPage />}
             />
             <Route path="/about" element={<About />} />
+            <Route
+              path="/technician/portfolio"
+              element={<TechnicianPortfolio />}
+            />
             <Route path="/contact" element={<Contact />} />
             <Route
               path="/technician/incoming-request"
@@ -147,7 +161,7 @@ export default function App() {
             />
           </Route>
 
-          {/* اختياري: 404 route */}
+          {/*  404  */}
           {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
       </Suspense>

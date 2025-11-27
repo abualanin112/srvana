@@ -132,8 +132,8 @@ export default function ProjectSubmissionPage() {
       setTimeout(() => {
         console.log("Project Submitted:", formData);
         setIsSubmitting(false);
-        // Navigate to review page
-        navigate("/project/summary", { state: { projectData: formData } });
+        // Navigate to processing page
+        navigate("/project/processing", { state: { projectData: formData } });
       }, 1500);
     } else {
       // Scroll to top error
