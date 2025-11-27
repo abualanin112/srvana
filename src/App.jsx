@@ -37,6 +37,13 @@ const TechnicianTaskTracking = lazy(() =>
 const TechnicianPaymentConfirmation = lazy(() =>
   import("./pages/technician/TechnicianPaymentConfirmation")
 );
+const ProjectSubmissionPage = lazy(() =>
+  import("./pages/ProjectSubmissionPage")
+);
+const ProjectReviewPage = lazy(() => import("./pages/ProjectReviewPage"));
+const ProjectSummaryPage = lazy(() => import("./pages/ProjectSummaryPage"));
+const ProjectOffersPage = lazy(() => import("./pages/ProjectOffersPage"));
+const ProjectChatPage = lazy(() => import("./pages/ProjectChatPage"));
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(
@@ -71,6 +78,14 @@ export default function App() {
           >
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesPage />} />
+            <Route
+              path="/projects-services"
+              element={<ProjectSubmissionPage />}
+            />
+            <Route path="/project/review" element={<ProjectReviewPage />} />
+            <Route path="/project/summary" element={<ProjectSummaryPage />} />
+            <Route path="/project/offers" element={<ProjectOffersPage />} />
+            <Route path="/project/chat" element={<ProjectChatPage />} />
             <Route path="/service/request" element={<FastServiceStep1 />} />
             <Route
               path="/service/select-technician"
@@ -78,6 +93,7 @@ export default function App() {
             />
             <Route path="/service/payment" element={<FastServiceStep3 />} />
             <Route path="/service/tracking" element={<OrderTracking />} />
+            <Route path="/order/tracking" element={<OrderTracking />} />
             <Route path="/service/rating" element={<ServiceRating />} />
             <Route
               path="/service/completion"

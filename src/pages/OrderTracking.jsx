@@ -128,7 +128,7 @@ export default function OrderTracking() {
 
         return { ...prev, steps: nextSteps };
       });
-    }, 30000); // 30 seconds
+    }, 3000); // 3 seconds
 
     return () => clearInterval(interval);
   }, [orderData]);

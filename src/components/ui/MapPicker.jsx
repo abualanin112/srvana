@@ -82,13 +82,26 @@ export default function MapPicker({
   const [isFetchingAddress, setIsFetchingAddress] = useState(false);
 
   useEffect(() => {
-    // Reverse geocoding to get address
-    if (position.lat && position.lng) {
+    // Skip fetching for the exact default coordinates to avoid initial load error and CORS issues on localhost
+    // Also skip if lat/lng are null
+    if (
+      !position.lat ||
+      !position.lng ||
+      (Math.abs(position.lat - 30.0444) < 0.0001 &&
+        Math.abs(position.lng - 31.2357) < 0.0001)
+    ) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
       setIsFetchingAddress(true);
       fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${position.lat}&lon=${position.lng}&format=json&accept-language=ar`
       )
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) throw new Error("Network response was not ok");
+          return res.json();
+        })
         .then((data) => {
           const addr = data.address || {};
           const newDetails = {
@@ -115,8 +128,8 @@ export default function MapPicker({
           });
         })
         .catch((err) => {
-          console.error("Geocoding error:", err);
-          // Fallback if fetch fails
+          console.warn("Geocoding skipped or failed:", err.message);
+          // Fallback if fetch fails - just keep coordinates
           onLocationChange?.({
             lat: position.lat,
             lng: position.lng,
@@ -127,7 +140,9 @@ export default function MapPicker({
         .finally(() => {
           setIsFetchingAddress(false);
         });
-    }
+    }, 800); // Debounce for 800ms
+
+    return () => clearTimeout(timer);
   }, [position]);
 
   const handleDetailChange = (field, value) => {
