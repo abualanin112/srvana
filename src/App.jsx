@@ -50,6 +50,9 @@ const ProjectProcessingPage = lazy(() =>
 const TechnicianPortfolio = lazy(() =>
   import("./pages/technician/TechnicianPortfolio")
 );
+const OpenProjectsPage = lazy(() =>
+  import("./pages/technician/OpenProjectsPage")
+);
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(
@@ -131,6 +134,7 @@ export default function App() {
               path="/technician/payment-confirmation"
               element={<TechnicianPaymentConfirmation />}
             />
+            <Route path="/projects/open" element={<OpenProjectsPage />} />
           </Route>
 
           {/* AuthLayout */}
