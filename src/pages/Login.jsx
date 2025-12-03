@@ -46,7 +46,7 @@ export default function LoginPage() {
         <div className="relative z-10 flex h-full w-full items-center justify-center p-6 md:p-10">
           <div className="flex w-full max-w-sm flex-col gap-6" dir="rtl">
             {/* قسم الشعار */}
-            <CustomLogo className="self-center w-55 drop-shadow-lg text-primary-foreground" />
+            <CustomLogo className="self-center w-55 drop-shadow-lg text-foreground" />
 
             {/* الفورم */}
             <Card>
@@ -167,19 +167,13 @@ export default function LoginPage() {
               </CardContent>
             </Card>
 
-            <p className="px-6 text-center text-sm text-primary-foreground/80">
+            <p className="px-6 text-center text-sm text-muted-foreground">
               بالنقر على "متابعة"، فإنك توافق على{" "}
-              <Link
-                to="/terms"
-                className="underline hover:text-primary-foreground"
-              >
+              <Link to="/terms" className="underline hover:text-foreground">
                 شروط الخدمة
               </Link>{" "}
               و{" "}
-              <Link
-                to="/privacy"
-                className="underline hover:text-primary-foreground"
-              >
+              <Link to="/privacy" className="underline hover:text-foreground">
                 سياسة الخصوصية
               </Link>
               .

@@ -116,10 +116,7 @@ export default function ProjectReviewPage() {
 
   if (isLoading) {
     return (
-      <div
-        className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900"
-        dir="rtl"
-      >
+      <div className="min-h-screen bg-background" dir="rtl">
         <div className="container max-w-4xl mx-auto px-4 py-12 space-y-8">
           <Skeleton className="h-12 w-full max-w-md mx-auto rounded-full" />
           <Skeleton className="h-64 w-full rounded-3xl" />
@@ -130,12 +127,9 @@ export default function ProjectReviewPage() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900"
-      dir="rtl"
-    >
+    <div className="min-h-screen bg-background" dir="rtl">
       {/* Steps Header */}
-      <div className="sticky top-0 z-50 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-md transition-all duration-300">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border shadow-md transition-all duration-300">
         {/* Reusing StepsIndicator but manually for now if needed, or just a simple header */}
         <div className="container mx-auto px-4 py-4">
           <h2 className="text-center font-bold text-lg">
@@ -150,35 +144,35 @@ export default function ProjectReviewPage() {
           {/* Summary Section */}
           <div className="space-y-6">
             {/* 1. Technician Summary */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500">
-              <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <CardTitle className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500">
+              <CardHeader className="bg-muted/50 border-b border-border pb-4">
+                <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
                   <PersonIcon className="w-6 h-6 text-primary" /> الفني المختار
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="flex items-center gap-5">
-                  <Avatar className="w-20 h-20 border-4 border-white dark:border-slate-700 shadow-md">
+                  <Avatar className="w-20 h-20 border-4 border-background shadow-md">
                     <AvatarImage src={technician.image} alt={technician.name} />
                     <AvatarFallback className="text-2xl font-bold bg-primary/10 text-primary">
                       {technician.name?.[0]}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-1">
+                    <h3 className="text-2xl font-bold text-foreground mb-1">
                       {technician.name}
                     </h3>
                     <p className="text-primary font-medium text-base mb-2">
                       {technician.profession}
                     </p>
-                    <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
-                      <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-lg">
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1 bg-muted px-2 py-1 rounded-lg">
                         <StarFilledIcon className="w-4 h-4 text-yellow-500" />
-                        <span className="font-bold text-slate-900 dark:text-slate-100">
+                        <span className="font-bold text-foreground">
                           {technician.rating}
                         </span>
                       </span>
-                      <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-lg">
+                      <span className="flex items-center gap-1 bg-muted px-2 py-1 rounded-lg">
                         <CheckCircledIcon className="w-4 h-4 text-green-500" />
                         {technician.tasksCompleted} مهمة
                       </span>
@@ -189,47 +183,47 @@ export default function ProjectReviewPage() {
             </Card>
 
             {/* 2. Project Summary */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-100">
-              <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <CardTitle className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-100">
+              <CardHeader className="bg-muted/50 border-b border-border pb-4">
+                <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
                   <FileTextIcon className="w-6 h-6 text-primary" /> تفاصيل
                   المشروع
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
-                <div className="flex flex-col gap-2 p-4 bg-slate-50 dark:bg-slate-950/50 rounded-2xl border border-slate-100 dark:border-slate-800">
-                  <span className="text-sm text-slate-500 dark:text-slate-400">
+                <div className="flex flex-col gap-2 p-4 bg-muted/50 rounded-2xl border border-border">
+                  <span className="text-sm text-muted-foreground">
                     عنوان المشروع
                   </span>
-                  <span className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                  <span className="text-lg font-bold text-foreground">
                     {project.title}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <span className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground flex items-center gap-2">
                       <ClockIcon className="w-4 h-4" /> مدة التنفيذ
                     </span>
-                    <div className="text-base font-bold text-slate-900 dark:text-slate-100">
+                    <div className="text-base font-bold text-foreground">
                       {offer.duration} أيام
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground flex items-center gap-2">
                       <TargetIcon className="w-4 h-4" /> الميزانية المقدرة
                     </span>
-                    <div className="text-base font-bold text-slate-900 dark:text-slate-100">
+                    <div className="text-base font-bold text-foreground">
                       {parseInt(project.budget).toLocaleString()} ر.س
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground flex items-center gap-2">
                     <SewingPinFilledIcon className="w-4 h-4" /> الموقع
                   </span>
-                  <div className="text-base font-medium text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-950/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 leading-relaxed">
+                  <div className="text-base font-medium text-foreground bg-muted/50 p-4 rounded-2xl border border-border leading-relaxed">
                     {project.location?.address}
                   </div>
                 </div>
@@ -240,25 +234,25 @@ export default function ProjectReviewPage() {
           {/* Left Column: Payment */}
           <div className="space-y-6">
             {/* 3. Payment Breakdown */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-200 h-fit">
-              <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <CardTitle className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-200 h-fit">
+              <CardHeader className="bg-muted/50 border-b border-border pb-4">
+                <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
                   <ReaderIcon className="w-6 h-6 text-primary" /> تفاصيل الدفع
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-4">
-                <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                <div className="flex justify-between items-center text-muted-foreground">
                   <span>قيمة العرض المتفق عليه</span>
                   <span className="font-semibold">
                     {parseInt(offer.price).toLocaleString()} ر.س
                   </span>
                 </div>
-                <Separator className="my-2 bg-slate-200 dark:bg-slate-700" />
+                <Separator className="my-2 bg-border" />
                 <div className="flex justify-between items-center text-primary text-xl font-extrabold bg-primary/5 p-4 rounded-xl -mx-2">
                   <span>الإجمالي المطلوب</span>
                   <span>{parseInt(offer.price).toLocaleString()} ر.س</span>
                 </div>
-                <p className="text-xs text-slate-400 text-center leading-relaxed">
+                <p className="text-xs text-muted-foreground text-center leading-relaxed">
                   * سيتم حجز المبلغ في الموقع ولن يتم تسليمه للفني إلا بعد
                   تأكيدك لاستلام المشروع.
                 </p>
@@ -266,9 +260,9 @@ export default function ProjectReviewPage() {
             </Card>
 
             {/* 4. Payment Methods */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-300">
-              <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <CardTitle className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-300">
+              <CardHeader className="bg-muted/50 border-b border-border pb-4">
+                <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
                   <IdCardIcon className="w-6 h-6 text-primary" /> طريقة الدفع
                 </CardTitle>
               </CardHeader>
@@ -281,19 +275,19 @@ export default function ProjectReviewPage() {
                   {/* Wallet */}
                   <div
                     className={cn(
-                      "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800",
+                      "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-muted",
                       paymentMethod === "wallet"
                         ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
-                        : "border-slate-200 dark:border-slate-800"
+                        : "border-border"
                     )}
                   >
                     <RadioGroupItem value="wallet" id="wallet" />
                     <Label
                       htmlFor="wallet"
-                      className="flex-1 cursor-pointer font-bold text-base flex items-center justify-between text-slate-900 dark:text-slate-100"
+                      className="flex-1 cursor-pointer font-bold text-base flex items-center justify-between text-foreground"
                     >
                       <span>محفظة الموقع</span>
-                      <span className="text-primary font-extrabold bg-white dark:bg-slate-900 px-2 py-1 rounded-lg shadow-sm">
+                      <span className="text-primary font-extrabold bg-background px-2 py-1 rounded-lg shadow-sm">
                         50,000 ر.س
                       </span>
                     </Label>
@@ -302,21 +296,21 @@ export default function ProjectReviewPage() {
                   {/* Card */}
                   <div
                     className={cn(
-                      "flex flex-col space-y-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800",
+                      "flex flex-col space-y-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-muted",
                       paymentMethod === "card"
                         ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
-                        : "border-slate-200 dark:border-slate-800"
+                        : "border-border"
                     )}
                   >
                     <div className="flex items-center space-x-4 space-x-reverse">
                       <RadioGroupItem value="card" id="card" />
                       <Label
                         htmlFor="card"
-                        className="flex-1 cursor-pointer font-bold text-base flex items-center gap-2 text-slate-900 dark:text-slate-100"
+                        className="flex-1 cursor-pointer font-bold text-base flex items-center gap-2 text-foreground"
                       >
                         بطاقة بنكية
                         <div className="flex gap-1 mr-auto">
-                          <IdCardIcon className="w-6 h-6 text-slate-400" />
+                          <IdCardIcon className="w-6 h-6 text-muted-foreground" />
                         </div>
                       </Label>
                     </div>
@@ -332,7 +326,7 @@ export default function ProjectReviewPage() {
                           <Label>رقم البطاقة</Label>
                           <Input
                             placeholder="0000 0000 0000 0000"
-                            className="bg-white dark:bg-slate-950"
+                            className="bg-background"
                           />
                         </div>
                       </div>
@@ -351,7 +345,7 @@ export default function ProjectReviewPage() {
           <Button
             variant="outline"
             onClick={() => navigate(-1)}
-            className="w-full md:w-auto min-w-[160px] h-14 text-lg font-medium gap-2 rounded-xl border-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+            className="w-full md:w-auto min-w-[160px] h-14 text-lg font-medium gap-2 rounded-xl border-2 hover:bg-accent transition-all"
           >
             <ArrowRightIcon className="w-5 h-5" />
             السابق

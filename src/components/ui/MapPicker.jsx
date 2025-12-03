@@ -190,7 +190,7 @@ export default function MapPicker({
           "relative overflow-hidden transition-all duration-500 shadow-lg",
           isFullscreen
             ? "fixed inset-0 z-50 h-screen w-screen rounded-none bg-background"
-            : "h-[350px] md:h-[450px] rounded-2xl border-2 border-slate-100 dark:border-slate-800"
+            : "h-[350px] md:h-[450px] rounded-2xl border-2 border-border"
         )}
       >
         <MapContainer
@@ -213,7 +213,7 @@ export default function MapPicker({
             variant="secondary"
             size="icon"
             onClick={handleLocateMe}
-            className="h-12 w-12 rounded-full shadow-xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-md hover:bg-white dark:hover:bg-slate-900 hover:scale-110 transition-all duration-300 text-primary"
+            className="h-12 w-12 rounded-full shadow-xl bg-card/90 backdrop-blur-md hover:bg-card hover:scale-110 transition-all duration-300 text-primary"
             title="موقعي الحالي"
           >
             <TargetIcon className="h-6 w-6" />
@@ -222,7 +222,7 @@ export default function MapPicker({
             variant="secondary"
             size="icon"
             onClick={toggleFullscreen}
-            className="h-12 w-12 rounded-full shadow-xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-md hover:bg-white dark:hover:bg-slate-900 hover:scale-110 transition-all duration-300 text-slate-700 dark:text-slate-300"
+            className="h-12 w-12 rounded-full shadow-xl bg-card/90 backdrop-blur-md hover:bg-card hover:scale-110 transition-all duration-300 text-foreground"
             title={isFullscreen ? "تصغير الخريطة" : "تكبير الخريطة"}
           >
             {isFullscreen ? (
@@ -235,7 +235,7 @@ export default function MapPicker({
 
         {/* Loading Indicator */}
         {isFetchingAddress && (
-          <div className="absolute bottom-4 left-4 z-1000 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-xs font-bold text-primary animate-in slide-in-from-bottom-2">
+          <div className="absolute bottom-4 left-4 z-1000 bg-card/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-xs font-bold text-primary animate-in slide-in-from-bottom-2">
             <ReloadIcon className="w-3 h-3 animate-spin" />
             جاري تحديد العنوان...
           </div>
@@ -243,12 +243,12 @@ export default function MapPicker({
       </div>
 
       {/* Address Display */}
-      <div className="space-y-4 bg-slate-50/50 dark:bg-slate-800/30 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 animate-in fade-in slide-in-from-top-4 duration-500">
+      <div className="space-y-4 bg-muted/30 p-6 rounded-2xl border border-border animate-in fade-in slide-in-from-top-4 duration-500">
         <div className="flex items-center justify-between">
-          <Label className="text-base font-bold text-slate-800 dark:text-slate-200">
+          <Label className="text-base font-bold text-foreground">
             العنوان التفصيلي
           </Label>
-          <span className="text-xs text-muted-foreground bg-white dark:bg-slate-900 px-2 py-1 rounded-full border dir-ltr">
+          <span className="text-xs text-muted-foreground bg-background px-2 py-1 rounded-full border border-border dir-ltr">
             {position.lat.toFixed(4)}, {position.lng.toFixed(4)}
           </span>
         </div>
@@ -267,7 +267,7 @@ export default function MapPicker({
               value={addressDetails.city}
               onChange={(e) => handleDetailChange("city", e.target.value)}
               placeholder="مثال: الرياض"
-              className="h-11 bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
+              className="h-11 bg-background border-input focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
               dir="rtl"
             />
           </div>
@@ -285,7 +285,7 @@ export default function MapPicker({
               value={addressDetails.district}
               onChange={(e) => handleDetailChange("district", e.target.value)}
               placeholder="مثال: حي العليا"
-              className="h-11 bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
+              className="h-11 bg-background border-input focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
               dir="rtl"
             />
           </div>
@@ -303,7 +303,7 @@ export default function MapPicker({
               value={addressDetails.street}
               onChange={(e) => handleDetailChange("street", e.target.value)}
               placeholder="مثال: شارع الملك فهد"
-              className="h-11 bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
+              className="h-11 bg-background border-input focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
               dir="rtl"
             />
           </div>
@@ -321,7 +321,7 @@ export default function MapPicker({
               value={addressDetails.building}
               onChange={(e) => handleDetailChange("building", e.target.value)}
               placeholder="مثال: 15"
-              className="h-11 bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
+              className="h-11 bg-background border-input focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
               dir="rtl"
             />
           </div>
@@ -339,7 +339,7 @@ export default function MapPicker({
               value={addressDetails.notes}
               onChange={(e) => handleDetailChange("notes", e.target.value)}
               placeholder="أقرب معلم، رقم الطابق، أو أي تفاصيل أخرى..."
-              className="h-11 bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
+              className="h-11 bg-background border-input focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
               dir="rtl"
             />
           </div>

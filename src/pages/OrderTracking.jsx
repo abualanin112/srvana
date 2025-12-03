@@ -155,10 +155,7 @@ export default function OrderTracking() {
 
   if (isLoading) {
     return (
-      <div
-        className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900 p-8"
-        dir="rtl"
-      >
+      <div className="min-h-screen bg-background p-8" dir="rtl">
         <div className="max-w-4xl mx-auto space-y-8">
           <Skeleton className="h-12 w-64 mx-auto rounded-full" />
           <div className="grid md:grid-cols-3 gap-8">
@@ -176,23 +173,20 @@ export default function OrderTracking() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900"
-      dir="rtl"
-    >
+    <div className="min-h-screen bg-background" dir="rtl">
       {/* Header */}
-      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+      <div className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="container max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => navigate("/")}
-              className="rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="rounded-full hover:bg-muted"
             >
               <HomeIcon className="w-5 h-5" />
             </Button>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-slate-50">
+            <h1 className="text-xl font-bold text-foreground">
               تتبع الطلب{" "}
               <span className="text-primary font-mono text-lg mr-2">
                 {orderData.id}
@@ -211,56 +205,58 @@ export default function OrderTracking() {
           {/* Main Content - Right Side */}
           <div className="md:col-span-2 space-y-6">
             {/* Map Visualization (Placeholder) */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden h-[300px] relative group">
-              <div className="absolute inset-0 bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden h-[300px] relative group">
+              <div className="absolute inset-0 bg-muted flex items-center justify-center">
                 <div className="text-center space-y-2">
                   <SewingPinFilledIcon className="w-12 h-12 text-primary mx-auto animate-bounce" />
-                  <p className="text-slate-500 font-medium">خريطة تتبع الفني</p>
+                  <p className="text-muted-foreground font-medium">
+                    خريطة تتبع الفني
+                  </p>
                 </div>
                 {/* Simulated Map Background */}
                 <div className="absolute inset-0 opacity-10 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg')] bg-cover bg-center" />
               </div>
 
               {/* Floating Status Card on Map */}
-              <div className="absolute bottom-4 right-4 left-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <div className="absolute bottom-4 right-4 left-4 bg-card/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-border flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 p-2 rounded-full text-primary">
                     <SewingPinFilledIcon className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500">الوجهة</p>
-                    <p className="text-sm font-bold text-slate-900 dark:text-slate-100 line-clamp-1">
+                    <p className="text-xs text-muted-foreground">الوجهة</p>
+                    <p className="text-sm font-bold text-foreground line-clamp-1">
                       {orderData.service.location.address}
                     </p>
                   </div>
                 </div>
                 <div className="text-left">
-                  <p className="text-xs text-slate-500">الوقت المتوقع</p>
+                  <p className="text-xs text-muted-foreground">الوقت المتوقع</p>
                   <p className="text-sm font-bold text-primary">15 دقيقة</p>
                 </div>
               </div>
             </Card>
 
             {/* Technician Card */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center gap-6">
                   <div className="relative">
-                    <Avatar className="w-20 h-20 border-4 border-slate-50 dark:border-slate-800 shadow-md">
+                    <Avatar className="w-20 h-20 border-4 border-background shadow-md">
                       <AvatarImage src={orderData.technician.image} />
                       <AvatarFallback>
                         {orderData.technician.name[0]}
                       </AvatarFallback>
                     </Avatar>
-                    <div className="absolute -bottom-1 -right-1 bg-green-500 w-5 h-5 rounded-full border-4 border-white dark:border-slate-900" />
+                    <div className="absolute -bottom-1 -right-1 bg-green-500 w-5 h-5 rounded-full border-4 border-background" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50 mb-1">
+                    <h3 className="text-xl font-bold text-foreground mb-1">
                       {orderData.technician.name}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                       <StarFilledIcon className="w-4 h-4 text-yellow-500" />
-                      <span className="font-bold text-slate-900 dark:text-slate-100">
+                      <span className="font-bold text-foreground">
                         {orderData.technician.rating}
                       </span>
                       <span>•</span>
@@ -291,15 +287,15 @@ export default function OrderTracking() {
 
           {/* Timeline - Left Side */}
           <div className="space-y-6">
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden h-full">
-              <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <CardTitle className="text-lg font-bold text-slate-800 dark:text-slate-100">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden h-full">
+              <CardHeader className="bg-muted/50 border-b border-border pb-4">
+                <CardTitle className="text-lg font-bold text-foreground">
                   حالة الطلب
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 relative">
                 {/* Timeline Line */}
-                <div className="absolute top-8 bottom-8 right-[2.65rem] w-0.5 bg-slate-200 dark:bg-slate-800" />
+                <div className="absolute top-8 bottom-8 right-[2.65rem] w-0.5 bg-border" />
 
                 <div className="space-y-8 relative z-10">
                   {orderData.steps.map((step, index) => (
@@ -307,12 +303,12 @@ export default function OrderTracking() {
                       {/* Icon */}
                       <div
                         className={cn(
-                          "w-10 h-10 rounded-full flex items-center justify-center shrink-0 border-4 border-white dark:border-slate-900 shadow-sm transition-all duration-500",
+                          "w-10 h-10 rounded-full flex items-center justify-center shrink-0 border-4 border-background shadow-sm transition-all duration-500",
                           step.status === "completed"
                             ? "bg-green-500 text-white"
                             : step.status === "current"
                             ? "bg-primary text-white ring-4 ring-primary/20"
-                            : "bg-slate-100 dark:bg-slate-800 text-slate-400"
+                            : "bg-muted text-muted-foreground"
                         )}
                       >
                         {step.status === "completed" ? (
@@ -329,14 +325,14 @@ export default function OrderTracking() {
                           step.status === "pending" && "opacity-50 grayscale"
                         )}
                       >
-                        <h4 className="font-bold text-slate-900 dark:text-slate-100 text-base mb-1">
+                        <h4 className="font-bold text-foreground text-base mb-1">
                           {step.label}
                         </h4>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
                           {step.description}
                         </p>
                         {step.time && (
-                          <span className="text-xs font-medium text-slate-400 mt-2 block bg-slate-50 dark:bg-slate-800/50 w-fit px-2 py-1 rounded-md">
+                          <span className="text-xs font-medium text-muted-foreground mt-2 block bg-muted w-fit px-2 py-1 rounded-md">
                             {step.time}
                           </span>
                         )}

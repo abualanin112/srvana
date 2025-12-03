@@ -39,10 +39,10 @@ export default function TechnicianRejectionReason() {
 
   return (
     <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4"
+      className="min-h-screen bg-background flex items-center justify-center p-4"
       dir="rtl"
     >
-      <Card className="w-full max-w-md border-0 shadow-xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
+      <Card className="w-full max-w-md border-0 shadow-xl bg-card/80 backdrop-blur-sm">
         <CardHeader>
           <div className="flex items-center gap-2 mb-2">
             <Button
@@ -82,7 +82,7 @@ export default function TechnicianRejectionReason() {
                 className={`flex items-center space-x-3 space-x-reverse p-4 rounded-xl border-2 cursor-pointer transition-all ${
                   selectedReason === reason.id
                     ? "border-primary bg-primary/5"
-                    : "border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    : "border-border hover:bg-accent"
                 }`}
                 onClick={() => setSelectedReason(reason.id)}
               >

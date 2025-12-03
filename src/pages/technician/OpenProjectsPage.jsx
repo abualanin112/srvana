@@ -226,14 +226,14 @@ export default function OpenProjectsPage() {
                   placeholder="ابحث عن المشروع..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pr-10 h-12 text-base bg-card dark:bg-slate-900/50 border-slate-200 focus-visible:ring-primary/20 rounded-md !shadow-none"
+                  className="pr-10 h-12! text-base bg-card border-border focus-visible:ring-primary/20 rounded-md shadow-none!"
                 />
               </div>
 
               {/* Sort */}
               <div className="w-full  md:w-[200px] shrink-0 ">
                 <Select value={sortBy} onValueChange={setSortBy} dir="rtl">
-                  <SelectTrigger className="!h-12 w-full bg-card dark:bg-slate-900/50 border-slate-200 dark:border-slate-700 rounded-md !shadow-none">
+                  <SelectTrigger className="h-12! w-full bg-card border-border rounded-md shadow-none!">
                     <SelectValue placeholder="ترتيب حسب" />
                   </SelectTrigger>
                   <SelectContent>
@@ -252,11 +252,11 @@ export default function OpenProjectsPage() {
             {/* Projects List */}
             <div className="space-y-4">
               {filteredProjects.length === 0 ? (
-                <div className="text-center py-20 bg-white dark:bg-slate-900/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-800">
-                  <div className="mx-auto w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4">
+                <div className="text-center py-20 bg-card rounded-xl border border-dashed border-border">
+                  <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
                     <MagnifyingGlassIcon className="w-8 h-8 text-muted-foreground" />
                   </div>
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                  <h3 className="text-lg font-semibold text-foreground">
                     لا توجد مشاريع مطابقة
                   </h3>
                   <p className="text-muted-foreground mt-1">
@@ -280,7 +280,11 @@ export default function OpenProjectsPage() {
               ) : (
                 <>
                   {currentProjects.map((project) => (
-                    <ProjectCard key={project.id} project={project} />
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      linkTarget="/projects/proposal"
+                    />
                   ))}
 
                   {/* Pagination Controls */}

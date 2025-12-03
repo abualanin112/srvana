@@ -53,7 +53,7 @@ export default function ProjectProcessingPage() {
 
   return (
     <div
-      className="min-h-screen bg-white dark:bg-slate-950 flex flex-col items-center justify-center relative overflow-hidden"
+      className="min-h-screen bg-background flex flex-col items-center justify-center relative overflow-hidden"
       dir="rtl"
     >
       {/* Background Ambience */}
@@ -66,7 +66,7 @@ export default function ProjectProcessingPage() {
         {/* Logo or Icon Animation */}
         <div className="relative">
           {/* Outer Ring */}
-          <div className="w-32 h-32 rounded-full border-4 border-slate-100 dark:border-slate-800 flex items-center justify-center relative">
+          <div className="w-32 h-32 rounded-full border-4 border-muted flex items-center justify-center relative">
             {/* Spinning Ring */}
             {!isCompleted && (
               <div className="absolute inset-0 rounded-full border-4 border-primary/30 border-t-primary animate-spin duration-1000" />
@@ -78,7 +78,7 @@ export default function ProjectProcessingPage() {
                 "w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500",
                 isCompleted
                   ? "bg-green-500 text-white scale-110 shadow-lg shadow-green-500/30"
-                  : "bg-slate-50 dark:bg-slate-900 text-primary"
+                  : "bg-muted text-primary"
               )}
             >
               {isCompleted ? (
@@ -97,16 +97,16 @@ export default function ProjectProcessingPage() {
         {/* Text & Progress */}
         <div className="space-y-6 w-full">
           <div className="space-y-2 h-16">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white animate-in fade-in slide-in-from-bottom-2 duration-500 key={statusText}">
+            <h2 className="text-2xl font-bold text-foreground animate-in fade-in slide-in-from-bottom-2 duration-500 key={statusText}">
               {statusText}
             </h2>
-            <p className="text-slate-500 dark:text-slate-400 text-sm">
+            <p className="text-muted-foreground text-sm">
               يرجى الانتظار قليلاً، لا تغلق الصفحة
             </p>
           </div>
 
           {/* Progress Bar */}
-          <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
             <div
               className="h-full bg-primary transition-all duration-700 ease-out rounded-full relative overflow-hidden"
               style={{ width: `${progress}%` }}

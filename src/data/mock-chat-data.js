@@ -32,6 +32,10 @@ export const MOCK_CHAT_DB = {
       duration: "7",
       durationUnit: "days",
       location: { address: "الرياض، حي العليا" },
+      questions: [
+        "هل لديك خبرة سابقة في مشاريع مماثلة؟",
+        "هل يمكنك توفير المواد الخام؟",
+      ],
     },
     offer: {
       id: 501,
@@ -41,6 +45,16 @@ export const MOCK_CHAT_DB = {
       duration: "5",
       originalDuration: "7",
       description: "سأقوم بتنفيذ العمل بجودة عالية وفي الوقت المحدد.",
+      answers: [
+        {
+          question: "هل لديك خبرة سابقة في مشاريع مماثلة؟",
+          answer: "نعم، قمت بتنفيذ 5 مشاريع مشابهة في نفس الحي.",
+        },
+        {
+          question: "هل يمكنك توفير المواد الخام؟",
+          answer: "نعم، يمكنني توفيرها مع الفواتير الأصلية.",
+        },
+      ],
     },
   },
   // Chat ID 2: Modern Construction Co. (Initial Offer)

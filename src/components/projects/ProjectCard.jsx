@@ -13,9 +13,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, linkTarget }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const maxLength = 180;
+
+  // Default link target if not provided
+  const target = linkTarget || `/projects/${project.id}`;
 
   // Date Formatting Logic
   const formatPostedDate = (dateString) => {
@@ -44,9 +47,9 @@ export default function ProjectCard({ project }) {
       : `${project.description.substring(0, maxLength)}...`;
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 items-start py-8 border-b border-slate-200 dark:border-slate-800 last:border-0 group hover:bg-primary/2 dark:hover:bg-slate-800 cursor-pointer px-4 -mx-4 mb-0 transition-all duration-300">
+    <div className="flex flex-col md:flex-row gap-6 items-start py-8 border-b border-border last:border-0 group hover:bg-muted/50 cursor-pointer px-4 -mx-4 mb-0 transition-all duration-300">
       {/* Image (Right) */}
-      <div className="w-full md:w-48 h-48 shrink-0 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shadow-sm group-hover:shadow-md transition-all duration-300 relative">
+      <div className="w-full md:w-48 h-48 shrink-0 rounded-xl overflow-hidden bg-muted shadow-sm group-hover:shadow-md transition-all duration-300 relative">
         <img
           src={project.image}
           alt={project.title}
@@ -63,7 +66,7 @@ export default function ProjectCard({ project }) {
             <div className="space-y-2">
               {/* Date Badge (Moved Above Title) */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-medium text-slate-400 dark:text-slate-500 whitespace-nowrap bg-slate-50 dark:bg-slate-900 px-2 py-1 rounded-full flex items-center gap-1 w-fit">
+                <span className="text-xs font-medium text-muted-foreground whitespace-nowrap bg-muted/50 px-2 py-1 rounded-full flex items-center gap-1 w-fit">
                   <ClockIcon className="w-3 h-3" />
                   {formatPostedDate(project.postedDate)}
                 </span>
@@ -71,8 +74,8 @@ export default function ProjectCard({ project }) {
 
               {/* Title */}
               <Link
-                to={`/projects/${project.id}`}
-                className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors line-clamp-1 block"
+                to={target}
+                className="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1 block"
               >
                 {project.title}
               </Link>
@@ -89,7 +92,7 @@ export default function ProjectCard({ project }) {
                   <Badge
                     key={skill}
                     variant="secondary"
-                    className="text-xs font-normal bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"
+                    className="text-xs font-normal bg-muted text-muted-foreground hover:bg-accent"
                   >
                     {skill}
                   </Badge>
@@ -98,7 +101,7 @@ export default function ProjectCard({ project }) {
             </div>
 
             {/* Budget */}
-            <div className=" shrink-0 flex flex-row md:flex-col items-center  justify-center md:justify-start gap-2 md:gap-1 bg-slate-50 dark:bg-slate-900/50 p-3 md:p-0 md:bg-transparent rounded-lg md:rounded-none">
+            <div className=" shrink-0 flex flex-row md:flex-col items-center  justify-center md:justify-start gap-2 md:gap-1 bg-muted/30 p-3 md:p-0 md:bg-transparent rounded-lg md:rounded-none">
               <div className="text-lg font-bold text-primary">
                 {project.budget.toLocaleString()} ج.م
               </div>
@@ -110,7 +113,7 @@ export default function ProjectCard({ project }) {
         </div>
 
         {/* Description with Read More */}
-        <div className="text-base leading-7 text-slate-600 dark:text-slate-300 pl-4 md:pl-8">
+        <div className="text-base leading-7 text-muted-foreground pl-4 md:pl-8">
           {displayDescription}
           {shouldTruncate && (
             <span
@@ -132,7 +135,7 @@ export default function ProjectCard({ project }) {
         </div>
 
         {/* Meta */}
-        <div className="flex flex-wrap items-center gap-4 pt-2 border-t border-slate-100 dark:border-slate-800/50 mt-4">
+        <div className="flex flex-wrap items-center gap-4 pt-2 border-t border-border mt-4">
           <div className="flex items-center gap-1.5 text-sm text-muted-foreground py-2">
             <SewingPinIcon className="w-4 h-4 text-red-500" />
             {project.location}
@@ -147,10 +150,7 @@ export default function ProjectCard({ project }) {
           </div>
           <div className="flex-1"></div>
           <Button asChild size="sm" variant="secondary">
-            <Link
-              to={`/projects/${project.id}`}
-              className="flex items-center gap-1"
-            >
+            <Link to={target} className="flex items-center gap-1">
               التفاصيل
               <ArrowLeftIcon className="w-4 h-4" />
             </Link>

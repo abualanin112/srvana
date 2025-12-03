@@ -38,16 +38,13 @@ export default function ProjectSummaryPage() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900 pb-20"
-      dir="rtl"
-    >
+    <div className="min-h-screen bg-background pb-20" dir="rtl">
       {/* Header / Success Banner */}
       <div className="bg-primary/5 border-b border-primary/10 py-12 text-center space-y-4">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400 mb-4 shadow-sm animate-in zoom-in duration-500">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 mb-4 shadow-sm animate-in zoom-in duration-500">
           <CheckCircledIcon className="w-10 h-10" />
         </div>
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight">
           تم تقديم المشروع بنجاح!
         </h1>
         <p className="text-muted-foreground text-lg max-w-xl mx-auto">
@@ -56,9 +53,9 @@ export default function ProjectSummaryPage() {
       </div>
 
       <div className="container max-w-4xl mx-auto px-4 -mt-8">
-        <Card className="border-0 shadow-xl shadow-slate-200/40 dark:shadow-none overflow-hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-8 duration-700">
+        <Card className="border-0 shadow-xl shadow-black/5 overflow-hidden bg-card/80 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-8 duration-700">
           {/* Project Header Info */}
-          <div className="p-6 md:p-8 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div className="p-6 md:p-8 border-b border-border flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <h2 className="text-2xl font-bold text-primary mb-2">
                 {projectData.title}
@@ -68,7 +65,7 @@ export default function ProjectSummaryPage() {
                   <Badge
                     key={idx}
                     variant="secondary"
-                    className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+                    className="hover:bg-secondary/80"
                   >
                     {cat}
                   </Badge>
@@ -79,7 +76,7 @@ export default function ProjectSummaryPage() {
               <span className="text-sm text-muted-foreground block mb-1">
                 رقم المشروع
               </span>
-              <span className="font-mono font-bold text-lg text-slate-700 dark:text-slate-300">
+              <span className="font-mono font-bold text-lg text-foreground">
                 #PRJ-{Math.floor(Math.random() * 10000)}
               </span>
             </div>
@@ -88,28 +85,28 @@ export default function ProjectSummaryPage() {
           <CardContent className="p-6 md:p-8 space-y-8">
             {/* Key Metrics Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 flex items-center justify-center">
+              <div className="p-4 rounded-xl bg-muted/30 border border-border flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
                   <TargetIcon className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground block">
                     الميزانية
                   </span>
-                  <span className="font-bold text-lg">
+                  <span className="font-bold text-lg text-foreground">
                     {projectData.budget} ج.م
                   </span>
                 </div>
               </div>
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400 flex items-center justify-center">
+              <div className="p-4 rounded-xl bg-muted/30 border border-border flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-secondary/20 text-secondary-foreground flex items-center justify-center shrink-0">
                   <ClockIcon className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground block">
                     المدة المتوقعة
                   </span>
-                  <span className="font-bold text-lg">
+                  <span className="font-bold text-lg text-foreground">
                     {projectData.duration}{" "}
                     {projectData.durationUnit === "days"
                       ? "أيام"
@@ -119,15 +116,15 @@ export default function ProjectSummaryPage() {
                   </span>
                 </div>
               </div>
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400 flex items-center justify-center">
+              <div className="p-4 rounded-xl bg-muted/30 border border-border flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center shrink-0">
                   <CalendarIcon className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground block">
                     تاريخ النشر
                   </span>
-                  <span className="font-bold text-lg">
+                  <span className="font-bold text-lg text-foreground">
                     {new Date().toLocaleDateString("ar-EG")}
                   </span>
                 </div>
@@ -142,7 +139,7 @@ export default function ProjectSummaryPage() {
                 <FileTextIcon className="w-5 h-5 text-primary" />
                 تفاصيل المشروع
               </h3>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line bg-slate-50 dark:bg-slate-950/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+              <p className="text-muted-foreground leading-relaxed whitespace-pre-line bg-muted/50 p-4 rounded-xl border border-border">
                 {projectData.description}
               </p>
             </div>
@@ -158,14 +155,12 @@ export default function ProjectSummaryPage() {
                   {projectData.questions.map((q, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-3 p-3 rounded-lg bg-slate-50 dark:bg-slate-950/50"
+                      className="flex items-start gap-3 p-3 rounded-lg bg-muted/50"
                     >
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center mt-0.5">
+                      <span className="shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center mt-0.5">
                         {idx + 1}
                       </span>
-                      <span className="text-slate-700 dark:text-slate-300">
-                        {q}
-                      </span>
+                      <span className="text-foreground">{q}</span>
                     </li>
                   ))}
                 </ul>
@@ -183,9 +178,9 @@ export default function ProjectSummaryPage() {
                   {projectData.files.map((file, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800"
+                      className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 border border-border"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500">
+                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center text-muted-foreground">
                         {file.type.startsWith("image/") ? (
                           <ImageIcon className="w-5 h-5" />
                         ) : (
@@ -193,7 +188,7 @@ export default function ProjectSummaryPage() {
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate text-slate-700 dark:text-slate-300">
+                        <p className="text-sm font-medium truncate text-foreground">
                           {file.name}
                         </p>
                         <p className="text-xs text-muted-foreground">
@@ -213,12 +208,12 @@ export default function ProjectSummaryPage() {
                   <SewingPinFilledIcon className="w-5 h-5 text-primary" />
                   الموقع
                 </h3>
-                <div className="bg-slate-50 dark:bg-slate-950/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800 space-y-3">
-                  <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                <div className="bg-muted/50 p-4 rounded-xl border border-border space-y-3">
+                  <div className="flex items-center gap-2 text-muted-foreground">
                     <span className="font-medium">الإحداثيات:</span>
                     <span
                       dir="ltr"
-                      className="font-mono text-sm bg-white dark:bg-slate-900 px-2 py-1 rounded border"
+                      className="font-mono text-sm bg-card px-2 py-1 rounded border"
                     >
                       {projectData.location.lat?.toFixed(6)},{" "}
                       {projectData.location.lng?.toFixed(6)}
@@ -226,7 +221,7 @@ export default function ProjectSummaryPage() {
                   </div>
 
                   {projectData.location.address && (
-                    <div className="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                    <div className="flex items-start gap-2 text-muted-foreground">
                       <span className="font-medium shrink-0">العنوان:</span>
                       <span>{projectData.location.address}</span>
                     </div>
@@ -236,7 +231,7 @@ export default function ProjectSummaryPage() {
                     Object.values(projectData.location.details).some(
                       Boolean
                     ) && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-200 dark:border-slate-800 mt-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-border mt-2">
                         {projectData.location.details.city && (
                           <div>
                             <span className="text-xs text-muted-foreground block">
@@ -285,7 +280,7 @@ export default function ProjectSummaryPage() {
           </CardContent>
 
           {/* Actions Footer */}
-          <div className="bg-slate-50/80 dark:bg-slate-900/80 p-6 md:p-8 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-4 justify-end">
+          <div className="bg-muted/80 p-6 md:p-8 border-t border-border flex flex-col sm:flex-row gap-4 justify-end">
             <Button
               variant="outline"
               size="lg"

@@ -37,6 +37,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import MediaLightbox from "@/components/ui/MediaLightbox";
 
 // --- Mock Data (API-like Structure) ---
 const TECHNICIAN_DATA = {
@@ -152,139 +153,24 @@ const PORTFOLIO_ITEMS = {
 
 const StatItem = memo(function StatItem({ icon, label, value }) {
   return (
-    <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+    <div className="p-4 flex items-center justify-between hover:bg-accent transition-colors">
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
           {icon}
         </div>
-        <span className="text-sm font-medium text-slate-600 dark:text-slate-300">
+        <span className="text-sm font-medium text-muted-foreground">
           {label}
         </span>
       </div>
-      <span className="font-bold text-slate-900 dark:text-white">{value}</span>
+      <span className="font-bold text-foreground">{value}</span>
     </div>
   );
 });
 
-function PortfolioItemDialogContent({ item }) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = item.images || [item.image];
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  // Handle keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "ArrowRight") nextImage();
-      if (e.key === "ArrowLeft") prevImage();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [images.length]);
-
-  return (
-    <div className="w-full h-full flex flex-col relative animate-in fade-in duration-300">
-      {/* Header / Close Area */}
-      <div className="absolute top-0 left-0 right-0 p-6 z-50 flex justify-between items-start bg-linear-to-b from-black/90 via-black/50 to-transparent pointer-events-none">
-        <div className="pointer-events-auto">
-          <h2 className="text-white/90 text-xl font-bold drop-shadow-lg tracking-wide">
-            {item.title}
-          </h2>
-          <p className="text-white/70 text-sm font-medium drop-shadow-md mt-1">
-            {currentImageIndex + 1} / {images.length}
-          </p>
-        </div>
-        <DialogClose
-          className="pointer-events-auto text-secondary hover:text-secondary-foreground 
-             bg-black/40 hover:bg-secondary 
-             rounded-full p-2 transition-colors 
-             backdrop-blur-sm border border-secondary/20"
-        >
-          <Cross2Icon className="w-6 h-6" />
-        </DialogClose>
-      </div>
-
-      {/* Main Image Area */}
-      <div className="flex-1 relative flex items-center justify-center overflow-hidden bg-black/50 pt-12">
-        <div className="relative w-full h-full flex items-center justify-center p-3 md:p-6 gap-12">
-          {/* Prev Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-secondary hover:text-secondary-foreground 
-               bg-black/40 hover:bg-secondary 
-               rounded-full w-12 h-12 md:w-14 md:h-14 
-               shrink-0 z-40 transition-all duration-300 
-               backdrop-blur-sm border border-secondary/20"
-            onClick={prevImage}
-          >
-            <ChevronRightIcon className="w-6 h-6 md:w-8 md:h-8" />
-          </Button>
-
-          {/* Image Container */}
-          <div className="relative w-full max-w-4xl aspect-video bg-black/20 rounded-xl overflow-hidden shadow-2xl flex items-center justify-center shrink-0">
-            <img
-              src={images[currentImageIndex]}
-              alt={`${item.title} - ${currentImageIndex + 1}`}
-              className="w-full h-full object-cover transition-all duration-500 ease-out select-none"
-            />
-          </div>
-
-          {/* Next Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-secondary hover:text-secondary-foreground 
-               bg-black/40 hover:bg-secondary 
-               rounded-full w-12 h-12 md:w-14 md:h-14 
-               shrink-0 z-40 transition-all duration-300 
-               backdrop-blur-sm border border-secondary/20"
-            onClick={nextImage}
-          >
-            <ChevronLeftIcon className="w-6 h-6 md:w-8 md:h-8" />
-          </Button>
-        </div>
-      </div>
-
-      {/* Thumbnails Strip - Sleek & Compact */}
-      <div className="h-24 md:h-28 bg-black/85 backdrop-blur-md border-t border-white/10 flex items-center justify-center gap-4 md:gap-6 px-8 py-4 overflow-x-auto z-50 shrink-0">
-        {images.map((img, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentImageIndex(idx)}
-            className={cn(
-              "relative h-14 w-14 md:h-16 md:w-16 rounded-lg overflow-hidden transition-all duration-300 ease-out shrink-0 group",
-              currentImageIndex === idx
-                ? "ring-2 ring-secondary ring-offset-2 ring-offset-black scale-110 opacity-100 z-10"
-                : "opacity-40 hover:opacity-100 hover:scale-105 grayscale hover:grayscale-0"
-            )}
-          >
-            <img
-              src={img}
-              alt={`thumbnail ${idx + 1}`}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-            {/* Active Indicator Overlay */}
-            {currentImageIndex !== idx && (
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
-            )}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 const PortfolioItemCard = memo(function PortfolioItemCard({ item }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const maxLength = 150; // Character limit for truncation
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const maxLength = 150;
 
   const shouldTruncate = item.description.length > maxLength;
   const displayDescription =
@@ -292,132 +178,138 @@ const PortfolioItemCard = memo(function PortfolioItemCard({ item }) {
       ? item.description
       : `${item.description.substring(0, maxLength)}...`;
 
+  // Prepare items for MediaLightbox
+  const lightboxItems = item.images || [item.image];
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <div
-          dir="rtl"
-          className="flex gap-6 items-start py-8 border-b border-slate-200 dark:border-slate-700 last:border-0 group hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer p-4 -mx-4 transition-all duration-300"
-        >
-          {/* Image (Right) */}
-          <div className="w-28 h-28 sm:w-40 sm:h-40 shrink-0 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shadow-sm group-hover:shadow-md transition-all duration-300 relative">
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <span className="flex items-center gap-2 text-secondary-foreground font-bold text-sm bg-secondary hover:bg-secondary/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                <ExternalLinkIcon className="w-4 h-4" />
-                المزيد
+    <>
+      <div
+        dir="rtl"
+        className="flex gap-6 items-start py-8 border-b border-border last:border-0 group hover:bg-accent/50 cursor-pointer p-4 -mx-4 transition-all duration-300"
+        onClick={() => setLightboxOpen(true)}
+      >
+        {/* Image (Right) */}
+        <div className="w-28 h-28 sm:w-40 sm:h-40 shrink-0 rounded-xl overflow-hidden bg-muted shadow-sm group-hover:shadow-md transition-all duration-300 relative">
+          <img
+            src={item.image}
+            alt={item.title}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="flex items-center gap-2 text-secondary-foreground font-bold text-sm bg-secondary hover:bg-secondary/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+              <ExternalLinkIcon className="w-4 h-4" />
+              المزيد
+            </span>
+          </div>
+        </div>
+
+        {/* Content (Left) */}
+        <div className="flex-1 min-w-0 space-y-4">
+          {/* Header */}
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-between items-start">
+              <h3 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors duration-300">
+                {item.title}
+              </h3>
+              <span className="text-xs font-medium text-muted-foreground whitespace-nowrap mr-4 bg-muted px-2 py-1 rounded-full">
+                {item.date}
               </span>
+            </div>
+
+            {/* Badges Section */}
+            <div className="flex flex-wrap gap-2">
+              <Badge
+                variant="outline"
+                className="text-primary border-primary/20 bg-primary/5"
+              >
+                {item.category}
+              </Badge>
+              <Badge
+                variant="outline"
+                className="text-muted-foreground border-border"
+              >
+                {item.subCategory}
+              </Badge>
+              {item.skills.map((skill, i) => (
+                <Badge
+                  key={i}
+                  variant="secondary"
+                  className="text-xs bg-muted text-muted-foreground"
+                >
+                  {skill}
+                </Badge>
+              ))}
             </div>
           </div>
 
-          {/* Content (Left) */}
-          <div className="flex-1 min-w-0 space-y-4">
-            {/* Header */}
-            <div className="flex flex-col gap-2">
-              <div className="flex justify-between items-start">
-                <h3 className="font-bold text-xl text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">
-                  {item.title}
-                </h3>
-                <span className="text-xs font-medium text-slate-400 dark:text-slate-500 whitespace-nowrap mr-4 bg-slate-50 dark:bg-slate-900 px-2 py-1 rounded-full">
-                  {item.date}
-                </span>
-              </div>
+          {/* Description with Inline Read More */}
+          <div className="text-sm leading-7 text-muted-foreground">
+            {displayDescription}
+            {shouldTruncate && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsExpanded(!isExpanded);
+                }}
+                className="text-primary font-bold hover:underline mr-2 inline-flex items-center gap-1 group"
+              >
+                {isExpanded ? "عرض أقل" : "رؤية المزيد"}
+                <ChevronLeftIcon
+                  className={`w-4 h-4 transition-transform duration-300 ${
+                    isExpanded ? "rotate-90" : "group-hover:-translate-x-1"
+                  }`}
+                />
+              </button>
+            )}
+          </div>
 
-              {/* Badges Section */}
-              <div className="flex flex-wrap gap-2">
-                <Badge
-                  variant="outline"
-                  className="text-primary border-primary/20 bg-primary/5"
-                >
-                  {item.category}
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className="text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700"
-                >
-                  {item.subCategory}
-                </Badge>
-                {item.skills.map((skill, i) => (
-                  <Badge
-                    key={i}
-                    variant="secondary"
-                    className="text-xs bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
-                  >
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-
-            {/* Description with Inline Read More */}
-            <div className="text-sm leading-7 text-slate-600 dark:text-slate-300">
-              {displayDescription}
-              {shouldTruncate && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsExpanded(!isExpanded);
-                  }}
-                  className="text-primary font-bold hover:underline mr-2 inline-flex items-center gap-1 group"
-                >
-                  {isExpanded ? "عرض أقل" : "رؤية المزيد"}
-                  <ChevronLeftIcon
-                    className={`w-4 h-4 transition-transform duration-300 ${
-                      isExpanded ? "rotate-90" : "group-hover:-translate-x-1"
-                    }`}
-                  />
-                </button>
-              )}
-            </div>
-
-            {/* Distinct Rating & Review Section */}
-            <div className="bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/20 rounded-xl p-4 mt-2 transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20">
-              <div className="flex items-center gap-3 mb-3">
-                <Avatar className="w-10 h-10 border-2 border-white dark:border-slate-950 shadow-sm">
-                  <AvatarImage src={item.clientAvatar} alt={item.clientName} />
-                  <AvatarFallback>{item.clientName[0]}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm font-bold text-slate-900 dark:text-white leading-none mb-1">
-                    {item.clientName}
-                  </p>
-                  <div className="flex items-center gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <StarFilledIcon
-                        key={i}
-                        className={cn(
-                          "w-3 h-3",
-                          i < item.rating
-                            ? "text-amber-500"
-                            : "text-slate-300 dark:text-slate-700"
-                        )}
-                      />
-                    ))}
-                  </div>
+          {/* Distinct Rating & Review Section */}
+          <div className="bg-muted/30 border border-border rounded-xl p-4 mt-2 transition-colors hover:bg-muted/50">
+            <div className="flex items-center gap-3 mb-3">
+              <Avatar className="w-10 h-10 border-2 border-background shadow-sm">
+                <AvatarImage src={item.clientAvatar} alt={item.clientName} />
+                <AvatarFallback>{item.clientName[0]}</AvatarFallback>
+              </Avatar>
+              <div>
+                <p className="text-sm font-bold text-foreground leading-none mb-1">
+                  {item.clientName}
+                </p>
+                <div className="flex items-center gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <StarFilledIcon
+                      key={i}
+                      className={cn(
+                        "w-3 h-3",
+                        i < item.rating ? "text-amber-500" : "text-muted"
+                      )}
+                    />
+                  ))}
                 </div>
               </div>
+            </div>
 
-              <div className="relative pr-2">
-                <p className="text-sm text-slate-700 dark:text-slate-300 italic leading-relaxed">
-                  "{item.clientReview}"
-                </p>
-              </div>
+            <div className="relative pr-2">
+              <p className="text-sm text-muted-foreground italic leading-relaxed">
+                "{item.clientReview}"
+              </p>
             </div>
           </div>
         </div>
-      </DialogTrigger>
+      </div>
 
-      {/* Detailed Dialog Content */}
-      <DialogContent className="!max-w-screen !w-screen h-screen !p-0 m-0 border-0 rounded-none bg-black/85 backdrop-blur-xl shadow-none flex flex-col overflow-hidden focus:outline-none">
-        <PortfolioItemDialogContent item={item} />
-      </DialogContent>
-    </Dialog>
+      <MediaLightbox
+        items={lightboxItems.map((url) => ({
+          type: "image",
+          url,
+          title: item.title,
+        }))}
+        initialIndex={0}
+        open={lightboxOpen}
+        onOpenChange={setLightboxOpen}
+      />
+    </>
   );
 });
 
@@ -444,7 +336,7 @@ export default function TechnicianPortfolio() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-20" dir="rtl">
+    <div className="min-h-screen bg-background pb-20" dir="rtl">
       {/* --- New Hero Header Section --- */}
       <div className="relative bg-primary overflow-hidden">
         {/* Abstract Background Pattern */}
@@ -512,13 +404,11 @@ export default function TechnicianPortfolio() {
             <div className="relative">
               <div className="flex items-center gap-3 mb-4">
                 <QuoteIcon className="w-8 h-8 text-primary rotate-180" />
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-                  نبذة عني
-                </h2>
+                <h2 className="text-2xl font-bold text-foreground">نبذة عني</h2>
               </div>
 
               <div className="relative pr-6 border-r-4 border-primary pl-4 py-2">
-                <p className="text-lg leading-8 text-slate-700 dark:text-slate-300 font-medium transition-all duration-300">
+                <p className="text-lg leading-8 text-muted-foreground font-medium transition-all duration-300">
                   {isBioExpanded
                     ? TECHNICIAN_DATA.bio
                     : `${TECHNICIAN_DATA.bio.substring(0, 200)}...`}
@@ -526,7 +416,7 @@ export default function TechnicianPortfolio() {
 
                 <div className="mt-4 flex items-center gap-2">
                   <span className="w-8 h-[2px] bg-primary rounded-full"></span>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed">
                     أعمل بدقة عالية وألتزم بالمواعيد. هدفي هو تقديم خدمة ممتازة
                     تضمن راحة العميل وكفاءة الجهاز.
                     <button
@@ -549,7 +439,7 @@ export default function TechnicianPortfolio() {
 
             {/* 3. Skills Section - Enhanced */}
             <div className="space-y-8">
-              <h2 className="text-2xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+              <h2 className="text-2xl font-bold flex items-center gap-2 text-foreground">
                 <CheckCircledIcon className="w-6 h-6 text-primary" />
                 المهارات والتخصصات
               </h2>
@@ -558,9 +448,9 @@ export default function TechnicianPortfolio() {
                 {TECHNICIAN_DATA.skills.map((skill, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-primary/50 hover:text-primary hover:bg-primary/5 transition-all duration-300 cursor-default group"
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-card text-card-foreground hover:border-primary/50 hover:text-primary hover:bg-primary/5 transition-all duration-300 cursor-default group"
                   >
-                    <span className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors">
+                    <span className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors">
                       {SKILL_ICONS[skill] || <StarFilledIcon />}
                     </span>
                     <span className="font-medium text-sm">{skill}</span>
@@ -577,7 +467,7 @@ export default function TechnicianPortfolio() {
               </h2>
 
               <Tabs defaultValue="services" className="w-full">
-                <TabsList className="w-full justify-start h-12 bg-white dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800 mb-6">
+                <TabsList className="w-full justify-start h-12 bg-muted p-1 rounded-xl border border-border mb-6">
                   <TabsTrigger
                     value="services"
                     className="flex-1 h-full rounded-lg data-[state=active]:bg-primary/10 data-[state=active]:text-primary font-bold"
@@ -619,7 +509,7 @@ export default function TechnicianPortfolio() {
                     >
                       <ChevronLeftIcon className="w-5 h-5" />
                     </Button>
-                    <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                    <span className="text-sm font-medium text-muted-foreground">
                       صفحة {servicePage} من {totalServicePages}
                     </span>
                     <Button
@@ -667,7 +557,7 @@ export default function TechnicianPortfolio() {
                       <ChevronLeftIcon className="w-5 h-5" />
                     </Button>
 
-                    <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                    <span className="text-sm font-medium text-muted-foreground">
                       صفحة {projectPage} من {totalProjectPages}
                     </span>
                     <Button
@@ -693,25 +583,25 @@ export default function TechnicianPortfolio() {
           {/* --- Left Column: Stats Sidebar (lg:col-span-4) --- */}
           <div className="lg:col-span-4 space-y-6 order-1 lg:order-2">
             <Card className="border-0 shadow-sm sticky top-24">
-              <CardHeader className="bg-card dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+              <CardHeader className="bg-muted/50 border-b border-border">
                 <CardTitle className="text-lg">إحصائيات الفني</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
-                <div className="divide-y divide-slate-100 dark:divide-slate-800">
-                  <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                <div className="divide-y divide-border">
+                  <div className="p-4 flex items-center justify-between hover:bg-accent transition-colors">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
                         <StarFilledIcon className="w-5 h-5 text-amber-500" />
                       </div>
-                      <span className="text-sm font-medium text-slate-600 dark:text-slate-300">
+                      <span className="text-sm font-medium text-muted-foreground">
                         التقييم العام
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="font-bold text-slate-900 dark:text-white">
+                      <span className="font-bold text-foreground">
                         {TECHNICIAN_DATA.rating}
                       </span>
-                      <span className="text-xs text-slate-500">
+                      <span className="text-xs text-muted-foreground">
                         ({TECHNICIAN_DATA.reviewsCount})
                       </span>
                     </div>
@@ -733,8 +623,8 @@ export default function TechnicianPortfolio() {
                     label="معدل إكمال المهام"
                     value={TECHNICIAN_DATA.stats.completionRate}
                   />
-                  <div className="p-4 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/50">
-                    <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                  <div className="p-4 flex items-center justify-between bg-muted/30">
+                    <span className="text-sm font-medium text-muted-foreground">
                       حالة التوثيق
                     </span>
                     <Badge

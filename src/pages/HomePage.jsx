@@ -31,13 +31,13 @@ export default function HomePage() {
   return (
     <>
       <section className="relative w-full h-screen overflow-hidden -mt-16">
-        {/* صورة الخلفية مع Gradient Overlay محسّن */}
+        {/* Gradient Overlay  */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+          className="absolute inset-0 bg-background bg-cover bg-no-repeat z-0"
           style={{ backgroundImage: `url(${headerBg})` }}
         >
-          {/* Gradient overlay للتباين الأفضل */}
-          <div className="absolute inset-0 bg-gradient-to-l from-foreground/80 via-foreground/60 to-foreground/40"></div>
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-l from-background/90 via-background/70 to-background/40"></div>
         </div>
 
         {/* المحتوى الرئيسي */}
@@ -46,9 +46,9 @@ export default function HomePage() {
           dir="rtl"
         >
           {/* العنوان الرئيسي - محسّن */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-primary-foreground leading-[1.1] my-6 drop-shadow-2xl animate-slide-up">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1] my-6 drop-shadow-2xl animate-slide-up">
             كل{" "}
-            <span className="text-secondary drop-shadow-[0_0_30px_rgba(var(--secondary),0.5)]">
+            <span className="text-primary drop-shadow-[0_0_30px_rgba(var(--primary),0.5)]">
               خدماتك
             </span>
             <br />
@@ -56,7 +56,7 @@ export default function HomePage() {
           </h1>
 
           {/* الوصف - محسّن */}
-          <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed text-primary-foreground/90 mb-10 max-w-3xl drop-shadow-lg animate-slide-up animation-delay-100">
+          <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed text-muted-foreground mb-10 max-w-3xl drop-shadow-lg animate-slide-up animation-delay-100">
             من صيانة الأجهزة المنزلية إلى مشاريعك الكبيرة، نحن نوفر كل شيء في
             سرفانا
           </p>
@@ -65,7 +65,7 @@ export default function HomePage() {
           <div className="flex flex-wrap items-center gap-4 mb-6 animate-slide-up animation-delay-200">
             <Button
               size="lg"
-              className="h-14 px-8 text-base font-bold shadow-2xl hover:shadow-secondary/50 hover:scale-105 transition-all duration-300 gap-2"
+              className="h-14 px-8 text-base font-bold shadow-2xl hover:shadow-primary/50 hover:scale-105 transition-all duration-300 gap-2"
               asChild
             >
               <Link to="/services/book">
@@ -77,7 +77,7 @@ export default function HomePage() {
             <Button
               variant="outline"
               size="lg"
-              className="h-14 px-8 text-base font-bold bg-primary-foreground/10 backdrop-blur-sm border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:scale-105 transition-all duration-300 gap-2"
+              className="h-14 px-8 text-base font-bold bg-background/10 backdrop-blur-sm border-2 border-foreground/30 text-foreground hover:bg-background hover:text-primary hover:scale-105 transition-all duration-300 gap-2"
               asChild
             >
               <Link to="/projects-services">
@@ -88,10 +88,10 @@ export default function HomePage() {
           </div>
 
           {/* Trust Indicators - جديد */}
-          <div className="flex flex-wrap items-center gap-6 mb-6 text-primary-foreground/80 animate-fade-in animation-delay-300">
+          <div className="flex flex-wrap items-center gap-6 mb-6 text-muted-foreground animate-fade-in animation-delay-300">
             <div className="flex items-center gap-2">
               <svg
-                className="w-5 h-5 text-secondary"
+                className="w-5 h-5 text-primary"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -101,7 +101,7 @@ export default function HomePage() {
             </div>
             <div className="flex items-center gap-2">
               <svg
-                className="w-5 h-5 text-secondary"
+                className="w-5 h-5 text-primary"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -115,7 +115,7 @@ export default function HomePage() {
             </div>
             <div className="flex items-center gap-2">
               <svg
-                className="w-5 h-5 text-secondary"
+                className="w-5 h-5 text-primary"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -130,11 +130,11 @@ export default function HomePage() {
           </div>
 
           {/* دعوة للعمل (CTA) للفنيين - محسّنة */}
-          <p className="text-base font-medium text-primary-foreground/90 backdrop-blur-sm bg-primary-foreground/5 px-4 py-2 rounded-lg inline-block animate-fade-in animation-delay-400">
+          <p className="text-base font-medium text-muted-foreground backdrop-blur-sm bg-background/5 px-4 py-2 rounded-lg inline-block animate-fade-in animation-delay-400">
             هل أنت فني؟{" "}
             <Link
               to="/join-as-technician"
-              className="text-secondary font-bold underline underline-offset-4 hover:no-underline hover:text-secondary/80 transition-colors"
+              className="text-primary font-bold underline underline-offset-4 hover:no-underline hover:text-primary/80 transition-colors"
             >
               انضم إلينا الآن
             </Link>

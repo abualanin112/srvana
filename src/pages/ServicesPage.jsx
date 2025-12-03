@@ -147,7 +147,7 @@ const HighlightedText = ({ text, highlight }) => {
 // --- مكون بطاقة الخدمة (Redesigned - Overlay Style) ---
 const ServiceCard = ({ service, searchQuery }) => {
   return (
-    <Card className="group relative flex flex-col rounded-2xl border-0 bg-card shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden !p-0 !gap-4">
+    <Card className="group relative flex flex-col rounded-2xl border-0 bg-card shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden p-0! gap-4!">
       {/* Image Container - Taller & Overlay Content */}
       <div className="relative h-72 w-full shrink-0 bg-muted">
         <img
@@ -158,7 +158,7 @@ const ServiceCard = ({ service, searchQuery }) => {
         />
 
         {/* Strong Gradient Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent z-10" />
+        <div className="absolute inset-0 bg-linear-to-t from-primary/90 via-primary/40 to-transparent z-10" />
 
         {/* Overlay Content (Title, Desc, Rating) */}
         <div className="absolute bottom-0 left-0 right-0 p-5 z-20 flex flex-col justify-end h-full">
@@ -185,7 +185,7 @@ const ServiceCard = ({ service, searchQuery }) => {
       </div>
 
       {/* Content Container (Metadata & Actions) */}
-      <div className="flex flex-col flex-grow px-5 pt-5 pb-5">
+      <div className="flex flex-col grow px-5 pt-5 pb-5">
         {/* Metadata List (Sub-services - Styled as Badges) */}
         <div className="flex flex-wrap justify-start gap-2 mb-auto">
           {service.subServices.map((sub, idx) => (
@@ -241,7 +241,7 @@ const ServiceCard = ({ service, searchQuery }) => {
 // --- Custom Project Card (Special Card for Custom Services) ---
 const CustomProjectCard = () => {
   return (
-    <Card className="group relative flex flex-col rounded-2xl border-2 border-primary/10 bg-primary shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden !p-0 !gap-4">
+    <Card className="group relative flex flex-col rounded-2xl border-2 border-primary/10 bg-primary shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden p-0! gap-4!">
       {/* Image Container with Overlay */}
       <div className="relative h-72 w-full shrink-0 bg-muted">
         <img
@@ -252,13 +252,13 @@ const CustomProjectCard = () => {
         />
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/60 to-primary/10 z-10" />
+        <div className="absolute inset-0 bg-linear-to-t from-primary/95 via-primary/60 to-primary/10 z-10" />
 
         {/* Overlay Content */}
         <div className="absolute bottom-0 left-0 right-0 p-5 z-20 flex flex-col justify-end h-full">
           {/* Special Badge */}
           <div className="mb-3 inline-flex w-fit">
-            <Badge className="bg-white/90 !text-primary border-0 shadow-lg px-3 py-1.5 text-xs font-bold backdrop-blur-sm">
+            <Badge className="bg-background/90 text-primary! border-0 shadow-lg px-3 py-1.5 text-xs font-bold backdrop-blur-sm">
               ⭐ خدمة مميزة
             </Badge>
           </div>
@@ -281,14 +281,14 @@ const CustomProjectCard = () => {
         <div className="grid gap-3.5 mb-5">
           {/* Step 1 */}
           <div className="flex items-start gap-2.5">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/20 text-white font-bold text-xs border border-white/30">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-background/20 text-primary-foreground font-bold text-xs border border-background/30">
               1
             </div>
             <div>
-              <h4 className="font-semibold text-white text-xs mb-0.5">
+              <h4 className="font-semibold text-primary-foreground text-xs mb-0.5">
                 إرسال الطلب
               </h4>
-              <p className="text-[11px] text-white/80 leading-relaxed">
+              <p className="text-[11px] text-primary-foreground/80 leading-relaxed">
                 صف مشروعك بالتفصيل مع رفع الصور أو المخططات.
               </p>
             </div>
@@ -296,14 +296,14 @@ const CustomProjectCard = () => {
 
           {/* Step 2 */}
           <div className="flex items-start gap-2.5">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/20 text-white font-bold text-xs border border-white/30">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-background/20 text-primary-foreground font-bold text-xs border border-background/30">
               2
             </div>
             <div>
-              <h4 className="font-semibold text-white text-xs mb-0.5">
+              <h4 className="font-semibold text-primary-foreground text-xs mb-0.5">
                 استلام العروض
               </h4>
-              <p className="text-[11px] text-white/80 leading-relaxed">
+              <p className="text-[11px] text-primary-foreground/80 leading-relaxed">
                 استقبل عروض أسعار تنافسية من أفضل الفنيين لدينا.
               </p>
             </div>
@@ -311,14 +311,14 @@ const CustomProjectCard = () => {
 
           {/* Step 3 */}
           <div className="flex items-start gap-2.5">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/20 text-white font-bold text-xs border border-white/30">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-background/20 text-primary-foreground font-bold text-xs border border-background/30">
               3
             </div>
             <div>
-              <h4 className="font-semibold text-white text-xs mb-0.5">
+              <h4 className="font-semibold text-primary-foreground text-xs mb-0.5">
                 اختيار الفني
               </h4>
-              <p className="text-[11px] text-white/80 leading-relaxed">
+              <p className="text-[11px] text-primary-foreground/80 leading-relaxed">
                 قارن بين العروض والتقييمات لاختيار الفني الأنسب.
               </p>
             </div>
@@ -326,14 +326,14 @@ const CustomProjectCard = () => {
 
           {/* Step 4 */}
           <div className="flex items-start gap-2.5">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/20 text-white font-bold text-xs border border-white/30">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-background/20 text-primary-foreground font-bold text-xs border border-background/30">
               4
             </div>
             <div>
-              <h4 className="font-semibold text-white text-xs mb-0.5">
+              <h4 className="font-semibold text-primary-foreground text-xs mb-0.5">
                 إنجاز المشروع
               </h4>
-              <p className="text-[11px] text-white/80 leading-relaxed">
+              <p className="text-[11px] text-primary-foreground/80 leading-relaxed">
                 تابع سير العمل حتى إنجاز مشروعك بالكامل ورضاك التام.
               </p>
             </div>
@@ -341,13 +341,17 @@ const CustomProjectCard = () => {
         </div>
 
         {/* Divider */}
-        <div className="h-px w-full bg-white/20 mb-5" />
+        <div className="h-px w-full bg-background/20 mb-5" />
 
         {/* Footer Action & Price */}
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-sm text-white/80 font-medium">تبدأ من</span>
-            <span className="text-lg font-bold text-white">حسب الاتفاق</span>
+            <span className="text-sm text-primary-foreground/80 font-medium">
+              تبدأ من
+            </span>
+            <span className="text-lg font-bold text-primary-foreground">
+              حسب الاتفاق
+            </span>
           </div>
 
           <Link to="/projects-services">

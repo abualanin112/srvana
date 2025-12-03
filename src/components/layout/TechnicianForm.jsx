@@ -114,7 +114,7 @@ export default function TechnicianForm({ className, ...props }) {
           )}
           {...props}
         >
-          <Card className="shadow-lg border">
+          <Card className="shadow-lg border-border">
             <CardHeader className="text-center space-y-1 pt-6">
               <CardTitle className="text-2xl font-bold">
                 نموذج بيانات الفني
@@ -142,7 +142,7 @@ export default function TechnicianForm({ className, ...props }) {
                     })}
                   />
                   {errors.fullName && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-destructive text-sm">
                       {errors.fullName.message}
                     </p>
                   )}
@@ -173,7 +173,7 @@ export default function TechnicianForm({ className, ...props }) {
                     })}
                   />
                   {errors.nationalId && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-destructive text-sm">
                       {errors.nationalId.message}
                     </p>
                   )}
@@ -188,7 +188,7 @@ export default function TechnicianForm({ className, ...props }) {
                       control={control}
                       render={({ field }) => (
                         <Input
-                          className="bg-gray-100"
+                          className="bg-muted"
                           value={
                             field.value ? format(field.value, "dd/MM/yyyy") : ""
                           }
@@ -225,7 +225,7 @@ export default function TechnicianForm({ className, ...props }) {
                       )}
                     />
                     {errors.gender && (
-                      <p className="text-red-500 text-sm">
+                      <p className="text-destructive text-sm">
                         {errors.gender.message}
                       </p>
                     )}
@@ -259,17 +259,17 @@ export default function TechnicianForm({ className, ...props }) {
                         <div className="flex items-center justify-center w-full">
                           <Label
                             htmlFor="dropzone-file"
-                            className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+                            className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-lg cursor-pointer bg-muted/50 hover:bg-muted"
                           >
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                              <UploadIcon className="w-8 h-8 mb-4 text-gray-500" />
-                              <p className="mb-2 text-sm text-gray-500">
+                              <UploadIcon className="w-8 h-8 mb-4 text-muted-foreground" />
+                              <p className="mb-2 text-sm text-muted-foreground">
                                 <span className="font-semibold">
                                   انقر للرفع
                                 </span>{" "}
                                 أو اسحب وأفلت
                               </p>
-                              <p className="text-xs text-gray-500">
+                              <p className="text-xs text-muted-foreground">
                                 JPG, PNG, PDF
                               </p>
                             </div>
@@ -295,7 +295,7 @@ export default function TechnicianForm({ className, ...props }) {
                     )}
                   />
                   {errors.nationalIdImage && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-destructive text-sm">
                       {errors.nationalIdImage.message}
                     </p>
                   )}
@@ -343,7 +343,7 @@ export default function TechnicianForm({ className, ...props }) {
                     )}
                   />
                   {errors.workingDays && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-destructive text-sm">
                       {errors.workingDays.message}
                     </p>
                   )}
@@ -363,7 +363,7 @@ export default function TechnicianForm({ className, ...props }) {
                         })}
                       />
                       {errors.startTime && (
-                        <p className="text-red-500 text-sm">
+                        <p className="text-destructive text-sm">
                           {errors.startTime.message}
                         </p>
                       )}
@@ -378,7 +378,7 @@ export default function TechnicianForm({ className, ...props }) {
                         })}
                       />
                       {errors.endTime && (
-                        <p className="text-red-500 text-sm">
+                        <p className="text-destructive text-sm">
                           {errors.endTime.message}
                         </p>
                       )}

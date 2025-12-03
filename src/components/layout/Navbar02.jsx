@@ -336,7 +336,7 @@ export const Navbar02 = React.forwardRef(
                 {logo ? (
                   <div className="select-none">{logo}</div>
                 ) : (
-                  <CustomLogo className="w-30 h-auto select-none text-[#0f2a71] dark:text-[#f5f6f8]" />
+                  <CustomLogo className="w-30 h-auto select-none text-primary " />
                 )}
               </Link>
 

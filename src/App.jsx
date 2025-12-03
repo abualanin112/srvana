@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "@/components/layout/MainLayout";
 import AuthLayout from "@/components/layout/AuthLayout";
 import { Spinner } from "@/components/ui/spinner";
+import { Toaster } from "sonner";
 
 // Lazy load pages
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -19,6 +20,7 @@ const OrderTracking = lazy(() => import("./pages/OrderTracking"));
 const ServiceCompletionPage = lazy(() =>
   import("./pages/ServiceCompletionPage")
 );
+
 const TechnicianForm = lazy(() => import("@/components/layout/TechnicianForm"));
 const TechnicianSkillsForm = lazy(() =>
   import("@/components/layout/TechnicianSkillsForm")
@@ -53,6 +55,15 @@ const TechnicianPortfolio = lazy(() =>
 const OpenProjectsPage = lazy(() =>
   import("./pages/technician/OpenProjectsPage")
 );
+const ProjectProposalPage = lazy(() =>
+  import("./pages/technician/ProjectProposalPage")
+);
+const TechnicianProjectExecution = lazy(() =>
+  import("./pages/technician/TechnicianProjectExecution")
+);
+const TechnicianProjectTracking = lazy(() =>
+  import("./pages/technician/TechnicianProjectTracking")
+);
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(
@@ -70,105 +81,120 @@ export default function App() {
   }, [darkMode]);
 
   return (
-    <BrowserRouter>
-      <Suspense
-        fallback={
-          <div className="flex h-screen w-full items-center justify-center">
-            <Spinner className="size-10" />
-          </div>
-        }
-      >
-        <Routes>
-          {/*MainLayout*/}
-          <Route
-            element={
-              <MainLayout darkMode={darkMode} setDarkMode={setDarkMode} />
-            }
-          >
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServicesPage />} />
+    <>
+      <BrowserRouter>
+        <Suspense
+          fallback={
+            <div className="flex h-screen w-full items-center justify-center">
+              <Spinner className="size-10" />
+            </div>
+          }
+        >
+          <Routes>
+            {/*MainLayout*/}
             <Route
-              path="/projects-services"
-              element={<ProjectSubmissionPage />}
-            />
-            <Route path="/project/review" element={<ProjectReviewPage />} />
-            <Route path="/project/summary" element={<ProjectSummaryPage />} />
-            <Route path="/project/offers" element={<ProjectOffersPage />} />
-            <Route path="/project/chat" element={<ProjectChatPage />} />
-            <Route
-              path="/project/processing"
-              element={<ProjectProcessingPage />}
-            />
-            <Route path="/service/request" element={<FastServiceStep1 />} />
-            <Route
-              path="/service/select-technician"
-              element={<FastServiceStep2 />}
-            />
-            <Route path="/service/payment" element={<FastServiceStep3 />} />
-            <Route path="/service/tracking" element={<OrderTracking />} />
-            <Route path="/order/tracking" element={<OrderTracking />} />
-            <Route path="/service/rating" element={<ServiceRating />} />
-            <Route
-              path="/service/completion"
-              element={<ServiceCompletionPage />}
-            />
-            <Route path="/about" element={<About />} />
-            <Route
-              path="/technician/portfolio"
-              element={<TechnicianPortfolio />}
-            />
-            <Route path="/contact" element={<Contact />} />
-            <Route
-              path="/technician/incoming-request"
-              element={<TechnicianIncomingRequest />}
-            />
-            <Route
-              path="/technician/reject-reason"
-              element={<TechnicianRejectionReason />}
-            />
-            <Route
-              path="/technician/task-tracking"
-              element={<TechnicianTaskTracking />}
-            />
-            <Route
-              path="/technician/payment-confirmation"
-              element={<TechnicianPaymentConfirmation />}
-            />
-            <Route path="/projects/open" element={<OpenProjectsPage />} />
-          </Route>
+              element={
+                <MainLayout darkMode={darkMode} setDarkMode={setDarkMode} />
+              }
+            >
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route
+                path="/projects-services"
+                element={<ProjectSubmissionPage />}
+              />
+              <Route path="/project/review" element={<ProjectReviewPage />} />
+              <Route path="/project/summary" element={<ProjectSummaryPage />} />
+              <Route path="/project/offers" element={<ProjectOffersPage />} />
+              <Route path="/project/chat" element={<ProjectChatPage />} />
+              <Route
+                path="/project/processing"
+                element={<ProjectProcessingPage />}
+              />
+              <Route path="/service/request" element={<FastServiceStep1 />} />
+              <Route
+                path="/service/select-technician"
+                element={<FastServiceStep2 />}
+              />
+              <Route path="/service/payment" element={<FastServiceStep3 />} />
+              <Route path="/service/tracking" element={<OrderTracking />} />
+              <Route path="/order/tracking" element={<OrderTracking />} />
+              <Route path="/service/rating" element={<ServiceRating />} />
+              <Route
+                path="/service/completion"
+                element={<ServiceCompletionPage />}
+              />
+              <Route path="/about" element={<About />} />
+              <Route
+                path="/technician/portfolio"
+                element={<TechnicianPortfolio />}
+              />
+              <Route path="/contact" element={<Contact />} />
+              <Route
+                path="/technician/incoming-request"
+                element={<TechnicianIncomingRequest />}
+              />
+              <Route
+                path="/technician/reject-reason"
+                element={<TechnicianRejectionReason />}
+              />
+              <Route
+                path="/technician/task-tracking"
+                element={<TechnicianTaskTracking />}
+              />
+              <Route
+                path="/technician/payment-confirmation"
+                element={<TechnicianPaymentConfirmation />}
+              />
+              <Route path="/projects/open" element={<OpenProjectsPage />} />
+              <Route
+                path="/projects/proposal"
+                element={<ProjectProposalPage />}
+              />
+              <Route
+                path="/technician/project-execution"
+                element={<TechnicianProjectExecution />}
+              />
+              <Route
+                path="/technician/project-tracking"
+                element={<TechnicianProjectTracking />}
+              />
+            </Route>
 
-          {/* AuthLayout */}
-          <Route element={<AuthLayout />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/TechnicianForm" element={<TechnicianForm />} />
-            <Route
-              path="/TechnicianSkillsForm"
-              element={<TechnicianSkillsForm />}
-            />
-            {/* reset-password */}
-            <Route
-              path="/technician/incoming-request"
-              element={<TechnicianIncomingRequest />}
-            />
-            <Route
-              path="/technician/reject-reason"
-              element={<TechnicianRejectionReason />}
-            />
-            <Route
-              path="/technician/task-tracking"
-              element={<TechnicianTaskTracking />}
-            />
-            <Route
-              path="/technician/payment-confirmation"
-              element={<TechnicianPaymentConfirmation />}
-            />
-          </Route>
+            {/* AuthLayout */}
+            <Route element={<AuthLayout />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/TechnicianForm" element={<TechnicianForm />} />
+              <Route
+                path="/TechnicianSkillsForm"
+                element={<TechnicianSkillsForm />}
+              />
+              {/* reset-password */}
+              <Route
+                path="/technician/incoming-request"
+                element={<TechnicianIncomingRequest />}
+              />
+              <Route
+                path="/technician/reject-reason"
+                element={<TechnicianRejectionReason />}
+              />
+              <Route
+                path="/technician/task-tracking"
+                element={<TechnicianTaskTracking />}
+              />
+              <Route
+                path="/technician/payment-confirmation"
+                element={<TechnicianPaymentConfirmation />}
+              />
+            </Route>
 
-          {/*  404  */}
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+            {/*  404  */}
+            {/* <Route path="*" element={<NotFoundPage />} /> */}
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+      <Toaster />
+    </>
   );
 }

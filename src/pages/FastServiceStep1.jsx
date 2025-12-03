@@ -130,12 +130,9 @@ export default function FastServiceStep1() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900"
-      dir="rtl"
-    >
+    <div className="min-h-screen bg-background" dir="rtl">
       {/* Steps Header - Sticky */}
-      <div className="sticky top-0 z-50 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-md transition-all duration-300">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border shadow-md transition-all duration-300">
         <StepsIndicator
           steps={[
             { label: "تفاصيل الخدمة", status: "active" },
@@ -149,10 +146,10 @@ export default function FastServiceStep1() {
       <div className="container max-w-5xl mx-auto px-4 pb-20 pt-12">
         {/* Page Header */}
         <div className="mb-12 text-center space-y-4 animate-in fade-in slide-in-from-top-4 duration-700">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight">
             تفاصيل الخدمة
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             يرجى إدخال بيانات طلبك بدقة ليتم اختيار أفضل فني للمهمة
           </p>
         </div>
@@ -162,11 +159,11 @@ export default function FastServiceStep1() {
           {/* 1. Category Selection */}
           <Card
             className={cn(
-              "border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300",
+              "border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300",
               errors.mainCategory && "ring-2 ring-red-500"
             )}
           >
-            <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 p-6 md:p-8">
+            <CardHeader className="bg-muted/50 border-b border-border p-6 md:p-8">
               <CardTitle className="text-2xl font-bold text-primary">
                 الفئة الأساسية
               </CardTitle>
@@ -179,7 +176,7 @@ export default function FastServiceStep1() {
                 <div className="space-y-3">
                   <Label
                     htmlFor="mainCategory"
-                    className="text-base font-semibold text-slate-700 dark:text-slate-300"
+                    className="text-base font-semibold text-foreground"
                   >
                     الفئة الأساسية <span className="text-red-500">*</span>
                   </Label>
@@ -191,7 +188,7 @@ export default function FastServiceStep1() {
                     <SelectTrigger
                       id="mainCategory"
                       className={cn(
-                        "h-12 text-right bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl transition-all",
+                        "h-12 text-right bg-muted/50 border-border focus:ring-2 focus:ring-primary/20 rounded-xl transition-all",
                         errors.mainCategory && "border-red-500"
                       )}
                     >
@@ -221,7 +218,7 @@ export default function FastServiceStep1() {
                   <div className="space-y-3 animate-in fade-in slide-in-from-top-4 duration-500">
                     <Label
                       htmlFor="subCategory"
-                      className="text-base font-semibold text-slate-700 dark:text-slate-300"
+                      className="text-base font-semibold text-foreground"
                     >
                       الفئة الفرعية <span className="text-red-500">*</span>
                     </Label>
@@ -233,7 +230,7 @@ export default function FastServiceStep1() {
                       <SelectTrigger
                         id="subCategory"
                         className={cn(
-                          "h-12 text-right bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl transition-all",
+                          "h-12 text-right bg-muted/50 border-border focus:ring-2 focus:ring-primary/20 rounded-xl transition-all",
                           errors.subCategory && "border-red-500"
                         )}
                       >
@@ -271,7 +268,7 @@ export default function FastServiceStep1() {
                 <div className="space-y-3 animate-in fade-in slide-in-from-top-4 duration-500 pt-2">
                   <Label
                     htmlFor="customSubCategory"
-                    className="text-base font-semibold text-slate-700 dark:text-slate-300"
+                    className="text-base font-semibold text-foreground"
                   >
                     حدد الخدمة المطلوبة <span className="text-red-500">*</span>
                   </Label>
@@ -291,7 +288,7 @@ export default function FastServiceStep1() {
                     }}
                     placeholder="اكتب الخدمة المطلوبة هنا..."
                     className={cn(
-                      "h-12 text-right bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl transition-all",
+                      "h-12 text-right bg-muted/50 border-border focus:ring-2 focus:ring-primary/20 rounded-xl transition-all",
                       errors.customSubCategory && "border-red-500"
                     )}
                     dir="rtl"
@@ -307,8 +304,8 @@ export default function FastServiceStep1() {
           </Card>
 
           {/* 2. Description */}
-          <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300">
-            <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 p-6 md:p-8">
+          <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300">
+            <CardHeader className="bg-muted/50 border-b border-border p-6 md:p-8">
               <CardTitle className="text-2xl font-bold text-primary">
                 وصف المشكلة
               </CardTitle>
@@ -326,15 +323,15 @@ export default function FastServiceStep1() {
                   }))
                 }
                 placeholder="مثال: المكيف لا يبرد بشكل جيد، ويصدر صوتاً غريباً عند التشغيل..."
-                className="min-h-[120px] text-base bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl transition-all resize-none p-4 leading-relaxed"
+                className="min-h-[120px] text-base bg-muted/50 border-border focus:ring-2 focus:ring-primary/20 rounded-xl transition-all resize-none p-4 leading-relaxed"
                 dir="rtl"
               />
             </CardContent>
           </Card>
 
           {/* 3. File Upload */}
-          <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300">
-            <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 p-6 md:p-8">
+          <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300">
+            <CardHeader className="bg-muted/50 border-b border-border p-6 md:p-8">
               <CardTitle className="text-2xl font-bold text-primary">
                 مرفقات (صور/فيديو)
               </CardTitle>
@@ -354,8 +351,8 @@ export default function FastServiceStep1() {
           </Card>
 
           {/* 4. Location */}
-          <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300">
-            <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 p-6 md:p-8">
+          <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300">
+            <CardHeader className="bg-muted/50 border-b border-border p-6 md:p-8">
               <CardTitle className="text-2xl font-bold text-primary">
                 موقع الخدمة
               </CardTitle>
@@ -380,11 +377,11 @@ export default function FastServiceStep1() {
           {/* 5. Schedule */}
           <Card
             className={cn(
-              "border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300",
+              "border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden transition-all duration-300",
               (errors.date || errors.time) && "ring-2 ring-red-500"
             )}
           >
-            <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 p-6 md:p-8">
+            <CardHeader className="bg-muted/50 border-b border-border p-6 md:p-8">
               <CardTitle className="text-2xl font-bold text-primary">
                 توقيت الخدمة
               </CardTitle>
@@ -408,10 +405,10 @@ export default function FastServiceStep1() {
               >
                 <div
                   className={cn(
-                    "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800",
+                    "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-muted",
                     formData.schedule === "now"
                       ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
-                      : "border-slate-200 dark:border-slate-800"
+                      : "border-border"
                   )}
                   onClick={() =>
                     setFormData((prev) => ({
@@ -426,11 +423,11 @@ export default function FastServiceStep1() {
                   <div className="flex flex-col">
                     <Label
                       htmlFor="now"
-                      className="font-bold text-lg cursor-pointer text-slate-900 dark:text-slate-100"
+                      className="font-bold text-lg cursor-pointer text-foreground"
                     >
                       الآن (مستعجل)
                     </Label>
-                    <span className="text-sm text-slate-500 dark:text-slate-400">
+                    <span className="text-sm text-muted-foreground">
                       أقرب وقت ممكن
                     </span>
                   </div>
@@ -438,10 +435,10 @@ export default function FastServiceStep1() {
 
                 <div
                   className={cn(
-                    "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800",
+                    "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-muted",
                     formData.schedule === "scheduled"
                       ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
-                      : "border-slate-200 dark:border-slate-800"
+                      : "border-border"
                   )}
                   onClick={() =>
                     setFormData((prev) => ({ ...prev, schedule: "scheduled" }))
@@ -455,11 +452,11 @@ export default function FastServiceStep1() {
                   <div className="flex flex-col">
                     <Label
                       htmlFor="scheduled"
-                      className="font-bold text-lg cursor-pointer text-slate-900 dark:text-slate-100"
+                      className="font-bold text-lg cursor-pointer text-foreground"
                     >
                       مجدول
                     </Label>
-                    <span className="text-sm text-slate-500 dark:text-slate-400">
+                    <span className="text-sm text-muted-foreground">
                       اختر تاريخ ووقت محدد
                     </span>
                   </div>
@@ -468,10 +465,10 @@ export default function FastServiceStep1() {
 
               {/* Date & Time Pickers */}
               {formData.schedule === "scheduled" && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-top-4 duration-500 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-top-4 duration-500 pt-4 border-t border-border">
                   {/* Date Picker */}
                   <div className="space-y-3">
-                    <Label className="text-base font-semibold text-slate-700 dark:text-slate-300">
+                    <Label className="text-base font-semibold text-foreground">
                       التاريخ <span className="text-red-500">*</span>
                     </Label>
                     <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
@@ -479,7 +476,7 @@ export default function FastServiceStep1() {
                         <Button
                           variant="outline"
                           className={cn(
-                            "w-full h-12 justify-between text-right font-normal bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl",
+                            "w-full h-12 justify-between text-right font-normal bg-muted/50 border-border hover:bg-muted rounded-xl",
                             !formData.date && "text-muted-foreground",
                             errors.date && "border-red-500"
                           )}
@@ -527,7 +524,7 @@ export default function FastServiceStep1() {
                   <div className="space-y-3">
                     <Label
                       htmlFor="time"
-                      className="text-base font-semibold text-slate-700 dark:text-slate-300"
+                      className="text-base font-semibold text-foreground"
                     >
                       الوقت <span className="text-red-500">*</span>
                     </Label>
@@ -544,7 +541,7 @@ export default function FastServiceStep1() {
                           setErrors((prev) => ({ ...prev, time: null }));
                       }}
                       className={cn(
-                        "h-12 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20 rounded-xl",
+                        "h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary/20 rounded-xl",
                         errors.time && "border-red-500"
                       )}
                     />
@@ -558,10 +555,10 @@ export default function FastServiceStep1() {
           </Card>
 
           {/* Navigation Buttons */}
-          <div className="flex flex-col-reverse md:flex-row gap-4 justify-end mt-12 pt-6 border-t border-slate-200/50 dark:border-slate-800/50">
+          <div className="flex flex-col-reverse md:flex-row gap-4 justify-end mt-12 pt-6 border-t border-border">
             <Button
               variant="outline"
-              className="w-full md:w-auto min-w-[160px] h-14 text-lg font-medium gap-2 rounded-xl border-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+              className="w-full md:w-auto min-w-[160px] h-14 text-lg font-medium gap-2 rounded-xl border-2 hover:bg-muted transition-all"
               onClick={() => navigate(-1)}
             >
               <ArrowRightIcon className="w-5 h-5" />

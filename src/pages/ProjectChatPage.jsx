@@ -10,21 +10,18 @@ import {
   SewingPinFilledIcon,
   FileIcon,
   ExternalLinkIcon,
+  Pencil1Icon,
+  Cross1Icon,
 } from "@radix-ui/react-icons";
-import { Trash2, Ban, Flag, Paperclip } from "lucide-react";
+import { Trash2, Ban, Flag, Paperclip, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+
 import {
   SidebarProvider,
   SidebarTrigger,
@@ -38,6 +35,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetFooter,
+  SheetClose,
+} from "@/components/ui/sheet";
 import { getChatDetails, addMessageToChat } from "../data/mock-chat-data";
 
 export default function ProjectChatPage() {
@@ -74,24 +80,117 @@ export default function ProjectChatPage() {
   const scrollAreaRef = useRef(null);
   const fileInputRef = useRef(null);
 
+  // New State for Edit Flow
+  const [userRole, setUserRole] = useState("technician"); // 'client' | 'technician'
+  const [isEditing, setIsEditing] = useState(false);
+  const [editForm, setEditForm] = useState(null);
+
+  // Initialize edit form when offer data changes
+  useEffect(() => {
+    if (offerData) {
+      setEditForm({
+        price: offerData.price,
+        duration: offerData.duration,
+        description: offerData.description,
+        answers: offerData.answers || [],
+      });
+    }
+  }, [offerData]);
+
+  const handleSaveOffer = () => {
+    if (!editForm) return;
+
+    const updates = {};
+    let hasChanges = false;
+    const changesList = [];
+
+    // Check Price
+    if (editForm.price !== offerData.price) {
+      updates.price = editForm.price;
+      updates.originalPrice = offerData.originalPrice || offerData.price;
+      hasChanges = true;
+      changesList.push("قيمة العرض");
+    }
+
+    // Check Duration
+    if (editForm.duration !== offerData.duration) {
+      updates.duration = editForm.duration;
+      updates.originalDuration =
+        offerData.originalDuration || offerData.duration;
+      hasChanges = true;
+      changesList.push("مدة التنفيذ");
+    }
+
+    // Check Description
+    if (editForm.description !== offerData.description) {
+      updates.description = editForm.description;
+      hasChanges = true;
+      if (!changesList.includes("تفاصيل العرض"))
+        changesList.push("تفاصيل العرض");
+    }
+
+    // Check Answers
+    const answersChanged =
+      JSON.stringify(editForm.answers) !== JSON.stringify(offerData.answers);
+    if (answersChanged) {
+      updates.answers = editForm.answers;
+      hasChanges = true;
+      if (!changesList.includes("إجابات الأسئلة"))
+        changesList.push("إجابات الأسئلة");
+    }
+
+    if (hasChanges) {
+      const newOfferData = { ...offerData, ...updates, status: "updated" };
+      setOfferData(newOfferData);
+      setIsEditing(false);
+
+      // Add System Message
+      const systemMsg = {
+        id: Date.now(),
+        sender: "system",
+        type: "text",
+        content: `تم تعديل ${changesList.join(" و ")} بنجاح.`,
+        time: new Date().toLocaleTimeString("ar-EG", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+      setMessages((prev) => [...prev, systemMsg]);
+    } else {
+      setIsEditing(false);
+    }
+  };
+
   // Update data when selected chat changes
   useEffect(() => {
     if (selectedChat?.id) {
-      // If we switched chats, we might want to load that chat's specific details
-      // But if we are in the context of a specific project (passed via state),
-      // we should probably keep the project details consistent.
-      // For now, let's just load messages from mock DB.
       const details = getChatDetails(selectedChat.id);
       setMessages(details.messages);
 
-      // Only update project/offer from mock if we DON'T have passed state
-      // OR if the chat ID changed significantly (logic can be refined).
-      // For this demo, if we have location.state.projectData, we keep it.
-      if (!location.state?.projectData) {
+      // Handle Project Data
+      // Use state only if it matches the current context (initial load)
+      // Otherwise fallback to DB
+      if (
+        location.state?.projectData &&
+        location.state?.selectedOffer?.id === selectedChat.id
+      ) {
+        setProjectData(location.state.projectData);
+      } else {
         setProjectData(details.project);
       }
 
-      if (!location.state?.selectedOffer) {
+      // Handle Offer Data
+      // Merge DB answers if missing from state
+      if (
+        location.state?.selectedOffer &&
+        location.state?.selectedOffer?.id === selectedChat.id
+      ) {
+        setOfferData({
+          ...location.state.selectedOffer,
+          answers:
+            location.state.selectedOffer.answers || details.offer.answers || [],
+        });
+      } else {
         setOfferData(details.offer);
       }
     }
@@ -204,7 +303,7 @@ export default function ProjectChatPage() {
         "--sidebar-width-icon": "3rem",
         height: "calc(100vh - 4rem)",
       }}
-      className="min-h-0! w-full bg-slate-50 dark:bg-slate-950 overflow-hidden"
+      className="min-h-0! w-full bg-background overflow-hidden"
       dir="rtl"
     >
       {/* Chat Sidebar */}
@@ -217,14 +316,14 @@ export default function ProjectChatPage() {
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col h-full min-h-0 relative overflow-hidden pt-0!">
           {/* Chat Header */}
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-white dark:bg-slate-900 px-4 shadow-sm z-10">
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-card px-4 shadow-sm z-10">
             <div className="flex items-center gap-2">
               <SidebarTrigger className="-mr-1 " />
               <Separator orientation="vertical" className="mr-2 h-4" />
             </div>
 
             <div className="flex items-center gap-3 mr-2">
-              <Avatar className="h-10 w-10 border-2 border-slate-100 dark:border-slate-800">
+              <Avatar className="h-10 w-10 border-2 border-border">
                 <AvatarImage src={selectedChat.avatar} />
                 <AvatarFallback>{selectedChat.name.charAt(0)}</AvatarFallback>
               </Avatar>
@@ -248,6 +347,325 @@ export default function ProjectChatPage() {
             </div>
 
             <div className="mr-auto flex items-center gap-2">
+              {/* Offer Details Sheet Trigger */}
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="hidden md:flex gap-2 bg-card hover:bg-muted border-primary/20 text-primary"
+                  >
+                    <FileIcon className="w-4 h-4" />
+                    تفاصيل العرض
+                  </Button>
+                </SheetTrigger>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden text-primary"
+                  >
+                    <FileIcon className="w-5 h-5" />
+                  </Button>
+                </SheetTrigger>
+
+                <SheetContent
+                  side="left"
+                  className="w-full sm:w-[400px] p-0 flex flex-col h-full bg-card border-r border-border"
+                >
+                  <SheetHeader className="p-6 border-b border-border text-right space-y-1 shrink-0">
+                    <SheetTitle className="text-xl font-bold text-foreground flex items-center gap-2">
+                      <FileIcon className="w-5 h-5 text-primary" />
+                      تفاصيل العرض والمشروع
+                    </SheetTitle>
+                    <div className="flex items-center justify-between gap-2 pt-2">
+                      <Badge
+                        variant={
+                          projectData.status === "open"
+                            ? "outline"
+                            : "secondary"
+                        }
+                        className="text-xs"
+                      >
+                        {projectData.status === "open" ? "مفتوح" : "مغلق"}
+                      </Badge>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 text-xs text-muted-foreground hover:text-primary p-0"
+                        onClick={() =>
+                          window.open("/project/summary", "_blank")
+                        }
+                      >
+                        عرض المشروع كامل{" "}
+                        <ExternalLinkIcon className="w-3 h-3 mr-1" />
+                      </Button>
+                    </div>
+                  </SheetHeader>
+
+                  <ScrollArea className="flex-1 min-h-0" dir="rtl">
+                    <div className="p-6 space-y-6">
+                      {/* Project Info */}
+                      <div className="space-y-3">
+                        <h4 className="text-sm font-bold text-foreground border-r-4 border-primary pr-2">
+                          معلومات المشروع
+                        </h4>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="bg-muted/50 p-3 rounded-xl border border-border">
+                            <span className="text-[10px] text-muted-foreground flex items-center gap-1 mb-1">
+                              <TargetIcon className="w-3 h-3" /> الميزانية
+                            </span>
+                            <p className="text-sm font-bold text-foreground">
+                              {parseInt(projectData.budget).toLocaleString()}{" "}
+                              ر.س
+                            </p>
+                          </div>
+                          <div className="bg-muted/50 p-3 rounded-xl border border-border">
+                            <span className="text-[10px] text-muted-foreground flex items-center gap-1 mb-1">
+                              <ClockIcon className="w-3 h-3" /> المدة
+                            </span>
+                            <p className="text-sm font-bold text-foreground">
+                              {projectData.duration} أيام
+                            </p>
+                          </div>
+                          <div className="col-span-2 bg-muted/50 p-3 rounded-xl border border-border flex items-center gap-2">
+                            <SewingPinFilledIcon className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                            <p className="text-xs font-medium text-foreground">
+                              {projectData.location.address}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <Separator className="bg-border" />
+
+                      {/* Offer Info */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-sm font-bold text-foreground border-r-4 border-primary pr-2">
+                            العرض المقدم
+                          </h4>
+                          <div className="flex items-center gap-2">
+                            <Badge
+                              variant="secondary"
+                              className={`text-[10px] h-5 border ${
+                                offerData.status === "updated"
+                                  ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400 border-green-100 dark:border-green-900"
+                                  : "bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400 border-blue-100 dark:border-blue-900"
+                              }`}
+                            >
+                              {offerData.status === "updated" ? "محدث" : "أولي"}
+                            </Badge>
+                          </div>
+                        </div>
+
+                        {/* Price & Duration */}
+                        <div className="grid grid-cols-2 gap-3">
+                          {/* Price */}
+                          <div className="space-y-1.5">
+                            <span className="text-[10px] text-muted-foreground block">
+                              قيمة العرض
+                            </span>
+                            {isEditing ? (
+                              <Input
+                                type="number"
+                                value={editForm?.price || ""}
+                                onChange={(e) =>
+                                  setEditForm({
+                                    ...editForm,
+                                    price: e.target.value,
+                                  })
+                                }
+                                className="h-9 text-center font-bold"
+                              />
+                            ) : offerData.status === "updated" ? (
+                              <div className="bg-green-50/50 dark:bg-green-900/10 p-2.5 rounded-xl border border-green-100 dark:border-green-900/30 text-center">
+                                <span className="block text-sm font-bold text-green-600 dark:text-green-500">
+                                  {parseInt(offerData.price).toLocaleString()}
+                                </span>
+                                <span className="text-[10px] text-muted-foreground line-through opacity-70">
+                                  {parseInt(
+                                    offerData.originalPrice || offerData.price
+                                  ).toLocaleString()}
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="bg-muted/50 p-2.5 rounded-xl border border-border text-center">
+                                <span className="block text-lg font-bold text-foreground">
+                                  {parseInt(offerData.price).toLocaleString()}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Duration */}
+                          <div className="space-y-1.5">
+                            <span className="text-[10px] text-muted-foreground block">
+                              مدة التنفيذ
+                            </span>
+                            {isEditing ? (
+                              <Input
+                                type="number"
+                                value={editForm?.duration || ""}
+                                onChange={(e) =>
+                                  setEditForm({
+                                    ...editForm,
+                                    duration: e.target.value,
+                                  })
+                                }
+                                className="h-9 text-center font-bold"
+                              />
+                            ) : offerData.status === "updated" ? (
+                              <div className="bg-muted/50 p-2.5 rounded-xl border border-border text-center">
+                                <span className="block text-sm font-bold text-foreground">
+                                  {offerData.duration} أيام
+                                </span>
+                                <span className="text-[10px] text-muted-foreground line-through opacity-70">
+                                  {offerData.originalDuration ||
+                                    offerData.duration}{" "}
+                                  أيام
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="bg-muted/50 p-2.5 rounded-xl border border-border text-center">
+                                <span className="block text-lg font-bold text-foreground">
+                                  {offerData.duration} أيام
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Proposal Details (Text) */}
+                        <div className="space-y-2">
+                          <span className="text-xs font-medium text-muted-foreground block">
+                            تفاصيل العرض النصي
+                          </span>
+                          {isEditing ? (
+                            <Textarea
+                              value={editForm?.description || ""}
+                              onChange={(e) =>
+                                setEditForm({
+                                  ...editForm,
+                                  description: e.target.value,
+                                })
+                              }
+                              className="min-h-[100px] text-sm leading-relaxed"
+                            />
+                          ) : (
+                            <div className="bg-muted/30 p-3 rounded-xl border border-border">
+                              <p className="text-sm text-foreground leading-relaxed whitespace-pre-line">
+                                {offerData.description}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Q&A Section */}
+                      {(offerData.answers?.length > 0 || isEditing) && (
+                        <>
+                          <Separator className="bg-border" />
+                          <div className="space-y-3">
+                            <h4 className="text-sm font-bold text-foreground border-r-4 border-primary pr-2">
+                              أسئلة العميل وإجابات الفني
+                            </h4>
+                            <div className="space-y-3">
+                              {(isEditing
+                                ? editForm?.answers
+                                : offerData.answers
+                              )?.map((qa, idx) => (
+                                <div
+                                  key={idx}
+                                  className="bg-muted/30 p-3 rounded-xl border border-border space-y-2"
+                                >
+                                  <div className="flex gap-2 items-start">
+                                    <span className="text-primary font-bold text-xs shrink-0 mt-0.5">
+                                      س:
+                                    </span>
+                                    <p className="text-xs font-medium text-foreground">
+                                      {qa.question}
+                                    </p>
+                                  </div>
+                                  <div className="flex gap-2 items-start w-full">
+                                    <span className="text-green-600 font-bold text-xs shrink-0 mt-2.5">
+                                      ج:
+                                    </span>
+                                    {isEditing ? (
+                                      <Textarea
+                                        value={qa.answer}
+                                        onChange={(e) => {
+                                          const newAnswers = [
+                                            ...editForm.answers,
+                                          ];
+                                          newAnswers[idx] = {
+                                            ...newAnswers[idx],
+                                            answer: e.target.value,
+                                          };
+                                          setEditForm({
+                                            ...editForm,
+                                            answers: newAnswers,
+                                          });
+                                        }}
+                                        className="text-xs min-h-[60px]"
+                                      />
+                                    ) : (
+                                      <p className="text-xs text-muted-foreground mt-0.5">
+                                        {qa.answer}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </ScrollArea>
+
+                  <SheetFooter className="p-4 border-t border-border bg-card mt-auto shrink-0">
+                    {userRole === "technician" ? (
+                      <Button
+                        className={`w-full h-12 rounded-xl font-bold text-base shadow-lg ${
+                          isEditing
+                            ? "bg-primary hover:bg-primary/90 text-white shadow-primary/20"
+                            : "bg-card hover:bg-muted border border-primary/20 text-primary"
+                        }`}
+                        onClick={
+                          isEditing ? handleSaveOffer : () => setIsEditing(true)
+                        }
+                      >
+                        {isEditing ? (
+                          <>
+                            <Save className="w-5 h-5 mr-2" />
+                            إرسال العرض
+                          </>
+                        ) : (
+                          <>
+                            <Pencil1Icon className="w-5 h-5 mr-2" />
+                            تعديل العرض
+                          </>
+                        )}
+                      </Button>
+                    ) : (
+                      <Button
+                        className="w-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 h-12 rounded-xl font-bold text-base"
+                        onClick={() =>
+                          navigate("/project/review", {
+                            state: { projectData, offerData },
+                          })
+                        }
+                      >
+                        <CheckIcon className="w-5 h-5 mr-2" />
+                        {offerData.status === "updated"
+                          ? "قبول العرض النهائي"
+                          : "قبول العرض"}
+                      </Button>
+                    )}
+                  </SheetFooter>
+                </SheetContent>
+              </Sheet>
               <DropdownMenu dir="rtl">
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -279,12 +697,12 @@ export default function ProjectChatPage() {
           {/* Messages Area */}
           <ScrollArea
             ref={scrollAreaRef}
-            className="flex-1 min-h-0 p-4 bg-slate-50/50 dark:bg-slate-950/50"
+            className="flex-1 min-h-0 p-4 bg-muted/50"
           >
             <div className="space-y-4 max-w-3xl mx-auto pb-4">
               {/* Date Divider */}
               <div className="flex justify-center my-4">
-                <span className="text-xs bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-3 py-1 rounded-full">
+                <span className="text-xs bg-muted text-muted-foreground px-3 py-1 rounded-full">
                   اليوم
                 </span>
               </div>
@@ -301,7 +719,7 @@ export default function ProjectChatPage() {
                       msg.sender === "user" ? "flex-row-reverse" : "flex-row"
                     }`}
                   >
-                    <Avatar className="w-8 h-8 mt-1 border border-slate-200 dark:border-slate-700">
+                    <Avatar className="w-8 h-8 mt-1 border border-border">
                       <AvatarImage
                         src={
                           msg.sender === "user"
@@ -320,7 +738,7 @@ export default function ProjectChatPage() {
                       className={`p-3 rounded-2xl text-sm shadow-sm ${
                         msg.sender === "user"
                           ? "bg-primary text-primary-foreground rounded-tr-none"
-                          : "bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-tl-none"
+                          : "bg-card border border-border text-foreground rounded-tl-none"
                       }`}
                     >
                       {msg.type === "text" && (
@@ -365,9 +783,9 @@ export default function ProjectChatPage() {
             </div>
           </ScrollArea>
 
-          <div className="p-4 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 z-20 relative">
+          <div className="p-4 bg-card border-t border-border z-20 relative">
             {showEmojiPicker && (
-              <div className="absolute bottom-full right-4 mb-2 z-50 shadow-xl rounded-xl border border-slate-200 dark:border-slate-800 [&_*::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className="absolute bottom-full right-4 mb-2 z-50 shadow-xl rounded-xl border border-border [&_*::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <EmojiPicker
                   onEmojiClick={onEmojiClick}
                   searchDisabled={true}
@@ -410,7 +828,7 @@ export default function ProjectChatPage() {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="اكتب رسالتك هنا..."
-                className="flex-1 bg-slate-50 dark:bg-slate-800 border-0 focus-visible:ring-1 focus-visible:ring-primary/20"
+                className="flex-1 bg-muted border-0 focus-visible:ring-1 focus-visible:ring-primary/20"
               />
 
               <Button
@@ -423,198 +841,6 @@ export default function ProjectChatPage() {
               </Button>
             </form>
           </div>
-        </div>
-
-        <div className="hidden lg:flex w-96 flex-col border-r bg-white dark:bg-slate-950 h-full">
-          <ScrollArea className="flex-1" dir="rtl">
-            <div className="divide-y divide-slate-100 dark:divide-slate-800">
-              {/* Project Section */}
-              <div className="p-5 space-y-4">
-                <div className="flex  items-start justify-between gap-2">
-                  <div className="text-right">
-                    <Badge
-                      variant={
-                        projectData.status === "open" ? "outline" : "secondary"
-                      }
-                      className="mb-2"
-                    >
-                      {projectData.status === "open" ? "مفتوح" : "مغلق"}
-                    </Badge>
-                    <h3 className="font-bold text-base text-slate-900 dark:text-slate-100 leading-snug">
-                      {projectData.title}
-                    </h3>
-                  </div>
-
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-6 w-6 text-muted-foreground hover:text-primary"
-                    onClick={() => window.open("/project/summary", "_blank")}
-                    title="عرض التفاصيل الكاملة"
-                  >
-                    <ExternalLinkIcon className="w-4 h-4" />
-                  </Button>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3 text-right">
-                  <div className="bg-slate-50 dark:bg-slate-900 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
-                    <span className="text-[10px] text-muted-foreground flex  items-center justify-start gap-1 mb-1">
-                      <TargetIcon className="w-3 h-3" /> الميزانية
-                    </span>
-                    <p className="text-xs font-bold text-slate-700 dark:text-slate-200">
-                      {parseInt(projectData.budget).toLocaleString()} ر.س
-                    </p>
-                  </div>
-
-                  <div className="bg-slate-50 dark:bg-slate-900 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
-                    <span className="text-[10px] text-muted-foreground flex  items-center justify-start gap-1 mb-1">
-                      <ClockIcon className="w-3 h-3" /> المدة
-                    </span>
-                    <p className="text-xs font-bold text-slate-700 dark:text-slate-200">
-                      {projectData.duration} أيام
-                    </p>
-                  </div>
-
-                  <div className="col-span-2 bg-slate-50 dark:bg-slate-900 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 flex  items-center gap-2">
-                    <SewingPinFilledIcon className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-                    <p className="text-xs font-medium text-slate-700 dark:text-slate-200 truncate">
-                      {projectData.location.address}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Offer Section */}
-              <div className="p-5 space-y-5">
-                <div className="flex items-center justify-between ">
-                  <h4 className="text-sm font-bold flex items-center gap-2">
-                    <FileIcon className="w-4 h-4 text-primary" />
-                    تفاصيل العرض
-                  </h4>
-
-                  <Badge
-                    variant="secondary"
-                    className={`text-[10px] h-5 border ${
-                      offerData.status === "updated"
-                        ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400 border-green-100 dark:border-green-900"
-                        : "bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400 border-blue-100 dark:border-blue-900"
-                    }`}
-                  >
-                    {offerData.status === "updated" ? "محدث" : "أولي"}
-                  </Badge>
-                </div>
-
-                <div className="space-y-4">
-                  {/* Price */}
-                  <div className="space-y-1.5">
-                    <span className="text-[10px] text-muted-foreground block text-right">
-                      قيمة العرض
-                    </span>
-
-                    {offerData.status === "updated" ? (
-                      <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
-                        <div className="text-center">
-                          <span className="block text-sm font-bold text-green-600 dark:text-green-500">
-                            {parseInt(offerData.price).toLocaleString()}
-                          </span>
-                          <span className="text-[10px] text-green-600/70 dark:text-green-500/70">
-                            الجديد
-                          </span>
-                        </div>
-
-                        <div className="flex-1 px-2 flex justify-center">
-                          <div className="w-full h-px bg-slate-200 dark:bg-slate-700 relative flex items-center justify-center">
-                            <div className="bg-slate-200 dark:bg-slate-700 rounded-full p-0.5">
-                              <CheckIcon className="w-3 h-3 text-muted-foreground" />
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="text-center">
-                          <span className="block text-xs text-muted-foreground line-through decoration-red-400/50 decoration-2">
-                            {parseInt(
-                              offerData.originalPrice || offerData.price
-                            ).toLocaleString()}
-                          </span>
-                          <span className="text-[10px] text-muted-foreground">
-                            السابق
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="bg-slate-50 dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-800 text-center">
-                        <span className="block text-lg font-bold text-slate-900 dark:text-slate-100">
-                          {parseInt(offerData.price).toLocaleString()}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Duration */}
-                  <div className="space-y-1.5">
-                    <span className="text-[10px] text-muted-foreground block text-right">
-                      مدة التنفيذ
-                    </span>
-
-                    {offerData.status === "updated" ? (
-                      <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
-                        <div className="text-center">
-                          <span className="block text-sm font-bold text-slate-900 dark:text-slate-100">
-                            {offerData.duration} أيام
-                          </span>
-                        </div>
-
-                        <div className="flex-1 px-2 flex justify-center">
-                          <div className="w-full h-px bg-slate-200 dark:bg-slate-700 relative flex items-center justify-center">
-                            <div className="bg-slate-200 dark:bg-slate-700 rounded-full p-0.5">
-                              <ClockIcon className="w-3 h-3 text-muted-foreground" />
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="text-center">
-                          <span className="block text-xs text-muted-foreground line-through decoration-red-400/50 decoration-2">
-                            {offerData.originalDuration || offerData.duration}{" "}
-                            أيام
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="bg-slate-50 dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-800 text-center">
-                        <span className="block text-lg font-bold text-slate-900 dark:text-slate-100">
-                          {offerData.duration} أيام
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Notes */}
-                <div className="space-y-1.5">
-                  <span className="text-[10px] text-muted-foreground block text-right">
-                    ملاحظات
-                  </span>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed block text-right">
-                    {offerData.description}
-                  </p>
-                </div>
-
-                <Button
-                  className="w-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 h-11 rounded-xl font-bold"
-                  onClick={() =>
-                    navigate("/project/review", {
-                      state: { projectData, offerData },
-                    })
-                  }
-                >
-                  <CheckIcon className="w-4 h-4 mr-2" />
-                  {offerData.status === "updated"
-                    ? "قبول العرض النهائي"
-                    : "قبول العرض"}
-                </Button>
-              </div>
-            </div>
-          </ScrollArea>
         </div>
       </SidebarInset>
     </SidebarProvider>

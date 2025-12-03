@@ -143,17 +143,12 @@ export default function ProjectOffersPage() {
   }, [offers, sortOption, priceRange, minRating, maxDuration]);
 
   return (
-    <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900 pb-20"
-      dir="rtl"
-    >
+    <div className="min-h-screen bg-background pb-20" dir="rtl">
       <div className="container max-w-6xl mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-              عروض المشروع
-            </h1>
+            <h1 className="text-3xl font-bold text-foreground">عروض المشروع</h1>
             <p className="text-muted-foreground">
               تصفح العروض المقدمة واختر الأنسب لك
             </p>
@@ -171,7 +166,7 @@ export default function ProjectOffersPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar: Project Details */}
           <div className="lg:col-span-1 space-y-6">
-            <Card className="border-0 shadow-lg shadow-slate-200/40 dark:shadow-none sticky top-24">
+            <Card className="border-0 shadow-lg shadow-black/5 sticky top-24">
               <CardHeader className="bg-primary/5 pb-4">
                 <CardTitle className="text-lg text-primary">
                   بطاقة المشروع
@@ -253,9 +248,9 @@ export default function ProjectOffersPage() {
           {/* Main Content: Offers List */}
           <div className="lg:col-span-3 space-y-6">
             {/* Advanced Filter Bar */}
-            <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div className="bg-card p-4 rounded-xl border border-border shadow-sm space-y-4">
               <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-medium">
+                <div className="flex items-center gap-2 text-foreground font-medium">
                   <MixerHorizontalIcon className="w-5 h-5 text-primary" />
                   <span>تصفية العروض ({filteredOffers.length})</span>
                 </div>
@@ -354,7 +349,7 @@ export default function ProjectOffersPage() {
             {/* Offers List */}
             <div className="space-y-4">
               {filteredOffers.length === 0 ? (
-                <div className="text-center py-12 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-800">
+                <div className="text-center py-12 bg-muted/30 rounded-xl border border-dashed border-border">
                   <p className="text-muted-foreground">
                     لا توجد عروض تطابق معايير البحث
                   </p>
@@ -378,8 +373,8 @@ export default function ProjectOffersPage() {
                     <CardContent className="p-0">
                       <div className="flex flex-col md:flex-row">
                         {/* Technician Info Side */}
-                        <div className="p-6 md:w-1/3 bg-slate-50/50 dark:bg-slate-900/50 border-b md:border-b-0 md:border-l border-slate-100 dark:border-slate-800 flex flex-col items-center text-center justify-center gap-3">
-                          <Avatar className="w-20 h-20 border-4 border-white dark:border-slate-800 shadow-sm">
+                        <div className="p-6 md:w-1/3 bg-muted/50 border-b md:border-b-0 md:border-l border-border flex flex-col items-center text-center justify-center gap-3">
+                          <Avatar className="w-20 h-20 border-4 border-background shadow-sm">
                             <AvatarImage src={offer.technician.avatar} />
                             <AvatarFallback>
                               {offer.technician.name.charAt(0)}
@@ -399,7 +394,7 @@ export default function ProjectOffersPage() {
                             </h3>
                             <div className="flex items-center justify-center gap-1 text-amber-500 mt-1">
                               <StarFilledIcon className="w-4 h-4" />
-                              <span className="font-bold text-slate-900 dark:text-white">
+                              <span className="font-bold text-foreground">
                                 {offer.technician.rating}
                               </span>
                               <span className="text-xs text-muted-foreground">
@@ -407,7 +402,7 @@ export default function ProjectOffersPage() {
                               </span>
                             </div>
                           </div>
-                          <div className="text-xs text-muted-foreground bg-white dark:bg-slate-800 px-3 py-1 rounded-full border">
+                          <div className="text-xs text-muted-foreground bg-card px-3 py-1 rounded-full border">
                             أنجز {offer.technician.completedProjects} مشروع
                           </div>
                         </div>
@@ -428,7 +423,7 @@ export default function ProjectOffersPage() {
                                 <span className="text-xs text-muted-foreground block mb-1">
                                   مدة التنفيذ
                                 </span>
-                                <span className="text-lg font-bold text-slate-700 dark:text-slate-300">
+                                <span className="text-lg font-bold text-foreground">
                                   {offer.duration}{" "}
                                   {offer.durationUnit === "days"
                                     ? "أيام"
@@ -437,8 +432,8 @@ export default function ProjectOffersPage() {
                               </div>
                             </div>
 
-                            <div className="bg-slate-50 dark:bg-slate-950/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800 mb-4">
-                              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            <div className="bg-muted/30 p-4 rounded-xl border border-border mb-4">
+                              <p className="text-sm text-muted-foreground leading-relaxed">
                                 {offer.description}
                               </p>
                             </div>

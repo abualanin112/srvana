@@ -26,10 +26,10 @@ export default function TechnicianPaymentConfirmation() {
 
   return (
     <div
-      className="min-h-screen bg-linear-to-br from-green-50 to-green-100/50 dark:from-green-950/30 dark:to-slate-900 flex items-center justify-center p-4"
+      className="min-h-screen bg-background flex items-center justify-center p-4"
       dir="rtl"
     >
-      <Card className="w-full max-w-md border-0 shadow-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl overflow-hidden">
+      <Card className="w-full max-w-md border-0 shadow-2xl bg-card/90 backdrop-blur-xl overflow-hidden">
         <div className="bg-green-500 h-2 w-full" />
         <CardContent className="p-8 text-center space-y-8">
           <div className="mx-auto w-24 h-24 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center animate-in zoom-in duration-500">
@@ -37,30 +37,30 @@ export default function TechnicianPaymentConfirmation() {
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">
+            <h1 className="text-3xl font-bold text-foreground">
               تمت المهمة بنجاح!
             </h1>
-            <p className="text-slate-500">
+            <p className="text-muted-foreground">
               شكراً لجهودك، تم إضافة المبلغ لمحفظتك.
             </p>
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 space-y-4 border border-slate-100 dark:border-slate-800">
-            <div className="flex justify-between items-center text-sm text-slate-500">
+          <div className="bg-muted/50 rounded-2xl p-6 space-y-4 border border-border">
+            <div className="flex justify-between items-center text-sm text-muted-foreground">
               <span>مدة العمل</span>
-              <span className="font-mono font-bold text-slate-900 dark:text-slate-100">
+              <span className="font-mono font-bold text-foreground">
                 {duration || "00:45"}
               </span>
             </div>
-            <div className="flex justify-between items-center text-sm text-slate-500">
+            <div className="flex justify-between items-center text-sm text-muted-foreground">
               <span>سعر الخدمة</span>
-              <span className="font-bold text-slate-900 dark:text-slate-100">
+              <span className="font-bold text-foreground">
                 {finalPrice || "250"} ج.م
               </span>
             </div>
             <Separator />
             <div className="flex justify-between items-center">
-              <span className="font-bold text-slate-900 dark:text-slate-100">
+              <span className="font-bold text-foreground">
                 رصيد المحفظة الحالي
               </span>
               <div className="flex items-center gap-2 text-green-600 font-bold text-xl">

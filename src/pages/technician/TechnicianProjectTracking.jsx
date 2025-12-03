@@ -11,7 +11,7 @@ import {
   TimerIcon,
 } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,13 +33,16 @@ const STEPS = [
   { id: "completed", label: "تم الإنجاز", icon: CheckCircledIcon },
 ];
 
-export default function TechnicianTaskTracking() {
+export default function TechnicianProjectTracking() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { request } = location.state || {};
+  const { project } = location.state || {};
 
   const [currentStep, setCurrentStep] = useState("way"); // way | arrived | working | completed
-  const [timer, setTimer] = useState(0);
+
+  // Timer Logic: Initialize with 15 days in seconds (15 * 24 * 60 * 60 = 1296000)
+  const INITIAL_DURATION = 15 * 24 * 60 * 60;
+  const [timeLeft, setTimeLeft] = useState(INITIAL_DURATION);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
   // Price Modification
@@ -50,23 +53,31 @@ export default function TechnicianTaskTracking() {
   // Completion
   const [proofImages, setProofImages] = useState([]);
 
-  // Timer Logic
+  // Timer Countdown Logic
   useEffect(() => {
     let interval;
-    if (isTimerRunning) {
+    if (isTimerRunning && timeLeft > 0) {
       interval = setInterval(() => {
-        setTimer((prev) => prev + 1);
+        setTimeLeft((prev) => Math.max(0, prev - 1));
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isTimerRunning]);
+  }, [isTimerRunning, timeLeft]);
 
   const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
+    const days = Math.floor(seconds / (24 * 3600));
+    const hours = Math.floor((seconds % (24 * 3600)) / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
+
+    if (days > 0) {
+      return `${days} يوم ${hours.toString().padStart(2, "0")}:${mins
+        .toString()
+        .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+    }
+    return `${hours.toString().padStart(2, "0")}:${mins
       .toString()
-      .padStart(2, "0")}`;
+      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   const handleStepChange = (nextStep) => {
@@ -88,24 +99,34 @@ export default function TechnicianTaskTracking() {
   const handleFinishTask = () => {
     navigate("/technician/payment-confirmation", {
       state: {
-        request,
-        duration: formatTime(timer),
-        finalPrice: newPrice || request?.price,
+        project,
+        duration: formatTime(INITIAL_DURATION - timeLeft), // Send elapsed time or remaining time based on requirement. Assuming elapsed for record.
+        finalPrice: newPrice || project?.price,
       },
     });
   };
 
-  if (!request) return null;
+  // Fallback mock data if no state is passed
+  const displayProject = project || {
+    customer: {
+      name: "أحمد محمود",
+      image: "https://i.pravatar.cc/150?u=ahmed",
+    },
+    location: {
+      address: "جدة، حي الشاطئ",
+    },
+    price: "15,000 ر.س",
+  };
 
   return (
     <div className="min-h-screen bg-background pb-24" dir="rtl">
       {/* Header */}
       <div className="bg-card/80 backdrop-blur-md border-b border-border sticky top-0 z-50 p-4">
         <div className="container max-w-md mx-auto flex items-center justify-between">
-          <h1 className="font-bold text-lg">متابعة المهمة</h1>
+          <h1 className="font-bold text-lg">متابعة المشروع</h1>
           <div className="flex items-center gap-2 bg-muted px-3 py-1 rounded-full text-sm font-mono">
             <TimerIcon className="w-4 h-4 text-primary" />
-            {formatTime(timer)}
+            {formatTime(timeLeft)}
           </div>
         </div>
       </div>
@@ -115,13 +136,13 @@ export default function TechnicianTaskTracking() {
         <Card className="border-0 shadow-lg">
           <CardContent className="p-4 flex items-center gap-4">
             <Avatar className="w-12 h-12">
-              <AvatarImage src={request.customer.image} />
-              <AvatarFallback>{request.customer.name[0]}</AvatarFallback>
+              <AvatarImage src={displayProject.customer.image} />
+              <AvatarFallback>{displayProject.customer.name[0]}</AvatarFallback>
             </Avatar>
             <div className="flex-1">
-              <h3 className="font-bold">{request.customer.name}</h3>
+              <h3 className="font-bold">{displayProject.customer.name}</h3>
               <p className="text-sm text-muted-foreground">
-                {request.location.address}
+                {displayProject.location.address}
               </p>
             </div>
             <Button
@@ -190,8 +211,7 @@ export default function TechnicianTaskTracking() {
           {currentStep === "arrived" && (
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4">
               <div className="bg-blue-50 dark:bg-blue-950/30 p-4 rounded-xl border border-blue-100 dark:border-blue-900 text-blue-800 dark:text-blue-200 text-sm">
-                يرجى فحص المشكلة وتحديد ما إذا كان السعر المتفق عليه مناسباً أم
-                يحتاج لتعديل.
+                يرجى التأكد من جاهزية الموقع والبدء في تنفيذ مراحل المشروع.
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -204,19 +224,19 @@ export default function TechnicianTaskTracking() {
                       variant="outline"
                       className="h-14 font-bold rounded-xl border-2"
                     >
-                      <Pencil2Icon className="w-5 h-5 ml-2" /> تعديل السعر
+                      <Pencil2Icon className="w-5 h-5 ml-2" /> تعديل العرض
                     </Button>
                   </DialogTrigger>
                   <DialogContent dir="rtl">
                     <DialogHeader>
-                      <DialogTitle>تعديل سعر الخدمة</DialogTitle>
+                      <DialogTitle>تعديل تفاصيل العرض</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4 py-4">
                       <div className="space-y-2">
                         <Label>السعر الجديد</Label>
                         <Input
                           type="number"
-                          placeholder="مثال: 350"
+                          placeholder="مثال: 15500"
                           value={newPrice}
                           onChange={(e) => setNewPrice(e.target.value)}
                         />
@@ -224,7 +244,7 @@ export default function TechnicianTaskTracking() {
                       <div className="space-y-2">
                         <Label>سبب التعديل</Label>
                         <Textarea
-                          placeholder="اشرح سبب زيادة السعر..."
+                          placeholder="اشرح سبب التعديل..."
                           value={priceReason}
                           onChange={(e) => setPriceReason(e.target.value)}
                         />
@@ -242,7 +262,7 @@ export default function TechnicianTaskTracking() {
                   onClick={() => handleStepChange("working")}
                   className="h-14 font-bold rounded-xl shadow-lg shadow-primary/20"
                 >
-                  <PlayIcon className="w-5 h-5 ml-2" /> بدء العمل
+                  <PlayIcon className="w-5 h-5 ml-2" /> بدء المشروع
                 </Button>
               </div>
             </div>
@@ -250,19 +270,26 @@ export default function TechnicianTaskTracking() {
 
           {currentStep === "working" && (
             <div className="text-center space-y-6 animate-in fade-in slide-in-from-bottom-4">
-              <div className="w-40 h-40 mx-auto rounded-full border-8 border-primary/20 flex items-center justify-center relative">
-                <div className="absolute inset-0 rounded-full border-t-8 border-primary animate-spin" />
-                <div className="text-3xl font-mono font-bold text-primary">
-                  {formatTime(timer)}
+              <div className="w-48 h-48 mx-auto rounded-full border-8 border-primary/20 flex items-center justify-center relative">
+                <div className="absolute inset-0 rounded-full border-t-8 border-primary animate-spin duration-3000" />
+                <div className="text-center">
+                  <span className="block text-xs text-muted-foreground mb-1">
+                    المتبقي
+                  </span>
+                  <div className="text-2xl font-mono font-bold text-primary dir-ltr">
+                    {formatTime(timeLeft)}
+                  </div>
                 </div>
               </div>
-              <p className="text-muted-foreground">جاري تنفيذ المهمة...</p>
+              <p className="text-muted-foreground">
+                جاري تنفيذ مراحل المشروع...
+              </p>
               <Button
                 onClick={() => handleStepChange("completed")}
                 variant="destructive"
                 className="w-full h-14 text-lg font-bold rounded-xl"
               >
-                <StopIcon className="w-5 h-5 ml-2" /> إنهاء العمل
+                <StopIcon className="w-5 h-5 ml-2" /> إنهاء المشروع
               </Button>
             </div>
           )}
@@ -270,7 +297,9 @@ export default function TechnicianTaskTracking() {
           {currentStep === "completed" && (
             <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
               <div className="space-y-4">
-                <Label className="text-base">إثبات الإنجاز (صور)</Label>
+                <Label className="text-base">
+                  إثبات الإنجاز (صور مراحل العمل)
+                </Label>
                 <div className="grid grid-cols-3 gap-2">
                   {proofImages.map((src, i) => (
                     <div
@@ -304,7 +333,7 @@ export default function TechnicianTaskTracking() {
                 onClick={handleFinishTask}
                 className="w-full h-14 text-lg font-bold rounded-xl bg-green-600 hover:bg-green-700 shadow-lg shadow-green-900/20"
               >
-                <PaperPlaneIcon className="w-5 h-5 ml-2" /> إرسال وتأكيد
+                <PaperPlaneIcon className="w-5 h-5 ml-2" /> تسليم المشروع
               </Button>
             </div>
           )}

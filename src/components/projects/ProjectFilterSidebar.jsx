@@ -85,14 +85,12 @@ export default function ProjectFilterSidebar({
     <div className="w-full lg:w-[350px] shrink-0  bg-card p-6 pb-8 space-y-8 rounded-md border-0 shadow-sm h-fit">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="font-bold text-lg text-slate-900 dark:text-white">
-          تصفية المشاريع
-        </h3>
+        <h3 className="font-bold text-lg text-foreground">تصفية المشاريع</h3>
         <Button
           variant="ghost"
           size="sm"
           onClick={clearAllFilters}
-          className="text-muted-foreground hover:text-slate-900 dark:hover:text-white h-8 px-2 text-xs gap-1"
+          className="text-muted-foreground hover:text-foreground h-8 px-2 text-xs gap-1"
         >
           <ReloadIcon className="w-3 h-3" />
           إعادة التعيين
@@ -178,9 +176,7 @@ export default function ProjectFilterSidebar({
 
       {/* Location (Moved to Top) */}
       <div className="space-y-4">
-        <h4 className="font-semibold text-sm text-slate-900 dark:text-slate-200">
-          الموقع (مصر)
-        </h4>
+        <h4 className="font-semibold text-sm text-foreground">الموقع (مصر)</h4>
         <Select
           value={filters.location || "all"}
           onValueChange={handleLocationChange}
@@ -202,9 +198,7 @@ export default function ProjectFilterSidebar({
 
       {/* Categories (No Scroll, Fixed RTL) */}
       <div className="space-y-4">
-        <h4 className="font-semibold text-sm text-slate-900 dark:text-slate-200">
-          الفئات
-        </h4>
+        <h4 className="font-semibold text-sm text-foreground">الفئات</h4>
         <div className="space-y-3">
           {allCategories.map((category) => (
             <div key={category} className="flex items-center gap-2">
@@ -215,7 +209,7 @@ export default function ProjectFilterSidebar({
               />
               <label
                 htmlFor={`cat-${category}`}
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-slate-600 dark:text-slate-300"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-muted-foreground"
               >
                 {category}
               </label>
@@ -227,7 +221,7 @@ export default function ProjectFilterSidebar({
       {/* Budget */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h4 className="font-semibold text-sm text-slate-900 dark:text-slate-200">
+          <h4 className="font-semibold text-sm text-foreground">
             الميزانية (جنيه)
           </h4>
         </div>
@@ -243,11 +237,9 @@ export default function ProjectFilterSidebar({
             className="my-4"
           />
         </div>
-        <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-300">
-          <div className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
-            من: {budgetRange[0]}
-          </div>
-          <div className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+        <div className="flex items-center justify-between text-xs text-muted-foreground">
+          <div className="bg-muted px-2 py-1 rounded">من: {budgetRange[0]}</div>
+          <div className="bg-muted px-2 py-1 rounded">
             إلى: {budgetRange[1]}
           </div>
         </div>
@@ -255,9 +247,7 @@ export default function ProjectFilterSidebar({
 
       {/* Duration (Ranges, Fixed RTL) */}
       <div className="space-y-4">
-        <h4 className="font-semibold text-sm text-slate-900 dark:text-slate-200">
-          مدة التنفيذ
-        </h4>
+        <h4 className="font-semibold text-sm text-foreground">مدة التنفيذ</h4>
         <RadioGroup
           value={filters.duration}
           onValueChange={handleDurationChange}
@@ -268,7 +258,7 @@ export default function ProjectFilterSidebar({
             <RadioGroupItem value="all" id="duration-all" />
             <Label
               htmlFor="duration-all"
-              className="cursor-pointer text-slate-600 dark:text-slate-300"
+              className="cursor-pointer text-muted-foreground"
             >
               الكل
             </Label>
@@ -281,7 +271,7 @@ export default function ProjectFilterSidebar({
               />
               <Label
                 htmlFor={`duration-${option.value}`}
-                className="cursor-pointer text-slate-600 dark:text-slate-300"
+                className="cursor-pointer text-muted-foreground"
               >
                 {option.label}
               </Label>

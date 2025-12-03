@@ -94,12 +94,9 @@ export default function FastServiceStep2() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900"
-      dir="rtl"
-    >
+    <div className="min-h-screen bg-background" dir="rtl">
       {/* Steps Header - Sticky */}
-      <div className="sticky top-0 z-50 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-md transition-all duration-300">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border shadow-md transition-all duration-300">
         <StepsIndicator
           steps={[
             { label: "تفاصيل الخدمة", status: "completed" },
@@ -113,10 +110,10 @@ export default function FastServiceStep2() {
       <div className="container max-w-5xl mx-auto px-4 pb-20 pt-12">
         {/* Page Header */}
         <div className="mb-12 text-center space-y-4 animate-in fade-in slide-in-from-top-4 duration-700">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight">
             اختر الفني المناسب
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             تم اختيار أفضل فني متاح لطلبك بناءً على تقييمات العملاء وخبرته.
           </p>
         </div>
@@ -125,7 +122,7 @@ export default function FastServiceStep2() {
         <div className="max-w-4xl mx-auto">
           {isLoading ? (
             // Skeleton Placeholder
-            <Card className="border-0 shadow-xl shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden p-8 md:p-12">
+            <Card className="border-0 shadow-xl shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden p-8 md:p-12">
               <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
                 <Skeleton className="w-32 h-32 md:w-40 md:h-40 rounded-full" />
                 <div className="flex-1 space-y-6 w-full text-center md:text-right">
@@ -145,13 +142,13 @@ export default function FastServiceStep2() {
             </Card>
           ) : (
             // Technician Card
-            <Card className="border-0 shadow-2xl shadow-primary/5 dark:shadow-none bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-[2.5rem] overflow-hidden transition-all duration-500 animate-in fade-in zoom-in-95 ring-1 ring-slate-200/50 dark:ring-slate-800/50">
+            <Card className="border-0 shadow-2xl shadow-primary/5 bg-card/90 backdrop-blur-md rounded-[2.5rem] overflow-hidden transition-all duration-500 animate-in fade-in zoom-in-95 ring-1 ring-border">
               <CardContent className="p-8 md:p-12">
                 <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start">
                   {/* Avatar Section */}
                   <div className="relative shrink-0">
                     <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-150 animate-pulse" />
-                    <Avatar className="w-32 h-32 md:w-48 md:h-48 border-[6px] border-white dark:border-slate-800 shadow-2xl relative z-10">
+                    <Avatar className="w-32 h-32 md:w-48 md:h-48 border-[6px] border-background shadow-2xl relative z-10">
                       <AvatarImage
                         src={selectedTech.image}
                         alt={selectedTech.name}
@@ -161,7 +158,7 @@ export default function FastServiceStep2() {
                         {selectedTech.name[0]}
                       </AvatarFallback>
                     </Avatar>
-                    <div className="absolute -bottom-3 -right-3 bg-white dark:bg-slate-800 p-1.5 rounded-full shadow-lg z-20">
+                    <div className="absolute -bottom-3 -right-3 bg-background p-1.5 rounded-full shadow-lg z-20">
                       <div className="bg-green-500 text-white text-sm font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
                         <StarFilledIcon className="w-4 h-4" />
                         {selectedTech.rating}
@@ -173,38 +170,38 @@ export default function FastServiceStep2() {
                   <div className="flex-1 text-center md:text-right space-y-6 w-full">
                     <div>
                       <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-2 mb-2">
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-slate-50">
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">
                           {selectedTech.name}
                         </h2>
                         <span className="bg-primary/10 text-primary text-sm font-bold px-4 py-1.5 rounded-full border border-primary/20">
                           فني معتمد
                         </span>
                       </div>
-                      <p className="text-xl font-medium text-slate-500 dark:text-slate-400 mb-4">
+                      <p className="text-xl font-medium text-muted-foreground mb-4">
                         {selectedTech.profession}
                       </p>
 
-                      <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-sm font-medium text-slate-600 dark:text-slate-300">
-                        <span className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700">
+                      <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-sm font-medium text-muted-foreground">
+                        <span className="flex items-center gap-2 bg-muted px-4 py-2 rounded-xl border border-border">
                           <CheckCircledIcon className="w-5 h-5 text-green-500" />
                           +{selectedTech.tasksCompleted} مهمة مكتملة
                         </span>
-                        <span className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <span className="flex items-center gap-2 bg-muted px-4 py-2 rounded-xl border border-border">
                           <SewingPinFilledIcon className="w-5 h-5 text-blue-500" />
                           يخدم {selectedTech.location}
                         </span>
-                        <span className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <span className="flex items-center gap-2 bg-muted px-4 py-2 rounded-xl border border-border">
                           <TimerIcon className="w-5 h-5 text-orange-500" />
                           يبعد {selectedTech.distance} دقيقة
                         </span>
                       </div>
                     </div>
 
-                    <div className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 text-right relative">
-                      <div className="absolute -top-3 right-6 bg-white dark:bg-slate-900 px-2 text-primary">
+                    <div className="bg-muted/50 p-6 rounded-2xl border border-border text-right relative">
+                      <div className="absolute -top-3 right-6 bg-card px-2 text-primary">
                         <QuoteIcon className="w-6 h-6 rotate-180" />
                       </div>
-                      <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                         {selectedTech.bio}
                       </p>
                     </div>
@@ -212,14 +209,14 @@ export default function FastServiceStep2() {
                     <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
                       <Button
                         variant="secondary"
-                        className="h-14 px-8 text-base font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shadow-sm"
+                        className="h-14 px-8 text-base font-bold rounded-xl hover:bg-muted transition-colors shadow-sm"
                       >
                         شاهد الملف الشخصي
                       </Button>
                       <Button
                         variant="ghost"
                         onClick={handleChangeTechnician}
-                        className="h-14 px-8 text-base font-bold text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-primary/5 rounded-xl transition-all border-2 border-transparent hover:border-primary/10"
+                        className="h-14 px-8 text-base font-bold text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-all border-2 border-transparent hover:border-primary/10"
                       >
                         <ReloadIcon className="w-4 h-4 ml-2" />
                         تغيير الفني
@@ -233,13 +230,13 @@ export default function FastServiceStep2() {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="max-w-4xl mx-auto flex flex-col-reverse md:flex-row gap-4 justify-between mt-12 pt-8 border-t border-slate-200/50 dark:border-slate-800/50">
+        <div className="max-w-4xl mx-auto flex flex-col-reverse md:flex-row gap-4 justify-between mt-12 pt-8 border-t border-border">
           <Button
             variant="outline"
             onClick={() =>
               navigate("/service/request", { state: { serviceData } })
             }
-            className="w-full md:w-auto min-w-[160px] h-14 text-lg font-medium gap-2 rounded-xl border-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+            className="w-full md:w-auto min-w-[160px] h-14 text-lg font-medium gap-2 rounded-xl border-2 hover:bg-muted transition-all"
           >
             <ArrowRightIcon className="w-5 h-5" />
             السابق

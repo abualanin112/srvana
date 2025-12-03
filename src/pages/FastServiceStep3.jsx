@@ -102,12 +102,9 @@ export default function FastServiceStep3() {
 
   if (isLoading) {
     return (
-      <div
-        className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900"
-        dir="rtl"
-      >
+      <div className="min-h-screen bg-background" dir="rtl">
         {/* Skeleton Header */}
-        <div className="sticky top-0 z-50 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-md p-4">
+        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border shadow-md p-4">
           <Skeleton className="h-12 w-full max-w-3xl mx-auto rounded-full" />
         </div>
 
@@ -152,12 +149,9 @@ export default function FastServiceStep3() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900"
-      dir="rtl"
-    >
+    <div className="min-h-screen bg-background" dir="rtl">
       {/* Steps Header - Sticky */}
-      <div className="sticky top-0 z-50 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-md transition-all duration-300">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border shadow-md transition-all duration-300">
         <StepsIndicator
           steps={[
             { label: "تفاصيل الخدمة", status: "completed" },
@@ -171,10 +165,10 @@ export default function FastServiceStep3() {
       <div className="container max-w-4xl mx-auto px-4 pb-24 pt-12 space-y-8">
         {/* Page Header */}
         <div className="text-center space-y-4 mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight">
             مراجعة الطلب والدفع
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             راجع تفاصيل طلبك واختر طريقة الدفع المناسبة لإتمام الحجز.
           </p>
         </div>
@@ -183,15 +177,15 @@ export default function FastServiceStep3() {
           {/* Summary Section */}
           <div className="space-y-6">
             {/* 1. Technician Summary */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500">
-              <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <CardTitle className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500">
+              <CardHeader className="bg-muted/50 border-b border-border pb-4">
+                <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
                   <PersonIcon className="w-6 h-6 text-primary" /> الفني المختار
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="flex items-center gap-5">
-                  <Avatar className="w-20 h-20 border-4 border-white dark:border-slate-700 shadow-md">
+                  <Avatar className="w-20 h-20 border-4 border-background shadow-md">
                     <AvatarImage
                       src={technicianData.image}
                       alt={technicianData.name}
@@ -201,20 +195,20 @@ export default function FastServiceStep3() {
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-1">
+                    <h3 className="text-2xl font-bold text-foreground mb-1">
                       {technicianData.name}
                     </h3>
                     <p className="text-primary font-medium text-base mb-2">
                       {technicianData.profession}
                     </p>
-                    <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
-                      <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-lg">
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1 bg-muted px-2 py-1 rounded-lg">
                         <StarFilledIcon className="w-4 h-4 text-yellow-500" />
-                        <span className="font-bold text-slate-900 dark:text-slate-100">
+                        <span className="font-bold text-foreground">
                           {technicianData.rating}
                         </span>
                       </span>
-                      <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-lg">
+                      <span className="flex items-center gap-1 bg-muted px-2 py-1 rounded-lg">
                         <CheckCircledIcon className="w-4 h-4 text-green-500" />
                         {technicianData.tasksCompleted} مهمة
                       </span>
@@ -225,27 +219,27 @@ export default function FastServiceStep3() {
             </Card>
 
             {/* 2. Service Summary */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-100">
-              <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <CardTitle className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-100">
+              <CardHeader className="bg-muted/50 border-b border-border pb-4">
+                <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
                   <FileTextIcon className="w-6 h-6 text-primary" /> ملخص خدمتك
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex flex-col gap-2 p-4 bg-slate-50 dark:bg-slate-950/50 rounded-2xl border border-slate-100 dark:border-slate-800">
-                    <span className="text-sm text-slate-500 dark:text-slate-400">
+                  <div className="flex flex-col gap-2 p-4 bg-muted/50 rounded-2xl border border-border">
+                    <span className="text-sm text-muted-foreground">
                       الخدمة الأساسية
                     </span>
-                    <span className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                    <span className="text-lg font-bold text-foreground">
                       {serviceData.mainCategory}
                     </span>
                   </div>
-                  <div className="flex flex-col gap-2 p-4 bg-slate-50 dark:bg-slate-950/50 rounded-2xl border border-slate-100 dark:border-slate-800">
-                    <span className="text-sm text-slate-500 dark:text-slate-400">
+                  <div className="flex flex-col gap-2 p-4 bg-muted/50 rounded-2xl border border-border">
+                    <span className="text-sm text-muted-foreground">
                       الخدمة الفرعية
                     </span>
-                    <span className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                    <span className="text-lg font-bold text-foreground">
                       {serviceData.subCategory === "other"
                         ? serviceData.customSubCategory
                         : serviceData.subCategory}
@@ -254,10 +248,10 @@ export default function FastServiceStep3() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground flex items-center gap-2">
                     <CalendarIcon className="w-4 h-4" /> الموعد المحدد
                   </span>
-                  <div className="flex items-center gap-3 text-lg font-bold text-slate-900 dark:text-slate-100 bg-primary/5 p-4 rounded-2xl border border-primary/10">
+                  <div className="flex items-center gap-3 text-lg font-bold text-foreground bg-primary/5 p-4 rounded-2xl border border-primary/10">
                     {serviceData.schedule === "now" ? (
                       <span className="text-primary">الآن (مستعجل)</span>
                     ) : (
@@ -274,10 +268,10 @@ export default function FastServiceStep3() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground flex items-center gap-2">
                     <SewingPinFilledIcon className="w-4 h-4" /> الموقع
                   </span>
-                  <div className="text-base font-medium text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-950/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 leading-relaxed">
+                  <div className="text-base font-medium text-muted-foreground bg-muted/50 p-4 rounded-2xl border border-border leading-relaxed">
                     {serviceData.location?.address ||
                       "تم تحديد الموقع على الخريطة"}
                   </div>
@@ -289,31 +283,31 @@ export default function FastServiceStep3() {
           {/* Left Column: Payment */}
           <div className="space-y-6">
             {/* 3. Payment Breakdown */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-200 h-fit">
-              <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <CardTitle className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-200 h-fit">
+              <CardHeader className="bg-muted/50 border-b border-border pb-4">
+                <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
                   <ReaderIcon className="w-6 h-6 text-primary" /> تفاصيل الدفع
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-4">
-                <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                <div className="flex justify-between items-center text-muted-foreground">
                   <span>رسوم الزيارة</span>
                   <span className="font-semibold">
                     {paymentData.visitFee} ج.م
                   </span>
                 </div>
-                <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                <div className="flex justify-between items-center text-muted-foreground">
                   <span>تكلفة الخدمة (تبدأ من)</span>
                   <span className="font-semibold">
                     {paymentData.serviceStartPrice} ج.م
                   </span>
                 </div>
-                <Separator className="my-2 bg-slate-200 dark:bg-slate-700" />
+                <Separator className="my-2 bg-border" />
                 <div className="flex justify-between items-center text-primary text-xl font-extrabold bg-primary/5 p-4 rounded-xl -mx-2">
                   <span>الإجمالي المتوقع</span>
                   <span>{paymentData.total} ج.م</span>
                 </div>
-                <p className="text-xs text-slate-400 text-center leading-relaxed">
+                <p className="text-xs text-muted-foreground text-center leading-relaxed">
                   * السعر النهائي يحدده الفني بعد المعاينة، وسيتم خصم رسوم
                   الزيارة من الإجمالي في حال الاتفاق.
                 </p>
@@ -321,9 +315,9 @@ export default function FastServiceStep3() {
             </Card>
 
             {/* 4. Payment Methods */}
-            <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-300">
-              <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <CardTitle className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-300">
+              <CardHeader className="bg-muted/50 border-b border-border pb-4">
+                <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
                   <IdCardIcon className="w-6 h-6 text-primary" /> طريقة الدفع
                 </CardTitle>
               </CardHeader>
@@ -336,19 +330,19 @@ export default function FastServiceStep3() {
                   {/* Wallet */}
                   <div
                     className={cn(
-                      "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800",
+                      "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-muted",
                       paymentMethod === "wallet"
                         ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
-                        : "border-slate-200 dark:border-slate-800"
+                        : "border-border"
                     )}
                   >
                     <RadioGroupItem value="wallet" id="wallet" />
                     <Label
                       htmlFor="wallet"
-                      className="flex-1 cursor-pointer font-bold text-base flex items-center justify-between text-slate-900 dark:text-slate-100"
+                      className="flex-1 cursor-pointer font-bold text-base flex items-center justify-between text-foreground"
                     >
                       <span>محفظة الموقع</span>
-                      <span className="text-primary font-extrabold bg-white dark:bg-slate-900 px-2 py-1 rounded-lg shadow-sm">
+                      <span className="text-primary font-extrabold bg-card px-2 py-1 rounded-lg shadow-sm">
                         500 ج.م
                       </span>
                     </Label>
@@ -357,21 +351,21 @@ export default function FastServiceStep3() {
                   {/* Card */}
                   <div
                     className={cn(
-                      "flex flex-col space-y-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800",
+                      "flex flex-col space-y-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-muted",
                       paymentMethod === "card"
                         ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
-                        : "border-slate-200 dark:border-slate-800"
+                        : "border-border"
                     )}
                   >
                     <div className="flex items-center space-x-4 space-x-reverse">
                       <RadioGroupItem value="card" id="card" />
                       <Label
                         htmlFor="card"
-                        className="flex-1 cursor-pointer font-bold text-base flex items-center gap-2 text-slate-900 dark:text-slate-100"
+                        className="flex-1 cursor-pointer font-bold text-base flex items-center gap-2 text-foreground"
                       >
                         بطاقة بنكية
                         <div className="flex gap-1 mr-auto">
-                          <IdCardIcon className="w-6 h-6 text-slate-400" />
+                          <IdCardIcon className="w-6 h-6 text-muted-foreground" />
                         </div>
                       </Label>
                     </div>
@@ -383,7 +377,7 @@ export default function FastServiceStep3() {
                         onClick={(e) => e.stopPropagation()}
                       >
                         <div className="space-y-2">
-                          <Label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                          <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                             رقم البطاقة
                           </Label>
                           <div className="relative">
@@ -402,12 +396,12 @@ export default function FastServiceStep3() {
                                   }));
                               }}
                               className={cn(
-                                "bg-white dark:bg-slate-950 h-11 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20",
+                                "bg-card h-11 border-border focus:ring-2 focus:ring-primary/20",
                                 errors.number && "border-red-500"
                               )}
                               dir="ltr"
                             />
-                            <LockClosedIcon className="absolute right-3 top-3 w-4 h-4 text-slate-400" />
+                            <LockClosedIcon className="absolute right-3 top-3 w-4 h-4 text-muted-foreground" />
                           </div>
                           {errors.number && (
                             <p className="text-xs text-red-500 font-bold">
@@ -417,7 +411,7 @@ export default function FastServiceStep3() {
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-2">
-                            <Label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                            <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                               تاريخ الانتهاء
                             </Label>
                             <Input
@@ -435,7 +429,7 @@ export default function FastServiceStep3() {
                                   }));
                               }}
                               className={cn(
-                                "bg-white dark:bg-slate-950 h-11 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20",
+                                "bg-card h-11 border-border focus:ring-2 focus:ring-primary/20",
                                 errors.expiry && "border-red-500"
                               )}
                               dir="ltr"
@@ -447,7 +441,7 @@ export default function FastServiceStep3() {
                             )}
                           </div>
                           <div className="space-y-2">
-                            <Label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                            <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                               CVV
                             </Label>
                             <Input
@@ -462,7 +456,7 @@ export default function FastServiceStep3() {
                                   setErrors((prev) => ({ ...prev, cvv: null }));
                               }}
                               className={cn(
-                                "bg-white dark:bg-slate-950 h-11 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20",
+                                "bg-card h-11 border-border focus:ring-2 focus:ring-primary/20",
                                 errors.cvv && "border-red-500"
                               )}
                               dir="ltr"
@@ -475,7 +469,7 @@ export default function FastServiceStep3() {
                           </div>
                         </div>
                         <div className="space-y-2">
-                          <Label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                          <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                             اسم صاحب البطاقة
                           </Label>
                           <Input
@@ -490,7 +484,7 @@ export default function FastServiceStep3() {
                                 setErrors((prev) => ({ ...prev, name: null }));
                             }}
                             className={cn(
-                              "bg-white dark:bg-slate-950 h-11 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-primary/20",
+                              "bg-card h-11 border-border focus:ring-2 focus:ring-primary/20",
                               errors.name && "border-red-500"
                             )}
                           />
@@ -507,16 +501,16 @@ export default function FastServiceStep3() {
                   {/* Cash */}
                   <div
                     className={cn(
-                      "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800",
+                      "flex items-center space-x-4 space-x-reverse p-4 rounded-2xl border-2 transition-all cursor-pointer hover:bg-muted",
                       paymentMethod === "cash"
                         ? "border-primary bg-primary/5 shadow-md shadow-primary/10"
-                        : "border-slate-200 dark:border-slate-800"
+                        : "border-border"
                     )}
                   >
                     <RadioGroupItem value="cash" id="cash" />
                     <Label
                       htmlFor="cash"
-                      className="flex-1 cursor-pointer font-bold text-base text-slate-900 dark:text-slate-100"
+                      className="flex-1 cursor-pointer font-bold text-base text-foreground"
                     >
                       الدفع عند الاستلام
                     </Label>
@@ -534,7 +528,7 @@ export default function FastServiceStep3() {
           <Button
             variant="outline"
             onClick={() => navigate(-1)}
-            className="w-full md:w-auto min-w-[160px] h-14 text-lg font-medium gap-2 rounded-xl border-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+            className="w-full md:w-auto min-w-[160px] h-14 text-lg font-medium gap-2 rounded-xl border-2 hover:bg-muted transition-all"
           >
             <ArrowRightIcon className="w-5 h-5" />
             السابق

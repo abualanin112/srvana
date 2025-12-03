@@ -109,10 +109,7 @@ export default function ServiceCompletionPage() {
 
   if (isLoading) {
     return (
-      <div
-        className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900"
-        dir="rtl"
-      >
+      <div className="min-h-screen bg-background" dir="rtl">
         <div className="container max-w-2xl mx-auto px-4 py-8 space-y-6">
           {/* Success Banner Skeleton */}
           <Card className="border-0 shadow-lg">
@@ -158,10 +155,7 @@ export default function ServiceCompletionPage() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900"
-      dir="rtl"
-    >
+    <div className="min-h-screen bg-background" dir="rtl">
       <div className="container max-w-2xl mx-auto px-4 py-8 space-y-6">
         {/* Success Banner */}
         <Card className="border-0 shadow-lg bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-900 animate-in fade-in slide-in-from-top-4 duration-500">
@@ -181,9 +175,9 @@ export default function ServiceCompletionPage() {
         </Card>
 
         {/* Mini Technician Card */}
-        <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-none bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-100">
+        <Card className="border-0 shadow-lg shadow-black/5 bg-card/80 backdrop-blur-sm rounded-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500 delay-100">
           <CardContent className="p-6 flex items-center gap-4">
-            <Avatar className="w-16 h-16 border-2 border-white dark:border-slate-700 shadow-md">
+            <Avatar className="w-16 h-16 border-2 border-background shadow-md">
               <AvatarImage
                 src={orderData.technician.image}
                 alt={orderData.technician.name}
@@ -191,13 +185,13 @@ export default function ServiceCompletionPage() {
               <AvatarFallback>{orderData.technician.name[0]}</AvatarFallback>
             </Avatar>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50">
+              <h3 className="text-xl font-bold text-foreground">
                 {orderData.technician.name}
               </h3>
               <p className="text-sm text-muted-foreground">
                 {orderData.technician.profession}
               </p>
-              <div className="flex items-center gap-2 mt-1 text-xs text-slate-500">
+              <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1 text-yellow-500 font-bold">
                   <StarFilledIcon /> {orderData.technician.rating}
                 </span>
@@ -208,21 +202,17 @@ export default function ServiceCompletionPage() {
         </Card>
 
         {/* Service Summary */}
-        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-slate-100 dark:border-slate-800 space-y-2 animate-in fade-in slide-in-from-top-4 duration-500 delay-150">
-          <h4 className="font-bold text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
+        <div className="bg-card/80 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-border space-y-2 animate-in fade-in slide-in-from-top-4 duration-500 delay-150">
+          <h4 className="font-bold text-foreground mb-2 flex items-center gap-2">
             <FileTextIcon className="text-primary" /> ملخص الخدمة
           </h4>
           <div className="text-sm text-muted-foreground space-y-1">
             <p>
-              <span className="font-medium text-slate-700 dark:text-slate-300">
-                الخدمة:
-              </span>{" "}
+              <span className="font-medium text-foreground">الخدمة:</span>{" "}
               {orderData.service.mainCategory} - {orderData.service.subCategory}
             </p>
             <p>
-              <span className="font-medium text-slate-700 dark:text-slate-300">
-                الموعد:
-              </span>{" "}
+              <span className="font-medium text-foreground">الموعد:</span>{" "}
               {orderData.service.schedule === "now"
                 ? "الآن (مستعجل)"
                 : orderData.service.time}
@@ -240,7 +230,7 @@ export default function ServiceCompletionPage() {
         {taskConfirmed === null && (
           <Card className="border-0 shadow-lg animate-in fade-in slide-in-from-top-4 duration-500 delay-200">
             <CardContent className="p-6 space-y-4">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">
+              <h2 className="text-xl font-bold text-foreground">
                 هل تمت المهمة؟
               </h2>
               <div className="flex gap-4">
@@ -290,7 +280,7 @@ export default function ServiceCompletionPage() {
         {taskConfirmed === true && (
           <Card className="border-0 shadow-lg animate-in fade-in slide-in-from-top-4 duration-500 delay-300">
             <CardContent className="p-6 space-y-6">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">
+              <h2 className="text-xl font-bold text-foreground">
                 كيف تقيّم الفني؟
               </h2>
 
@@ -305,7 +295,7 @@ export default function ServiceCompletionPage() {
                     {star <= rating ? (
                       <StarFilledIcon className="w-12 h-12 text-yellow-500" />
                     ) : (
-                      <StarIcon className="w-12 h-12 text-slate-300 dark:text-slate-600" />
+                      <StarIcon className="w-12 h-12 text-muted-foreground" />
                     )}
                   </button>
                 ))}
@@ -313,7 +303,7 @@ export default function ServiceCompletionPage() {
 
               {/* Rating Text */}
               {rating > 0 && (
-                <div className="text-center text-lg font-medium text-slate-700 dark:text-slate-300 animate-in fade-in duration-300">
+                <div className="text-center text-lg font-medium text-foreground animate-in fade-in duration-300">
                   {rating === 1 && "سيء جداً"}
                   {rating === 2 && "سيء"}
                   {rating === 3 && "مقبول"}
@@ -325,7 +315,7 @@ export default function ServiceCompletionPage() {
               {/* Comment Input - Only show if rating is selected */}
               {rating > 0 && (
                 <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                  <label className="text-sm font-medium text-foreground">
                     رأيك (اختياري)
                   </label>
                   <Textarea

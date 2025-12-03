@@ -2,8 +2,8 @@
 @import "tw-animate-css";
 @import "leaflet/dist/leaflet.css";
 
-@custom-variant dark (&:is(.dark *));
-@tailwind utilities;
+/* @custom-variant dark (&:is(.dark *)); */
+/* @tailwind utilities; */
 
 @font-face {
   font-family: "Noto Kufi Arabic";
@@ -136,16 +136,6 @@ body {
     0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
 }
-
-/* الأزرق الغامق: #001840
-
-#0f2a71
-
-الذهبي: #fbc510
-
-الأبيض الفاتح: #f5f6f8
-
-الأبيض الغامق: #e3e6ed */
 
 @theme inline {
   --color-background: var(--background);

@@ -100,7 +100,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
           className={cn("container mx-auto py-4", className)}
           {...props}
         >
-          <Card className="max-w-4xl mx-auto shadow-lg border">
+          <Card className="max-w-4xl mx-auto shadow-lg border-border">
             <CardHeader className="text-center space-y-2">
               <CardTitle className="text-2xl font-bold">
                 سجّل مهاراتك وخبراتك كفني محترف
@@ -130,7 +130,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                           <SelectTrigger
                             id="specialization"
                             className={
-                              errors.specialization ? "border-red-500" : ""
+                              errors.specialization ? "border-destructive" : ""
                             }
                           >
                             <SelectValue placeholder="اختر تخصصك" />
@@ -146,7 +146,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                       )}
                     />
                     {errors.specialization && (
-                      <p className="text-red-500 text-sm mt-1">
+                      <p className="text-destructive text-sm mt-1">
                         {errors.specialization.message}
                       </p>
                     )}
@@ -194,7 +194,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                       )}
                     />
                     {errors.experienceLevel && (
-                      <p className="text-red-500 text-sm mt-1">
+                      <p className="text-destructive text-sm mt-1">
                         {errors.experienceLevel.message}
                       </p>
                     )}
@@ -215,7 +215,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                       <div
                         className={cn(
                           "grid grid-cols-2 md:grid-cols-3 gap-4 rounded-md border p-4",
-                          errors.skills ? "border-red-500" : ""
+                          errors.skills ? "border-destructive" : ""
                         )}
                       >
                         {skillsOptions.map((skill) => (
@@ -242,7 +242,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                     )}
                   />
                   {errors.skills && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p className="text-destructive text-sm mt-1">
                       {errors.skills.message}
                     </p>
                   )}
@@ -256,7 +256,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                     placeholder="اكتب نبذة قصيرة عنك وخبراتك العملية"
                     className={cn(
                       "min-h-[100px]",
-                      errors.about ? "border-red-500" : ""
+                      errors.about ? "border-destructive" : ""
                     )}
                     {...register("about", {
                       required: "النبذة التعريفية مطلوبة",
@@ -267,7 +267,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                     })}
                   />
                   {errors.about && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p className="text-destructive text-sm mt-1">
                       {errors.about.message}
                     </p>
                   )}
@@ -282,7 +282,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                   </div>
 
                   {fields.map((item, index) => (
-                    <Card key={item.id} className="p-4 bg-slate-50 relative">
+                    <Card key={item.id} className="p-4 bg-muted relative">
                       <div className="space-y-4">
                         <div className="space-y-2">
                           <Label htmlFor={`previousWorks.${index}.title`}>
@@ -293,7 +293,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                             placeholder="مثلاً: تركيب نظام تكييف في مجمع سكني"
                             className={
                               errors.previousWorks?.[index]?.title
-                                ? "border-red-500"
+                                ? "border-destructive"
                                 : ""
                             }
                             {...register(`previousWorks.${index}.title`, {
@@ -305,7 +305,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                             })}
                           />
                           {errors.previousWorks?.[index]?.title && (
-                            <p className="text-red-500 text-sm mt-1">
+                            <p className="text-destructive text-sm mt-1">
                               {errors.previousWorks[index].title.message}
                             </p>
                           )}
@@ -320,7 +320,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                             placeholder="اكتب وصفاً مختصراً لطبيعة العمل المنفذ"
                             className={
                               errors.previousWorks?.[index]?.description
-                                ? "border-red-500"
+                                ? "border-destructive"
                                 : ""
                             }
                             {...register(`previousWorks.${index}.description`, {
@@ -332,7 +332,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                             })}
                           />
                           {errors.previousWorks?.[index]?.description && (
-                            <p className="text-red-500 text-sm mt-1">
+                            <p className="text-destructive text-sm mt-1">
                               {errors.previousWorks[index].description.message}
                             </p>
                           )}
@@ -400,7 +400,7 @@ export default function TechnicianSkillsForm({ className, ...props }) {
                       لنشرها
                     </Label>
                     {errors.agreement && (
-                      <p className="text-red-500 text-sm mt-1">
+                      <p className="text-destructive text-sm mt-1">
                         {errors.agreement.message}
                       </p>
                     )}

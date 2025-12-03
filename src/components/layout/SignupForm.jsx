@@ -89,7 +89,7 @@ export default function SignupForm({ className, ...props }) {
       className={cn("flex flex-col gap-6 w-full", className)}
       {...props}
     >
-      <Card className="shadow-xs border">
+      <Card className="shadow-xs border-border">
         <CardHeader className="text-center space-y-1 pt-4">
           <CardTitle className="text-xl font-semibold">أنشئ حسابك</CardTitle>
           <CardDescription>أدخل بياناتك لإنشاء حسابك الجديد</CardDescription>

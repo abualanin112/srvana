@@ -142,12 +142,9 @@ export default function ProjectSubmissionPage() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900 pb-20"
-      dir="rtl"
-    >
+    <div className="min-h-screen bg-background pb-20" dir="rtl">
       {/* Header */}
-      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+      <div className="bg-card/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="container max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button
@@ -158,7 +155,7 @@ export default function ProjectSubmissionPage() {
             >
               <ArrowRightIcon className="w-5 h-5" />
             </Button>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+            <h1 className="text-xl font-bold text-foreground">
               تقديم مشروع جديد
             </h1>
           </div>
@@ -168,7 +165,7 @@ export default function ProjectSubmissionPage() {
       <div className="container max-w-4xl mx-auto px-4 py-8 space-y-8">
         {/* Intro */}
         <div className="text-center space-y-2 mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground">
             ابدأ مشروعك الآن
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -178,8 +175,8 @@ export default function ProjectSubmissionPage() {
         </div>
 
         {/* 1. Basic Info */}
-        <Card className="border-0 shadow-lg shadow-slate-200/40 dark:shadow-none overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-100">
-          <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
+        <Card className="border-0 shadow-lg shadow-black/5 overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-100">
+          <CardHeader className="bg-muted/50 border-b border-border">
             <CardTitle className="text-xl text-primary">
               بيانات المشروع الأساسية
             </CardTitle>
@@ -260,7 +257,7 @@ export default function ProjectSubmissionPage() {
               </div>
 
               {/* Selected Tags */}
-              <div className="flex flex-wrap gap-2 mt-3 min-h-[40px] p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-800">
+              <div className="flex flex-wrap gap-2 mt-3 min-h-[40px] p-4 bg-muted/50 rounded-xl border border-dashed border-border">
                 {formData.categories.length === 0 && (
                   <span className="text-muted-foreground text-sm self-center">
                     لم يتم اختيار فئات بعد
@@ -317,8 +314,8 @@ export default function ProjectSubmissionPage() {
         </Card>
 
         {/* 2. Budget & Duration */}
-        <Card className="border-0 shadow-lg shadow-slate-200/40 dark:shadow-none overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-200">
-          <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
+        <Card className="border-0 shadow-lg shadow-black/5 overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-200">
+          <CardHeader className="bg-muted/50 border-b border-border">
             <CardTitle className="text-xl text-primary">
               الميزانية والوقت
             </CardTitle>
@@ -349,7 +346,7 @@ export default function ProjectSubmissionPage() {
                     errors.budget && "border-red-500"
                   )}
                 />
-                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm font-medium bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm font-medium bg-muted px-2 py-1 rounded">
                   ج.م
                 </div>
               </div>
@@ -407,8 +404,8 @@ export default function ProjectSubmissionPage() {
         </Card>
 
         {/* 3. Mandatory Questions */}
-        <Card className="border-0 shadow-lg shadow-slate-200/40 dark:shadow-none overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-300">
-          <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
+        <Card className="border-0 shadow-lg shadow-black/5 overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-300">
+          <CardHeader className="bg-muted/50 border-b border-border">
             <CardTitle className="text-xl text-primary">
               أسئلة للمتقدمين
             </CardTitle>
@@ -441,22 +438,20 @@ export default function ProjectSubmissionPage() {
 
             <div className="space-y-3">
               {formData.questions.length === 0 ? (
-                <div className="text-center py-8 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl text-muted-foreground">
+                <div className="text-center py-8 border-2 border-dashed border-border rounded-xl text-muted-foreground">
                   لا توجد أسئلة مضافة حالياً
                 </div>
               ) : (
                 formData.questions.map((q, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800 group transition-all hover:border-primary/30"
+                    className="flex items-center justify-between p-4 bg-muted/50 rounded-xl border border-border group transition-all hover:border-primary/30"
                   >
                     <div className="flex items-center gap-3">
                       <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">
                         {idx + 1}
                       </span>
-                      <span className="font-medium text-slate-700 dark:text-slate-300">
-                        {q}
-                      </span>
+                      <span className="font-medium text-foreground">{q}</span>
                     </div>
                     <Button
                       variant="ghost"
@@ -474,8 +469,8 @@ export default function ProjectSubmissionPage() {
         </Card>
 
         {/* 4. Description & Files (From FastServiceStep1) */}
-        <Card className="border-0 shadow-lg shadow-slate-200/40 dark:shadow-none overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-400">
-          <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
+        <Card className="border-0 shadow-lg shadow-black/5 overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-400">
+          <CardHeader className="bg-muted/50 border-b border-border">
             <CardTitle className="text-xl text-primary">
               تفاصيل ومرفقات
             </CardTitle>
@@ -529,8 +524,8 @@ export default function ProjectSubmissionPage() {
         </Card>
 
         {/* 5. Location (From FastServiceStep1) */}
-        <Card className="border-0 shadow-lg shadow-slate-200/40 dark:shadow-none overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-500">
-          <CardHeader className="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
+        <Card className="border-0 shadow-lg shadow-black/5 overflow-hidden animate-in fade-in slide-in-from-top-8 duration-700 delay-500">
+          <CardHeader className="bg-muted/50 border-b border-border">
             <CardTitle className="text-xl text-primary">موقع المشروع</CardTitle>
             <CardDescription>
               حدد موقع تنفيذ المشروع على الخريطة

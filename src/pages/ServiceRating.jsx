@@ -35,12 +35,12 @@ export default function ServiceRating() {
 
   return (
     <div
-      className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4"
+      className="min-h-screen bg-background flex items-center justify-center p-4"
       dir="rtl"
     >
-      <Card className="w-full max-w-lg border-0 shadow-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in zoom-in-95 duration-500">
+      <Card className="w-full max-w-lg border-0 shadow-2xl bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden animate-in fade-in zoom-in-95 duration-500">
         <CardHeader className="text-center pb-2">
-          <CardTitle className="text-2xl font-bold text-slate-900 dark:text-slate-50">
+          <CardTitle className="text-2xl font-bold text-foreground">
             كيف كانت خدمتك؟
           </CardTitle>
           <CardDescription className="text-lg">
@@ -50,17 +50,15 @@ export default function ServiceRating() {
         <CardContent className="space-y-8 p-8">
           {/* Technician Info */}
           <div className="flex flex-col items-center gap-4">
-            <Avatar className="w-24 h-24 border-4 border-white dark:border-slate-800 shadow-lg">
+            <Avatar className="w-24 h-24 border-4 border-background shadow-lg">
               <AvatarImage src={technician.image} />
               <AvatarFallback>{technician.name[0]}</AvatarFallback>
             </Avatar>
             <div className="text-center">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50">
+              <h3 className="text-xl font-bold text-foreground">
                 {technician.name}
               </h3>
-              <p className="text-slate-500 dark:text-slate-400">
-                {technician.profession}
-              </p>
+              <p className="text-muted-foreground">{technician.profession}</p>
             </div>
           </div>
 
@@ -77,7 +75,7 @@ export default function ServiceRating() {
                 {star <= (hoverRating || rating) ? (
                   <StarFilledIcon className="w-10 h-10 text-yellow-400 drop-shadow-sm" />
                 ) : (
-                  <StarIcon className="w-10 h-10 text-slate-300 dark:text-slate-600" />
+                  <StarIcon className="w-10 h-10 text-muted-foreground" />
                 )}
               </button>
             ))}
@@ -85,14 +83,14 @@ export default function ServiceRating() {
 
           {/* Comment */}
           <div className="space-y-3">
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+            <label className="text-sm font-medium text-foreground">
               أضف تعليقك (اختياري)
             </label>
             <Textarea
               placeholder="اكتب تجربتك هنا..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              className="min-h-[100px] bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 rounded-xl resize-none focus:ring-2 focus:ring-primary/20"
+              className="min-h-[100px] bg-muted border-border rounded-xl resize-none focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
